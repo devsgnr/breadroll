@@ -1,0 +1,11 @@
+{
+  "name": "ts_fsm",
+  "module": "index.ts",
+  "devDependencies": {
+    "bun-types": "^0.6.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "type": "module"
+}
