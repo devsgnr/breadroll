@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { TransitionObject } from "../lib/parser/@types";
-import FSM from "..";
+import FSM from "../src/fsm";
 
 const fsm = new FSM();
 
