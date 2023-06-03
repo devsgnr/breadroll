@@ -9,15 +9,10 @@ class IO {
     });
   }
 
-  save(location: string, data: Array<TransitionObject>): IOSave {
-    const json = async (): Promise<number> => {
-      return await Bun.write(location, JSON.stringify(data, null, 2)).then(
-        (value) => {
-          return value;
-        }
-      );
-    };
-    return { as: { json } };
+  async save(location: string, data: Array<TransitionObject>): Promise<number> {
+    return Bun.write(location, JSON.stringify(data, null, 2)).then((value) => {
+      return value;
+    });
   }
 }
 

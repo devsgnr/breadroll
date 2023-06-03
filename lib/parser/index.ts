@@ -32,7 +32,7 @@ class Parser {
    * @returns { TransitionObject }
    */
   private object_builder(line: string): TransitionObject {
-    let state = {};
+    let state: TransitionObject = {};
     line.split(",").map((value: string, index: number) => {
       state = { ...state, ...{ [this.keys[index]]: value } };
     });
