@@ -1,14 +1,16 @@
-import { TransitionObject } from "./@types";
+import { ObjectType } from "./@types";
+
+const NEW_LINE = "\n";
 
 class Parser {
   public keys: Array<string>;
   public states: Array<string>;
-  public state_transition_object: Array<TransitionObject>;
+  public object: Array<ObjectType>;
 
   constructor() {
     this.keys = [];
     this.states = [];
-    this.state_transition_object = [];
+    this.object = [];
   }
 
   /**
@@ -26,13 +28,13 @@ class Parser {
 
   /**
    * @private
-   * This function is used to build a JavaScript object of type TransitionObject
+   * This function is used to build a JavaScript object of type ObjectType
    * it is used by `this.generate_transition_object` to make the fnuction less verbose
    * @param { string } line
-   * @returns { TransitionObject }
+   * @returns { ObjectType }
    */
-  private object_builder(line: string): TransitionObject {
-    let state: TransitionObject = {};
+  private object_builder(line: string): ObjectType {
+    let state: ObjectType = {};
     line.split(",").map((value: string, index: number) => {
       state = { ...state, ...{ [this.keys[index]]: value } };
     });
@@ -44,14 +46,14 @@ class Parser {
    * JavaScript objects that define the transition for each state when
    * given a certain input
    * @param { string } state_table
-   * @returns { Array<TransitionObject> }
+   * @returns { Array<ObjectType> }
    */
-  generate_transition_object(state_table: string): Array<TransitionObject> {
-    const table = state_table.split("\n").splice(1);
-    this.state_transition_object = table.map((line: string) => {
+  generate_object(state_table: string): Array<ObjectType> {
+    const table = state_table.split(NEW_LINE).splice(1);
+    this.object = table.map((line: string) => {
       return this.object_builder(line);
     });
-    return this.state_transition_object;
+    return this.object;
   }
 }
 

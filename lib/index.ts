@@ -1,5 +1,5 @@
 import IO from "./io";
-import Transition from "./transition";
+import SVObject from "./object";
 import Parser from "./parser";
 
-export { IO, Transition, Parser };
+export { IO, SVObject, Parser };
