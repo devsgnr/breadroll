@@ -50,9 +50,7 @@ class Parser {
    */
   generate_object(state_table: string): Array<ObjectType> {
     const table = state_table.split(NEW_LINE).splice(1);
-    this.object = table.map((line: string) => {
-      return this.object_builder(line);
-    });
+    this.object = table.map((line: string) => this.object_builder(line));
     return this.object;
   }
 }
