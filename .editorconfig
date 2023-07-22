@@ -1,0 +1,3 @@
+print_width = 180
+trim_trailing_whitespace = false
+tab_width = 4

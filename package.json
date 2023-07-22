@@ -2,7 +2,10 @@
   "name": "ts_fsm",
   "module": "index.ts",
   "devDependencies": {
-    "bun-types": "^0.6.0"
+    "bun-types": "^0.6.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
