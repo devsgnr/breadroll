@@ -1,13 +1,5 @@
+import { EscapeSeq } from "../../utils";
 import { ObjectType } from "./@types/object.types";
-
-export enum Delimter {
-  NEW_LINE = "\n",
-}
-
-export enum Escape {
-  CARRIAGE_RETURN = "\r",
-  HORIZONTAL_TAB = "\t",
-}
 
 export type DelimterType = "," | "\t";
 
@@ -30,12 +22,12 @@ class Parser {
    * @returns { Array<string> }
    */
   get_table_header(table: string, delimiter: DelimterType): Array<string> {
-    const header = table.split(Delimter.NEW_LINE, 1)[0].split(delimiter);
-    this.keys = header.map((header) => header.split(Escape.CARRIAGE_RETURN)[0].toLocaleLowerCase());
+    const header = table.split(EscapeSeq.NEW_LINE, 1)[0].split(delimiter);
+    this.keys = header.map((header) => header.split(EscapeSeq.CARRIAGE_RETURN)[0].toLocaleLowerCase());
     return this.keys;
   }
 
-  /**ßßß
+  /**
    * @private
    * This function is used to build a JavaScript object of type ObjectType
    * it is used by `this.generate_transition_object` to make the fnuction less verbose
@@ -47,7 +39,7 @@ class Parser {
     line.split(",").map((value: string, index: number) => {
       state = {
         ...state,
-        ...{ [this.keys[index]]: value.split(Escape.CARRIAGE_RETURN)[0] },
+        ...{ [this.keys[index]]: value.split(EscapeSeq.CARRIAGE_RETURN)[0] },
       };
     });
     return state;
@@ -61,7 +53,7 @@ class Parser {
    * @returns { Array<ObjectType> }
    */
   generate_object(table: string): Array<ObjectType> {
-    const row = table.split(Delimter.NEW_LINE).splice(1);
+    const row = table.split(EscapeSeq.NEW_LINE).splice(1);
     this.object = row.map((line: string) => this.object_builder(line));
     return this.object;
   }

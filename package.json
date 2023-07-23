@@ -1,14 +1,25 @@
 {
-  "name": "ts_fsm",
+  "name": "ts_sv",
   "module": "index.ts",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "bun-types": "^0.6.0",
     "eslint": "^8.45.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.0"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "3.0.0",
+    "typescript": "5.1.6"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "5.1.6"
   },
-  "type": "module"
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "type": "module",
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix"
+  }
 }
