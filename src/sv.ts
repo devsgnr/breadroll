@@ -1,19 +1,21 @@
 import { IO, Parser, SVObject } from "../lib";
-import { IOSave } from "../lib/io/@types";
-import { ObjectType } from "../lib/parser/@types";
+import { IOSave } from "../lib/io/@types/io.types";
+import { DelimterType } from "../lib/parser";
+import { ObjectType } from "../lib/parser/@types/object.types";
+import { SVReadOptions } from "./@types/sv.types";
 
 class SV {
   private parser: Parser;
   private io: IO;
-  private transition: SVObject;
+  private svObj: SVObject;
 
-  public keys: Array<string>;
+  private keys: Array<string>;
   public object: Array<ObjectType>;
 
   constructor() {
     this.parser = new Parser();
     this.io = new IO();
-    this.transition = new SVObject();
+    this.svObj = new SVObject();
 
     this.keys = [];
     this.object = [];
@@ -21,20 +23,25 @@ class SV {
 
   /**
    * This function opens the .fsm file; get the table headers and then
-   * also generated the transition object array and returns the array
+   * also generated the svObj object array and returns the array
    * @param { string } filepath
    * @returns { Promise<Array<ObjectType>> }
    */
-  async create(filepath: string): Promise<Array<ObjectType>> {
-    return this.io.read(filepath).then((value) => {
-      this.keys = this.parser.get_table_header(value);
-      this.object = this.parser.generate_object(value);
-      return this.object;
-    });
+  async read(filepath: string, delim: DelimterType, option: SVReadOptions = { header: true }): Promise<SV> {
+    return this.io
+      .read(filepath)
+      .then((value) => {
+        if (option.header) this.keys = this.parser.get_table_header(value, delim);
+        this.object = this.parser.generate_object(value);
+        return this;
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   }
 
   /**
-   * This function saves the generates finite state transition object
+   * This function saves the generates finite state svObj object
    * as a JSON to the specified location and filename
    * @param { string } filepath
    * @returns { Promise<number> }
@@ -44,12 +51,13 @@ class SV {
   }
 
   /**
-   * This function gets and return all the states from within the
-   * finite state machine
+   * This function gets and return all the keys from within the
+   * oject
    * @returns { Array<string> }
    */
   get getKeys(): Array<string> {
-    return this.transition.getAllKeys(this.object);
+    if (this.keys) return this.keys;
+    else throw new Error("No header present");
   }
 }
 

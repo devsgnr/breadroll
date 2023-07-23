@@ -1,4 +1,4 @@
-import { ObjectType } from "../parser/@types";
+import { ObjectType } from "../parser/@types/object.types";
 
 class SVObject {
   public keys: Array<string>;

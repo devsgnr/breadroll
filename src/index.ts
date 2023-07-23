@@ -3,10 +3,10 @@ import SV from "./sv";
 const file = new SV();
 
 file
-  .create("./test/csv/test.csv")
-  .then(() => {
-    console.log(file.getKeys);
-    file.save("./result.json").as.json();
+  .read("./test/csv/test.csv", ",", { header: true })
+  .then((object: SV) => {
+    console.log(object.getKeys);
+    object.save("./result.json").as.json();
   })
   .catch((err) => {
     console.log(err);
