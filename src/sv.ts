@@ -1,6 +1,6 @@
 import { IO, Parser, SVObject } from "../lib";
 import { IOSave } from "../lib/io/@types/io.types";
-import { Delimter, DelimterType } from "../lib/parser";
+import { DelimterType } from "../lib/parser";
 import { ObjectType } from "../lib/parser/@types/object.types";
 import { SVReadOptions } from "./@types/sv.types";
 
@@ -10,7 +10,7 @@ class SV {
   private svObj: SVObject;
 
   private keys: Array<string>;
-  private object: Array<ObjectType>;
+  public object: Array<ObjectType>;
 
   constructor() {
     this.parser = new Parser();
@@ -27,7 +27,7 @@ class SV {
    * @param { string } filepath
    * @returns { Promise<Array<ObjectType>> }
    */
-  async read(filepath: string, delim: DelimterType, option: SVReadOptions): Promise<SV> {
+  async read(filepath: string, delim: DelimterType, option: SVReadOptions = { header: true }): Promise<SV> {
     return this.io
       .read(filepath)
       .then((value) => {
