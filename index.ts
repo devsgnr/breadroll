@@ -1,6 +1,8 @@
 /**
- * TS_FSM (ts_fsm)
- * A simple lightweight command line application for testing finite state machines
- * Create a .fsm file and run this application from the command line and test your
- * transitions with out having complex knowledge of how finite state machines work
+ * TS_SV (ts_sv)
+ * A simple lightweight application library for parsing csv and tsv
  */
+
+import SV from "./src/sv";
+
+export { SV };

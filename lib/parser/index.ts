@@ -1,8 +1,6 @@
 import { EscapeSeq } from "../../utils";
 import { ObjectType } from "./@types/object.types";
 
-export type DelimterType = "," | "\t";
-
 class Parser {
   private keys: Array<string>;
   private states: Array<string>;
@@ -21,7 +19,7 @@ class Parser {
    * @param { string } table
    * @returns { Array<string> }
    */
-  get_table_header(table: string, delimiter: DelimterType): Array<string> {
+  get_table_header(table: string, delimiter: string): Array<string> {
     const header = table.split(EscapeSeq.NEW_LINE, 1)[0].split(delimiter);
     this.keys = header.map((header) => header.split(EscapeSeq.CARRIAGE_RETURN)[0].toLocaleLowerCase());
     return this.keys;
@@ -34,9 +32,9 @@ class Parser {
    * @param { string } line
    * @returns { ObjectType }
    */
-  private object_builder(line: string): ObjectType {
+  private object_builder(line: string, delim: string): ObjectType {
     let state: ObjectType = {};
-    line.split(",").map((value: string, index: number) => {
+    line.split(delim).map((value: string, index: number) => {
       state = {
         ...state,
         ...{ [this.keys[index]]: value.split(EscapeSeq.CARRIAGE_RETURN)[0] },
@@ -52,9 +50,9 @@ class Parser {
    * @param { string } table
    * @returns { Array<ObjectType> }
    */
-  generate_object(table: string): Array<ObjectType> {
+  generate_object(table: string, delim: string): Array<ObjectType> {
     const row = table.split(EscapeSeq.NEW_LINE).splice(1);
-    this.object = row.map((line: string) => this.object_builder(line));
+    this.object = row.map((line: string) => this.object_builder(line, delim));
     return this.object;
   }
 }

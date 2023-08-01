@@ -170,3 +170,11 @@ dist
 
 # eslint cache
 .eslintcache
+
+# generated
+
+result.json
+
+# code that doesn't need to be in the repository
+
+src/index.ts
