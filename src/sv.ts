@@ -1,13 +1,11 @@
-import { IO, Parser, SVObject } from "../lib";
+import { IO, Parser } from "../lib";
 import { IOSave } from "../lib/io/@types/io.types";
-import { DelimterType } from "../lib/parser";
 import { ObjectType } from "../lib/parser/@types/object.types";
 import { SVReadOptions } from "./@types/sv.types";
 
 class SV {
   private parser: Parser;
   private io: IO;
-  private svObj: SVObject;
 
   private keys: Array<string>;
   public object: Array<ObjectType>;
@@ -15,24 +13,23 @@ class SV {
   constructor() {
     this.parser = new Parser();
     this.io = new IO();
-    this.svObj = new SVObject();
 
     this.keys = [];
     this.object = [];
   }
 
   /**
-   * This function opens the .fsm file; get the table headers and then
-   * also generated the svObj object array and returns the array
+   * This function opens the seperated value file; gets the table headers (if present)
+   * and then also generate the object array and returns the array
    * @param { string } filepath
    * @returns { Promise<Array<ObjectType>> }
    */
-  async read(filepath: string, delim: DelimterType, option: SVReadOptions = { header: true }): Promise<SV> {
+  async read(filepath: string, delim: string, option: SVReadOptions): Promise<SV> {
     return this.io
       .read(filepath)
       .then((value) => {
         if (option.header) this.keys = this.parser.get_table_header(value, delim);
-        this.object = this.parser.generate_object(value);
+        this.object = this.parser.generate_object(value, delim);
         return this;
       })
       .catch((err) => {

@@ -1,3 +1,3 @@
-export interface SVReadOptions {
+export type SVReadOptions = {
   header: boolean;
-}
+};
