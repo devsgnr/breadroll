@@ -1,6 +1,6 @@
 {
-  "name": "ts_sv",
-  "version": "0.1",
+  "name": "ts_df",
+  "version": "0.1.1",
   "module": "index.ts",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.1.0",
