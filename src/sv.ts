@@ -7,12 +7,20 @@ class SV {
   private parser: Parser;
   private io: IO;
 
+  private filepath: string;
+  private delimiter: string;
+  private options: SVReadOptions;
+
   private keys: Array<string>;
   public object: Array<ObjectType>;
 
-  constructor() {
+  constructor(filepath: string, delimiter: string, options: SVReadOptions) {
     this.parser = new Parser();
     this.io = new IO();
+
+    this.filepath = filepath;
+    this.delimiter = delimiter;
+    this.options = options;
 
     this.keys = [];
     this.object = [];
@@ -21,15 +29,14 @@ class SV {
   /**
    * This function opens the seperated value file; gets the table headers (if present)
    * and then also generate the object array and returns the array
-   * @param { string } filepath
    * @returns { Promise<Array<ObjectType>> }
    */
-  async read(filepath: string, delim: string, option: SVReadOptions): Promise<SV> {
+  async read(): Promise<SV> {
     return this.io
-      .read(filepath)
+      .read(this.filepath)
       .then((value) => {
-        if (option.header) this.keys = this.parser.get_table_header(value, delim);
-        this.object = this.parser.generate_object(value, delim);
+        if (this.options.header) this.keys = this.parser.get_table_header(value, this.delimiter);
+        this.object = this.parser.generate_object(value, this.delimiter);
         return this;
       })
       .catch((err) => {
@@ -55,6 +62,15 @@ class SV {
   get getKeys(): Array<string> {
     if (this.keys) return this.keys;
     else throw new Error("No header present");
+  }
+
+  /**
+   * This function filters the object and return a new array of object based
+   * on the filter that was provided as arguments of the function,
+   * eg. ("key", "equals", "value")
+   */
+  filter(): Array<ObjectType> {
+    return [];
   }
 }
 

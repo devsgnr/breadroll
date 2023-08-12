@@ -1,5 +1,6 @@
 import { EscapeSeq } from "../../utils";
 import { ObjectType } from "./@types/object.types";
+import { parseIfNumber } from "./utils";
 
 class Parser {
   private keys: Array<string>;
@@ -37,7 +38,7 @@ class Parser {
     line.split(delim).map((value: string, index: number) => {
       state = {
         ...state,
-        ...{ [this.keys[index]]: value.split(EscapeSeq.CARRIAGE_RETURN)[0] },
+        ...{ [this.keys[index]]: parseIfNumber(value.split(EscapeSeq.CARRIAGE_RETURN)[0]) },
       };
     });
     return state;
