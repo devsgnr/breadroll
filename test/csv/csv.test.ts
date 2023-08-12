@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test";
 import * as mock from "../result.json";
-import SV from "../../src/sv";
+import DF from "../../src/df";
 
-// Instanciate SV Class
-const file = new SV();
+// Instanciate DF Class
+const file = new DF("./test/csv/test.csv", ",", { header: true });
 
 /**
  * Testing IO (Input/Output)
@@ -14,7 +14,7 @@ describe("testing IO", () => {
    * corresponds to existing mock json
    */
   test("open, read & to json", async () => {
-    await file.read("./test.csv", ",").then((result) => {
+    await file.read().then((result) => {
       const json = JSON.stringify(result.object, null, 2);
       expect(json).toBe(mock);
     });

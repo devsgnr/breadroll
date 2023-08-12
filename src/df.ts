@@ -1,22 +1,24 @@
-import { IO, Parser } from "../lib";
+import { IO, Parser, DFObject } from "../lib";
 import { IOSave } from "../lib/io/@types/io.types";
 import { ObjectType } from "../lib/parser/@types/object.types";
-import { SVReadOptions } from "./@types/sv.types";
+import { DFReadOptions } from "./@types/df.types";
 
-class SV {
+class DF {
   private parser: Parser;
   private io: IO;
+  private object_handler: DFObject;
 
   private filepath: string;
   private delimiter: string;
-  private options: SVReadOptions;
+  private options: DFReadOptions;
 
   private keys: Array<string>;
   public object: Array<ObjectType>;
 
-  constructor(filepath: string, delimiter: string, options: SVReadOptions) {
+  constructor(filepath: string, delimiter: string, options: DFReadOptions) {
     this.parser = new Parser();
     this.io = new IO();
+    this.object_handler = new DFObject();
 
     this.filepath = filepath;
     this.delimiter = delimiter;
@@ -31,7 +33,7 @@ class SV {
    * and then also generate the object array and returns the array
    * @returns { Promise<Array<ObjectType>> }
    */
-  async read(): Promise<SV> {
+  async read(): Promise<DF> {
     return this.io
       .read(this.filepath)
       .then((value) => {
@@ -45,7 +47,7 @@ class SV {
   }
 
   /**
-   * This function saves the generates finite state svObj object
+   * This function saves the generates finite state DFObj object
    * as a JSON to the specified location and filename
    * @param { string } filepath
    * @returns { Promise<number> }
@@ -65,6 +67,17 @@ class SV {
   }
 
   /**
+   * This function get the number of occurences of a particular key's
+   * value and returns the count
+   * @param {string} key
+   * @param {unknown} value
+   * @returns {number}
+   */
+  getCount(key: string, value: unknown): number {
+    return this.object_handler.count(this.object, key, value);
+  }
+
+  /**
    * This function filters the object and return a new array of object based
    * on the filter that was provided as arguments of the function,
    * eg. ("key", "equals", "value")
@@ -74,4 +87,4 @@ class SV {
   }
 }
 
-export default SV;
+export default DF;

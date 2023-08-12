@@ -2,7 +2,7 @@ export type ObjectType = {
   [key: string]: string | unknown;
 };
 
-export type SVExtractedData = {
+export type DFExtractedData = {
   metadata: ObjectType;
   filters: {
     [key: string]: Array<string>;

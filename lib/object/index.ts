@@ -1,4 +1,6 @@
-class SVObject {
+import { ObjectType } from "../parser/@types/object.types";
+
+class DFObject {
   public keys: Array<string>;
 
   constructor() {
@@ -6,9 +8,16 @@ class SVObject {
   }
 
   /**
-   *
+   * This function retuns the count of occurance of a dataframe's key's
+   * value
+   * @param {Array<ObjectType>} dataframe
+   * @param {string} key
+   * @param {unknown} value
+   * @returns {number}
    */
-  getAllKeys(): void {}
+  count(dataframe: Array<ObjectType>, key: string, value: unknown): number {
+    return dataframe.filter((object) => object[key] === value).length;
+  }
 }
 
-export default SVObject;
+export default DFObject;
