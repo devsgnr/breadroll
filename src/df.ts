@@ -9,19 +9,17 @@ class DF {
   private object_handler: DFObject;
 
   private filepath: string;
-  private delimiter: string;
   private options: DFReadOptions;
 
   private keys: Array<string>;
   public object: Array<ObjectType>;
 
-  constructor(filepath: string, delimiter: string, options: DFReadOptions) {
+  constructor(filepath: string, options: DFReadOptions) {
     this.parser = new Parser();
     this.io = new IO();
     this.object_handler = new DFObject();
 
     this.filepath = filepath;
-    this.delimiter = delimiter;
     this.options = options;
 
     this.keys = [];
@@ -33,12 +31,12 @@ class DF {
    * and then also generate the object array and returns the array
    * @returns { Promise<Array<ObjectType>> }
    */
-  async read(): Promise<DF> {
+  async open(): Promise<DF> {
     return this.io
       .read(this.filepath)
       .then((value) => {
-        if (this.options.header) this.keys = this.parser.get_table_header(value, this.delimiter);
-        this.object = this.parser.generate_object(value, this.delimiter);
+        if (this.options.header) this.keys = this.parser.get_table_header(value, this.options.delimiter);
+        this.object = this.parser.generate_object(value, this.options.delimiter);
         return this;
       })
       .catch((err) => {
