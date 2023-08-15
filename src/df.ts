@@ -76,6 +76,13 @@ class DF {
   }
 
   /**
+   * This function returns the first five rows of the data frame
+   */
+  get head() {
+    return this.object.splice(0, 5);
+  }
+
+  /**
    * This function filters the object and return a new array of object based
    * on the filter that was provided as arguments of the function,
    * eg. ("key", "equals", "value")
