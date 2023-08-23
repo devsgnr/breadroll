@@ -1,5 +1,8 @@
+import { DFObject } from "..";
+import { DFReadOptions } from "../../src/@types/df.types";
 import { EscapeSeq } from "../../utils";
 import { ObjectType } from "./@types/object.types";
+import { parseIfNumber } from "./utils";
 
 class Parser {
   private keys: Array<string>;
@@ -19,9 +22,11 @@ class Parser {
    * @param { string } table
    * @returns { Array<string> }
    */
-  get_table_header(table: string, delimiter: string): Array<string> {
-    const header = table.split(EscapeSeq.NEW_LINE, 1)[0].split(delimiter);
-    this.keys = header.map((header) => header.split(EscapeSeq.CARRIAGE_RETURN)[0].toLocaleLowerCase());
+  get_table_header(table: string, options: DFReadOptions): Array<string> {
+    const header = table.split(EscapeSeq.NEW_LINE, 1)[0].split(options.delimiter);
+    if (options.header) this.keys = header.map((header) => header.split(EscapeSeq.CARRIAGE_RETURN)[0].toLocaleLowerCase().replace(" ", "_"));
+    if (!options.header && options.keys) this.keys = options.keys;
+    if (!options.header && !options.keys) throw new Error("Header set to false and no keys provided");
     return this.keys;
   }
 
@@ -37,7 +42,7 @@ class Parser {
     line.split(delim).map((value: string, index: number) => {
       state = {
         ...state,
-        ...{ [this.keys[index]]: value.split(EscapeSeq.CARRIAGE_RETURN)[0] },
+        ...{ [this.keys[index]]: parseIfNumber(value.split(EscapeSeq.CARRIAGE_RETURN)[0]) },
       };
     });
     return state;
@@ -48,12 +53,12 @@ class Parser {
    * JavaScript objects that define the transition for each state when
    * given a certain input
    * @param { string } table
-   * @returns { Array<ObjectType> }
+   * @returns { DFObject }
    */
-  generate_object(table: string, delim: string): Array<ObjectType> {
+  generate_object(table: string, options: DFReadOptions): DFObject {
     const row = table.split(EscapeSeq.NEW_LINE).splice(1);
-    this.object = row.map((line: string) => this.object_builder(line, delim));
-    return this.object;
+    this.object = row.map((line: string) => this.object_builder(line, options.delimiter));
+    return new DFObject(this.object);
   }
 }
 

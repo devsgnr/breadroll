@@ -1,8 +1,9 @@
 /**
- * TS_SV (ts_sv)
- * A simple lightweight application library for parsing csv and tsv
+ * TS_DF (ts_df)
+ * A simple lightweight application library for parsing cDF and tDF and
+ * performing EDA (exploratory data analysis) written in Typescript
  */
 
-import SV from "./src/sv";
+import DF from "./src/df";
 
-export { SV };
+export { DF };

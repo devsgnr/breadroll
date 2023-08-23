@@ -368,7 +368,7 @@ id	age	bp	sg	al	su	rbc	pc	pcc	ba	bgr	bu	sc	sod	pot	hemo	pcv	wbcc	rbcc	htn	dm	cad
 367	60	80	1.025	0	0	normal	normal	notpresent	notpresent	81	15	0.5	141	3.6	15	46	10500	5.3	no	no	no	good	no	no	notckd
 368	68	60	1.025	0	0	normal	normal	notpresent	notpresent	125	41	1.1	139	3.8	17.4	50	6700	6.1	no	no	no	good	no	no	notckd
 369	30	80	1.025	0	0	normal	normal	notpresent	notpresent	82	42	0.7	146	5	14.9	45	9400	5.9	no	no	no	good	no	no	notckd
-370	75	70	1.02	0	0	normal	normal	notpresent	notpresent	107	48	0.8	144	3.5	13.6	46	10300	4.8	no		no	no	good	no	
+370	75	70	1.02	0	0	normal	normal	notpresent	notpresent	107	48	0.8	144	3.5	13.6	46	10300	4.8	no		no	no	good	no	notckd
 371	69	70	1.02	0	0	normal	normal	notpresent	notpresent	83	42	1.2	139	3.7	16.2	50	9300	5.4	no	no	no	good	no	no	notckd
 372	28	60	1.025	0	0	normal	normal	notpresent	notpresent	79	50	0.5	145	5	17.6	51	6500	5	no	no	no	good	no	no	notckd
 373	72	60	1.02	0	0	normal	normal	notpresent	notpresent	109	26	0.9	150	4.9	15	52	10500	5.5	no	no	no	good	no	no	notckd

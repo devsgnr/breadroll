@@ -1,5 +1,5 @@
-export interface IOSave {
+export type IOSave = {
   as: {
     json: () => Promise<number>;
   };
-}
+};
