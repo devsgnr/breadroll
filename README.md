@@ -1,6 +1,6 @@
-## ts_df
+# ts_df
 
-⚠️ EXPERIMENTAL - This is still in development with a lot of work that needs to be done, it is very rough around the edges.
+### ⚠️ EXPERIMENTAL - This is still in development with a lot of work that needs to be done, it is very rough around the edges.
 
 A simple lightweight application library for parsing csv and tsv and performing EDA (exploratory data analysis) think pandas but written in Typescript and developed on the Bun.js Runtime.
 
