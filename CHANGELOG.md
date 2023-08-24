@@ -10,3 +10,9 @@
 - `DF.isNull` - returns all the rows that have some properties equals to `null`
 - `DF.notNull` - returns all the rows that have every property equals to `!null`
 - `DF.dtypes` - returns all the data types of all the columns in the dataframe
+
+### Aug 24th - v0.1.2
+
+- `DF` changed to `DataframeFile` which only handles file opening and saving
+- `DFObject` changed to `DataframeObject` which a lot of until functions
+- Modified test suite to remove a lot of unneccesary tests

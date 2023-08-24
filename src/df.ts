@@ -1,25 +1,22 @@
-import { IO, Parser, DFObject } from "../lib";
+import { IO, Parser, DataframeObject } from "../lib";
 import { IOSave } from "../lib/io/@types/io.types";
-import { Condition } from "../lib/object/@types/filter.types";
 import { ObjectType } from "../lib/parser/@types/object.types";
-import { DFReadOptions } from "./@types/df.types";
+import { DataframeReadOptions } from "./@types/df.types";
 
-class DF {
+class DataframeFile {
   private parser: Parser;
   private io: IO;
 
   private filepath: string;
-  private options: DFReadOptions;
+  private options: DataframeReadOptions;
 
-  private keys: Array<string>;
-  public object: DFObject;
+  public object: DataframeObject;
 
-  constructor(filepath: string, options: DFReadOptions) {
+  constructor(filepath: string, options: DataframeReadOptions) {
     this.filepath = filepath;
     this.options = options;
 
-    this.keys = [];
-    this.object = new DFObject([]);
+    this.object = new DataframeObject([]);
 
     this.parser = new Parser();
     this.io = new IO();
@@ -30,13 +27,13 @@ class DF {
    * and then also generate the object array and returns the array
    * @returns { Promise<Array<ObjectType>> }
    */
-  async open(): Promise<DF> {
+  async open(): Promise<DataframeObject> {
     return this.io
       .read(this.filepath)
       .then((value) => {
-        this.keys = this.parser.get_table_header(value, this.options);
+        this.parser.get_table_header(value, this.options);
         this.object = this.parser.generate_object(value, this.options);
-        return this;
+        return this.object;
       })
       .catch((err) => {
         throw new Error(err);
@@ -44,78 +41,14 @@ class DF {
   }
 
   /**
-   * This function saves the generates finite state DFObj object
+   * This function saves the generates finite state DataframeObj object
    * as a JSON to the specified location and filename
    * @param { string } filepath
    * @returns { Promise<number> }
    */
-  save(filepath: string): IOSave {
-    return this.io.save(filepath, this.object.aggregate);
-  }
-
-  /**
-   * This function gets and return all the keys from within the
-   * oject
-   * @returns { Array<string> }
-   */
-  get labels(): Array<string> {
-    return this.keys;
-  }
-
-  /**
-   * This function returns the total count of rows in the
-   * dataframe
-   * @returns { number }
-   */
-  get count(): number {
-    return this.object.count;
-  }
-
-  /**
-   * This function returns the first five rows of the data frame
-   */
-  get head(): Array<ObjectType> {
-    return this.object.aggregate.splice(0, 5);
-  }
-
-  /**
-   * This function return all the objects in the array where some
-   * properties are eqaul to null
-   */
-  get isNull(): DFObject {
-    return new DFObject(this.object.aggregate.filter((object) => Object.values(object).some((value) => !value)));
-  }
-
-  /**
-   * This function return all the objects in the array where every object
-   * property is not eqaul to `null`
-   */
-  get notNull(): DFObject {
-    return new DFObject(this.object.aggregate.filter((object) => Object.values(object).every((value) => value)));
-  }
-
-  /**
-   * This function return the data types of each column
-   * in the dataframe in a { key: value } pair
-   */
-  get dtypes(): ObjectType {
-    let types: ObjectType = {};
-    Object.values(this.object.aggregate[0]).map((value, index) => {
-      types = { ...types, ...{ [this.keys[index]]: typeof value } };
-    });
-    return types;
-  }
-
-  /**
-   * This function filters the object and return a new array of object based
-   * on the filter that was provided as arguments of the function,
-   * eg. ("key", "equals", "value")
-   * @param { FilterExpression } ...args
-   * @returns { DFObject }
-   */
-  filter(key: string, filter: Condition, value: unknown): DFObject {
-    return this.object.filter(key, filter, value);
+  save(object: Array<ObjectType>, filepath: string): IOSave {
+    return this.io.save(filepath, object);
   }
 }
 
-export default DF;
+export default DataframeFile;
