@@ -15,7 +15,7 @@ describe("testing IO - mock test", () => {
    * that it shouldn't be empty
    */
   test("if file is not empty, it should not be an empty array", () => {
-    assert.notEqual([], df.aggregate);
+    assert.notEqual([], df.value);
   });
 
   /**
@@ -31,6 +31,6 @@ describe("testing IO - mock test", () => {
    * rows of the data frame
    */
   test("Head count should be 5", () => {
-    expect(df.head).toBe(5);
+    expect(df.head.length).toBe(5);
   });
 });
