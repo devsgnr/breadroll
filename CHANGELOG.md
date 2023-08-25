@@ -13,6 +13,6 @@
 
 ### Aug 24th - v0.1.2
 
-- `DF` changed to `DataframeFile` which only handles file opening and saving
-- `DFObject` changed to `DataframeObject` which a lot of until functions
+- `DF` changed to `DataFile` which only handles file opening and saving
+- `DFObject` changed to handle and maintain the Javascript object generated after parsing by `DataFile`
 - Modified test suite to remove a lot of unneccesary tests

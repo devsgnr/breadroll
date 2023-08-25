@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { DataframeFile } from "..";
+import { DataFile } from "..";
 import assert from "assert";
 
 // Instanciate DF Class & Open file
-const file = new DataframeFile("./test/data/test.csv", { header: true, delimiter: "," });
+const file = new DataFile("./test/data/test.csv", { header: true, delimiter: "," });
 const df = await file.open();
 
 /**
@@ -31,6 +31,6 @@ describe("testing IO - mock test", () => {
    * rows of the data frame
    */
   test("Head count should be 5", () => {
-    expect(df.head.length).toBe(5);
+    expect(df.head).toBe(5);
   });
 });

@@ -2,7 +2,7 @@ import { ObjectType } from "../parser/@types/object.types";
 import { Condition } from "./@types/filter.types";
 import Filters from "./filters";
 
-class DataframeObject {
+class DFObject {
   private object: Array<ObjectType>;
 
   constructor(object: Array<ObjectType>) {
@@ -38,16 +38,16 @@ class DataframeObject {
    * This function return all the objects in the array where some
    * properties are eqaul to null
    */
-  get isNull(): DataframeObject {
-    return new DataframeObject(this.object.filter((object) => Object.values(object).some((value) => !value)));
+  get isNull(): DFObject {
+    return new DFObject(this.object.filter((object) => Object.values(object).some((value) => !value)));
   }
 
   /**
    * This function return all the objects in the array where every object
    * property is not eqaul to `null`
    */
-  get notNull(): DataframeObject {
-    return new DataframeObject(this.object.filter((object) => Object.values(object).every((value) => value)));
+  get notNull(): DFObject {
+    return new DFObject(this.object.filter((object) => Object.values(object).every((value) => value)));
   }
 
   /**
@@ -69,20 +69,20 @@ class DataframeObject {
    * @param { string } key
    * @param { Condition } filter
    * @param { unknown } value
-   * @returns { DataframeObject }
+   * @returns { DFObject }
    */
-  filter(key: string, filter: Condition, value: unknown): DataframeObject {
+  filter(key: string, filter: Condition, value: unknown): DFObject {
     return Filters[filter](this.object, ...[key, value]);
   }
 
   /**
    * This function exposes the array of objects before or after
    * filter has been applied to it
-   * @returns { ObjectType[] }
+   * @returns { Array<ObjectType> }
    */
-  get aggregate(): ObjectType[] {
+  get value(): Array<ObjectType> {
     return this.object;
   }
 }
 
-export default DataframeObject;
+export default DFObject;
