@@ -26,7 +26,8 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
 
 ## `DFObject`
 
-`DFObject.count`
+### `DFObject.count`
+
 This function returns the count of rows `number`, the most especially useful when use in tandem with the `DFObject.filter()`
 
 ```typescript
@@ -36,7 +37,8 @@ const df: DFObject = await file.open();
 const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
 ```
 
-`DFObject.labels`
+### `DFObject.labels`
+
 This function returns an array of strings `Array<string>` ie. the labels of each column of the dataframe
 
 ```typescript
@@ -44,7 +46,8 @@ This function returns an array of strings `Array<string>` ie. the labels of each
 const df_labels = df.labels; // ["age", "race", "workclass", ...]
 ```
 
-`DFObject.head`
+### `DFObject.head`
+
 This function return an array of objects `Array<ObjectType>`. NB: `ObjectType` is a custom type.
 
 ```typescript
@@ -52,7 +55,8 @@ This function return an array of objects `Array<ObjectType>`. NB: `ObjectType` i
 const df_labels = df.head; // [{}, {}, {}, ...]
 ```
 
-`DFObject.isNull`
+### `DFObject.isNull`
+
 This function return a new Dataframe object `DFObject` where some of it properties have a `null`
 
 ```typescript
@@ -60,7 +64,8 @@ This function return a new Dataframe object `DFObject` where some of it properti
 const isNull = df.isNull; // DFObject()
 ```
 
-`DFObject.notNull`
+### `DFObject.notNull`
+
 This function return a new Dataframe object `DFObject` where none of it properties have a `null`, the inverse of `DFObject.isNull`
 
 ```typescript
@@ -68,7 +73,8 @@ This function return a new Dataframe object `DFObject` where none of it properti
 const notNull = df.notNull; // DFObject()
 ```
 
-`DFObject.dtypes`
+### `DFObject.dtypes`
+
 This function return an object `ObjectType` that shows the data type of each column in the dataframe in a key:value pair
 
 ```typescript
@@ -76,7 +82,8 @@ This function return an object `ObjectType` that shows the data type of each col
 const dtypes = df.dtypes; // { age: "number", workclass: "string", ... }
 ```
 
-`DFObject.value`
+### `DFObject.value`
+
 This function exposes ie. returns an array of objects `Array<ObjectType>` that is within the `DFObject`
 
 ```typescript
@@ -84,7 +91,8 @@ This function exposes ie. returns an array of objects `Array<ObjectType>` that i
 const dtypes = df.value; // [{}, {}, {}, ...]
 ```
 
-`DFObject.filter(key: string, filter: Condition, value: unknown)`
+### `DFObject.filter(key: string, filter: Condition, value: unknown)`
+
 This function returns `DFObject` and it is used to filter out `DFObject`, by checking if `key` which is the column label against a filter condition `Condition` using `value`
 
 ```typescript
