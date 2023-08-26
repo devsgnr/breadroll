@@ -2,7 +2,7 @@
 
 ⚠️ EXPERIMENTAL - This is still in active development and very much experimental, it is still in it's early stages very rough around the edges.
 
-ts_df, short for **Typescript Dataframe**, is a simple lightweight application library for parsing csv, tsv and other delimited file, performing EDA (exploratory data analysis) and SIMD (single instruction / multiple data) operation on multivariate datasets. Think pandas but written in Typescript and developed on the Bun.js Runtime.
+ts_df, short for **Typescript Dataframe**, is a simple lightweight application library for parsing csv, tsv and other delimited file, for statistical, EDA (exploratory data analysis) and SIMD (single instruction / multiple data) operations on multivariate datasets. Think `pandas` but written in Typescript and developed on the Bun.js Runtime.
 
 Here an example with a dataset gotten from [Kaggle](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 
@@ -26,7 +26,7 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
 
 ## `DFObject`
 
-### `DFObject.count`
+- #### `DFObject.count`
 
 This function returns the count of rows `number`, the most especially useful when use in tandem with the `DFObject.filter()`
 
@@ -37,7 +37,7 @@ const df: DFObject = await file.open();
 const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
 ```
 
-### `DFObject.labels`
+- #### `DFObject.labels`
 
 This function returns an array of strings `Array<string>` ie. the labels of each column of the dataframe
 
@@ -46,7 +46,7 @@ This function returns an array of strings `Array<string>` ie. the labels of each
 const df_labels = df.labels; // ["age", "race", "workclass", ...]
 ```
 
-### `DFObject.head`
+- #### `DFObject.head`
 
 This function return an array of objects `Array<ObjectType>`. NB: `ObjectType` is a custom type.
 
@@ -55,7 +55,7 @@ This function return an array of objects `Array<ObjectType>`. NB: `ObjectType` i
 const df_labels = df.head; // [{}, {}, {}, ...]
 ```
 
-### `DFObject.isNull`
+- #### `DFObject.isNull`
 
 This function return a new Dataframe object `DFObject` where some of it properties have a `null`
 
@@ -64,7 +64,7 @@ This function return a new Dataframe object `DFObject` where some of it properti
 const isNull = df.isNull; // DFObject()
 ```
 
-### `DFObject.notNull`
+- #### `DFObject.notNull`
 
 This function return a new Dataframe object `DFObject` where none of it properties have a `null`, the inverse of `DFObject.isNull`
 
@@ -73,7 +73,7 @@ This function return a new Dataframe object `DFObject` where none of it properti
 const notNull = df.notNull; // DFObject()
 ```
 
-### `DFObject.dtypes`
+- #### `DFObject.dtypes`
 
 This function return an object `ObjectType` that shows the data type of each column in the dataframe in a key:value pair
 
@@ -82,7 +82,7 @@ This function return an object `ObjectType` that shows the data type of each col
 const dtypes = df.dtypes; // { age: "number", workclass: "string", ... }
 ```
 
-### `DFObject.value`
+- #### `DFObject.value`
 
 This function exposes ie. returns an array of objects `Array<ObjectType>` that is within the `DFObject`
 
@@ -91,7 +91,7 @@ This function exposes ie. returns an array of objects `Array<ObjectType>` that i
 const dtypes = df.value; // [{}, {}, {}, ...]
 ```
 
-### `DFObject.filter(key: string, filter: Condition, value: unknown)`
+- #### `DFObject.filter(key: string, filter: Condition, value: unknown)`
 
 This function returns `DFObject` and it is used to filter out `DFObject`, by checking if `key` which is the column label against a filter condition `Condition` using `value`
 

@@ -1,12 +1,15 @@
+import { DFCustomType } from "../../src/@types/df.types";
 import { ObjectType } from "../parser/@types/object.types";
-import { Condition } from "./@types/filter.types";
+import { Condition, FilterType } from "./@types/filter.types";
 import Filters from "./filters";
 
 class DFObject {
   private object: Array<ObjectType>;
+  private filters: FilterType;
 
   constructor(object: Array<ObjectType>) {
     this.object = object;
+    this.filters = Object({ ...Filters });
   }
 
   /**
@@ -72,8 +75,17 @@ class DFObject {
    * @returns { DFObject }
    */
   filter(key: string, filter: Condition, value: unknown): DFObject {
-    return Filters[filter](this.object, ...[key, value]);
+    return this.filters[filter](this.object, key, value);
   }
+
+  /**
+   * extend
+   */
+  custom: DFCustomType = {
+    filter: (callback: (object: Array<ObjectType>) => DFObject): DFObject => {
+      return callback(this.object);
+    },
+  };
 
   /**
    * This function exposes the array of objects before or after
