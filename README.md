@@ -42,7 +42,6 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function returns an array of strings `Array<string>` ie. the labels of each column of the dataframe
 
   ```typescript
-  ...
   const df_labels = df.labels; // ["age", "race", "workclass", ...]
   ```
 
@@ -51,7 +50,6 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function return an array of objects `Array<ObjectType>`. NB: `ObjectType` is a custom type.
 
   ```typescript
-  ...
   const df_labels = df.head; // [{}, {}, {}, ...]
   ```
 
@@ -60,7 +58,6 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function return a new Dataframe object `DFObject` where some of it properties have a `null`
 
   ```typescript
-  ...
   const isNull = df.isNull; // DFObject()
   ```
 
@@ -69,7 +66,6 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function return a new Dataframe object `DFObject` where none of it properties have a `null`, the inverse of `DFObject.isNull`
 
   ```typescript
-  ...
   const notNull = df.notNull; // DFObject()
   ```
 
@@ -78,7 +74,6 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function return an object `ObjectType` that shows the data type of each column in the dataframe in a key:value pair
 
   ```typescript
-  ...
   const dtypes = df.dtypes; // { age: "number", workclass: "string", ... }
   ```
 
@@ -87,7 +82,6 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function exposes ie. returns an array of objects `Array<ObjectType>` that is within the `DFObject`
 
   ```typescript
-  ...
   const dtypes = df.value; // [{}, {}, {}, ...]
   ```
 
@@ -96,14 +90,12 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function returns `DFObject` and it is used to filter out `DFObject`, by checking if `key` which is the column label against a filter condition `Condition` using `value`
 
   ```typescript
-  ...
   const filtered_salary = df.filter("salary", "greater than", 70000); // DFObject
   ```
 
   Multiple / Chained Filter: you can chain the filter ie. filtering the previously filtered `DFObject`, the chained filter can be as long as you need them to be;
 
   ```typescript
-  ...
   const salary_and_year = df.filter("salary", "greater than", 70000).filter("work_year", "equals", 2020); // DFObject
   ```
 
