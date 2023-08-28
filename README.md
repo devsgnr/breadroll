@@ -26,12 +26,12 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
 
 ## `DataFile`
 
-- `DataFile(filepath: string, options: DataframeReadOptions)`
-  `filepath: string` - the location of the file.
-  `options: DataframeReadOptions`
-  - `DataframeReadOptions.header: boolean` when set to `true`, `DataFile.open()` automatically gets the header from the file
-  - `DataframeReadOptions.delimiter: string` the delimiting string, it could be a variety of delimiter, the likes of `",", "\t"` and more
-  - `DataframeReadOptions.keys?: Array<string>` this is an optional property for when `DataframeReadOptions.header` is `false`
+- #### `DataFile(filepath: string, options: DataframeReadOptions)`
+  - `filepath: string` - the location of the file.
+  - `options: DataframeReadOptions`
+    - `DataframeReadOptions.header: boolean` when set to `true`, `DataFile.open()` automatically gets the header from the file
+    - `DataframeReadOptions.delimiter: string` the delimiting string, it could be a variety of delimiter, the likes of `",", "\t"` and more
+    - `DataframeReadOptions.keys?: Array<string>` this is an optional property for when `DataframeReadOptions.header` is `false`
 - #### `DataFile.open()`
   This function opens and parses the specified file path in the `DataFile()` instance, then returns `DFObject`
 - #### `DataFile.save(data: DFObject, filepath: string)`
