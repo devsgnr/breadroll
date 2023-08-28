@@ -4,6 +4,6 @@
  * performing EDA (exploratory data analysis) written in Typescript
  */
 
-import DF from "./src/df";
+import DataFile from "./src/df";
 
-export { DF };
+export { DataFile };
