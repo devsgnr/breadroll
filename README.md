@@ -115,3 +115,9 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
 
   Programmatic Multiple / Chained Filters:
   **Coming Soon**
+
+---
+
+### Author(s)
+
+- [Emmanuel Watila](https://devsgnr.xyz) ([@devsgnr](https://github.com/devsgnr))
