@@ -33,8 +33,8 @@ class DFObject {
   /**
    * This function returns the first five rows of the data frame
    */
-  get head(): Array<ObjectType> {
-    return this.object.splice(0, 5);
+  get head(): DFObject {
+    return new DFObject(this.object.splice(0, 5));
   }
 
   /**
@@ -74,15 +74,15 @@ class DFObject {
    * @param { unknown } value
    * @returns { DFObject }
    */
-  filter(key: string, filter: Condition, value: unknown): DFObject {
-    return this.filters[filter](this.object, key, value);
+  filter(key: string, filter: Condition, value: unknown, limit?: unknown): DFObject {
+    return this.filters[filter](this.object, key, value, limit);
   }
 
   /**
    * extend
    */
   custom: DFCustomType = {
-    filter: (callback: (object: Array<ObjectType>) => DFObject): DFObject => {
+    operation: (callback: (object: Array<ObjectType>) => DFObject) => {
       return callback(this.object);
     },
   };

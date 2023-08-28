@@ -8,5 +8,5 @@ export type DataframeReadOptions = {
 };
 
 export type DFCustomType = {
-  [key: string]: (callback: (object: Array<ObjectType>) => DFObject) => DFObject;
+  operation: (callback: (object: Array<ObjectType>) => DFObject) => DFObject;
 };

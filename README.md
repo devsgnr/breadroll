@@ -24,6 +24,19 @@ const workclass_equals_private = df.filter("workclass", "equals", "Private").cou
 
 This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
+## `DataFile`
+
+- `DataFile(filepath: string, options: DataframeReadOptions)`
+  `filepath: string` - the location of the file.
+  `options: DataframeReadOptions`
+  - `DataframeReadOptions.header: boolean` when set to `true`, `DataFile.open()` automatically gets the header from the file
+  - `DataframeReadOptions.delimiter: string` the delimiting string, it could be a variety of delimiter, the likes of `",", "\t"` and more
+  - `DataframeReadOptions.keys?: Array<string>` this is an optional property for when `DataframeReadOptions.header` is `false`
+- #### `DataFile.open()`
+  This function opens and parses the specified file path in the `DataFile()` instance, then returns `DFObject`
+- #### `DataFile.save(data: DFObject, filepath: string)`
+  This function saves `DFObject.value` as a few type of files ie. for example `DataFile.save(DFObject, filepath).as.json()`, more file types will be added soon.
+
 ## `DFObject`
 
 - #### `DFObject.count`
@@ -85,9 +98,10 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   const dtypes = df.value; // [{}, {}, {}, ...]
   ```
 
-- #### `DFObject.filter(key: string, filter: Condition, value: unknown)`
+- #### `DFObject.filter(key: string, filter: Condition, value: unknown, limit?: unknown)`
 
   This function returns `DFObject` and it is used to filter out `DFObject`, by checking if `key` which is the column label against a filter condition `Condition` using `value`
+  **Note:** `limit` is an optional fourth argument that is used with range filters like `in between`
 
   ```typescript
   const filtered_salary = df.filter("salary", "greater than", 70000); // DFObject
@@ -100,3 +114,4 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   ```
 
   Programmatic Multiple / Chained Filters:
+  **Coming Soon**
