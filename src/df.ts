@@ -1,4 +1,4 @@
-import { IO, Parser, DFObject } from "../lib";
+import { IO, Parser, Dataframe } from "../lib";
 import { IOSave } from "../lib/io/@types/io.types";
 import { ObjectType } from "../lib/parser/@types/object.types";
 import { DataframeReadOptions } from "./@types/df.types";
@@ -10,13 +10,13 @@ class DataFile {
   private filepath: string;
   private options: DataframeReadOptions;
 
-  public object: DFObject;
+  public object: Dataframe;
 
   constructor(filepath: string, options: DataframeReadOptions) {
     this.filepath = filepath;
     this.options = options;
 
-    this.object = new DFObject([]);
+    this.object = new Dataframe([]);
 
     this.parser = new Parser();
     this.io = new IO();
@@ -27,7 +27,7 @@ class DataFile {
    * and then also generate the object array and returns the array
    * @returns { Promise<Array<ObjectType>> }
    */
-  async open(): Promise<DFObject> {
+  async open(): Promise<Dataframe> {
     return this.io
       .read(this.filepath)
       .then((value) => {

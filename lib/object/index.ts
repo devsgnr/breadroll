@@ -3,7 +3,7 @@ import { ObjectType } from "../parser/@types/object.types";
 import { Condition, FilterType } from "./@types/filter.types";
 import Filters from "./filters";
 
-class DFObject {
+class Dataframe {
   private object: Array<ObjectType>;
   private filters: FilterType;
 
@@ -33,24 +33,24 @@ class DFObject {
   /**
    * This function returns the first five rows of the data frame
    */
-  get head(): DFObject {
-    return new DFObject(this.object.splice(0, 5));
+  get head(): Dataframe {
+    return new Dataframe(this.object.splice(0, 5));
   }
 
   /**
    * This function return all the objects in the array where some
    * properties are eqaul to null
    */
-  get isNull(): DFObject {
-    return new DFObject(this.object.filter((object) => Object.values(object).some((value) => !value)));
+  get isNull(): Dataframe {
+    return new Dataframe(this.object.filter((object) => Object.values(object).some((value) => !value)));
   }
 
   /**
    * This function return all the objects in the array where every object
    * property is not eqaul to `null`
    */
-  get notNull(): DFObject {
-    return new DFObject(this.object.filter((object) => Object.values(object).every((value) => value)));
+  get notNull(): Dataframe {
+    return new Dataframe(this.object.filter((object) => Object.values(object).every((value) => value)));
   }
 
   /**
@@ -72,9 +72,9 @@ class DFObject {
    * @param { string } key
    * @param { Condition } filter
    * @param { unknown } value
-   * @returns { DFObject }
+   * @returns { Dataframe }
    */
-  filter(key: string, filter: Condition, value: unknown, limit?: unknown): DFObject {
+  filter(key: string, filter: Condition, value: unknown, limit?: unknown): Dataframe {
     return this.filters[filter](this.object, key, value, limit);
   }
 
@@ -82,7 +82,7 @@ class DFObject {
    * extend
    */
   custom: DFCustomType = {
-    operation: (callback: (object: Array<ObjectType>) => DFObject) => {
+    operation: (callback: (object: Array<ObjectType>) => Dataframe) => {
       return callback(this.object);
     },
   };
@@ -97,4 +97,4 @@ class DFObject {
   }
 }
 
-export default DFObject;
+export default Dataframe;

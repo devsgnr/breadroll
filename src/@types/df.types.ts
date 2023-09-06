@@ -1,4 +1,4 @@
-import { DFObject } from "../../lib";
+import { Dataframe } from "../../lib";
 import { ObjectType } from "../../lib/parser/@types/object.types";
 
 export type DataframeReadOptions = {
@@ -8,5 +8,5 @@ export type DataframeReadOptions = {
 };
 
 export type DFCustomType = {
-  operation: (callback: (object: Array<ObjectType>) => DFObject) => DFObject;
+  operation: (callback: (object: Array<ObjectType>) => Dataframe) => Dataframe;
 };
