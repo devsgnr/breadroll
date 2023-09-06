@@ -3,7 +3,7 @@ import { IOSave } from "../lib/io/@types/io.types";
 import { ObjectType } from "../lib/parser/@types/object.types";
 import { DataframeReadOptions } from "./@types/df.types";
 
-class DataFile {
+class TSDF {
   private parser: Parser;
   private io: IO;
 
@@ -51,4 +51,4 @@ class DataFile {
   }
 }
 
-export default DataFile;
+export default TSDF;

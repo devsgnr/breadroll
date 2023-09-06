@@ -7,7 +7,7 @@ ts_df, short for **Typescript Dataframe**, is a simple lightweight application l
 Here an example with a dataset gotten from [Kaggle](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 
 ```typescript
-const file: DataFile = new DataFile("./test/data/ds_salaries.csv", { header: true, delimiter: "," });
+const file: TSDF = new TSDF("./test/data/ds_salaries.csv", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
 
 const salaries_over_70k = df.filter("salary", "greater than", 70000).count; // 447;
@@ -16,7 +16,7 @@ const salaries_over_70k = df.filter("salary", "greater than", 70000).count; // 4
 Here another example with a dataset from [UC Irvine's Machine Learning Repository](https://archive.ics.uci.edu/dataset/2/adult)
 
 ```typescript
-const file: DataFile = new DataFile("./test/data/adult.data", { header: true, delimiter: "," });
+const file: TSDF = new TSDF("./test/data/adult.data", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
 
 const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
@@ -24,18 +24,18 @@ const workclass_equals_private = df.filter("workclass", "equals", "Private").cou
 
 This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
-## `DataFile`
+## `TSDF`
 
-- #### `DataFile(filepath: string, options: DataframeReadOptions)`
+- #### `TSDF(filepath: string, options: DataframeReadOptions)`
   - `filepath: string` - the location of the file.
   - `options: DataframeReadOptions`
-    - `DataframeReadOptions.header: boolean` when set to `true`, `DataFile.open()` automatically gets the header from the file
+    - `DataframeReadOptions.header: boolean` when set to `true`, `TSDF.open()` automatically gets the header from the file
     - `DataframeReadOptions.delimiter: string` the delimiting string, it could be a variety of delimiter, the likes of `",", "\t"` and more
     - `DataframeReadOptions.keys?: Array<string>` this is an optional property for when `DataframeReadOptions.header` is `false`
-- #### `DataFile.open()`
-  This function opens and parses the specified file path in the `DataFile()` instance, then returns `Dataframe`
-- #### `DataFile.save(data: Dataframe, filepath: string)`
-  This function saves `Dataframe.value` as a few type of files ie. for example `DataFile.save(Dataframe, filepath).as.json()`, more file types will be added soon.
+- #### `TSDF.open()`
+  This function opens and parses the specified file path in the `TSDF()` instance, then returns `Dataframe`
+- #### `TSDF.save(data: Dataframe, filepath: string)`
+  This function saves `Dataframe.value` as a few type of files ie. for example `TSDF.save(Dataframe, filepath).as.json()`, more file types will be added soon.
 
 ## `Dataframe`
 
@@ -44,7 +44,7 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   This function returns the count of rows `number`, the most especially useful when use in tandem with the `Dataframe.filter()`
 
   ```typescript
-  const file: DataFile = new DataFile("./test/data/adult.data", { header: true, delimiter: "," });
+  const file: TSDF = new TSDF("./test/data/adult.data", { header: true, delimiter: "," });
   const df: Dataframe = await file.open();
 
   const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
