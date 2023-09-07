@@ -79,15 +79,6 @@ class Dataframe {
   }
 
   /**
-   * extend
-   */
-  custom: DFCustomType = {
-    operation: (callback: (object: Array<ObjectType>) => Dataframe) => {
-      return callback(this.object);
-    },
-  };
-
-  /**
    * This function exposes the array of objects before or after
    * filter has been applied to it
    * @returns { Array<ObjectType> }
@@ -95,6 +86,39 @@ class Dataframe {
   get value(): Array<ObjectType> {
     return this.object;
   }
+
+  /**
+   * This function returns the sum of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  sum(key: string): number {
+    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0);
+  }
+
+  /**
+   * This function returns the average of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  average(key: string): number {
+    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0) / this.object.length;
+  }
+
+  /**
+   * This object `custom` provide a function `operation` with a callback function
+   * that provides the value of `Dataframe.value` which can then be used to perform
+   * any custom operation you'd like on the values of the `Dataframe`
+   */
+  custom: DFCustomType = {
+    operation: (callback: (object: Array<ObjectType>) => Dataframe) => {
+      return callback(this.object);
+    },
+  };
 }
 
 export default Dataframe;
