@@ -1,4 +1,3 @@
-import { DFCustomType } from "../../src/@types/df.types";
 import { ObjectType } from "../parser/@types/object.types";
 import { Condition, FilterType } from "./@types/filter.types";
 import Filters from "./filters";
@@ -110,15 +109,39 @@ class Dataframe {
   }
 
   /**
-   * This object `custom` provide a function `operation` with a callback function
-   * that provides the value of `Dataframe.value` which can then be used to perform
-   * any custom operation you'd like on the values of the `Dataframe`
+   * This function returns the maximum value of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
    */
-  custom: DFCustomType = {
-    operation: (callback: (object: Array<ObjectType>) => Dataframe) => {
-      return callback(this.object);
-    },
-  };
+  max(key: string): number {
+    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+    return Math.max(...arr);
+  }
+
+  /**
+   * This function returns the minimum value of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  min(key: string): number {
+    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+    return Math.min(...arr);
+  }
+
+  /**
+   * This  function `use` provides a callback function that provides
+   * the value of `Dataframe.value` which can then be used to perform
+   * any custom operation you'd like on the values of the `Dataframe`
+   * @param { function } callback
+   * @returns { Dataframe }
+   */
+  use(callback: (object: Array<ObjectType>) => Dataframe): Dataframe {
+    return callback(this.object);
+  }
 }
 
 export default Dataframe;

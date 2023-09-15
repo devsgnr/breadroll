@@ -113,8 +113,37 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   const salary_and_year = df.filter("salary", "greater than", 70000).filter("work_year", "equals", 2020); // Dataframe
   ```
 
-  Programmatic Multiple / Chained Filters:
-  **Coming Soon**
+- #### `Dataframe.sum(key: string)`
+
+  This function returns the sum of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.sum("key"); // number
+  ```
+
+- #### `Dataframe.average(key: string)`
+
+  This function returns the average of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.average("key"); // number
+  ```
+
+- #### `Dataframe.max(key: string)`
+
+  This function returns the maximum value of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.max("key"); // number
+  ```
+
+- #### `Dataframe.min(key: string)`
+
+  This function returns the minimum value of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.min("key"); // number
+  ```
 
 ---
 

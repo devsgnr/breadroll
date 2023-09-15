@@ -1,8 +1,15 @@
 # Changelog
 
+### Sept 15th - v0.2
+
+- `Dataframe.min(key: string): number` This function returns the minimum value of all the values of the specified column ie. key. Note, the values are coerse into a number type
+- `Dataframe.max(key: string): number` This function returns the maximum value of all the values of the specified column ie. key. Note, the values are coerse into a number type
+- `Dataframe.sum(key: string): number` This function returns the sum of all the values of the specified column ie. key. Note, the values are coerse into a number type
+- `Dataframe.average(key: string): number` This function returns the average of all the values of the specified column ie. key. Note, the values are coerse into a number type
+
 ### Aug 27th - v0.1.3
 
-- `Dataframe.custom.operation(callback: (dataframe: Array<ObjectType>) => Dataframe) => Dataframe` allows user to perform their own custom operation on a the current dataframe version, eg. after running `Dataframe.filter`
+- `Dataframe.use(callback: (dataframe: Array<ObjectType>) => Dataframe): Dataframe` it provides access to the object ie. it kinda ejects from the base class allowing user to perform their own custom operation on a the current dataframe version, eg. after running `Dataframe.filter`
 - Added more filters, `greater than or equal to`, `less than or equal to`, `in between`
 - Tweaked `Dataframe.filter` to take a fourth and optional argument `limit` for range filters like `in between`
 
