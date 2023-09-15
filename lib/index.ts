@@ -1,5 +1,5 @@
 import IO from "./io";
-import DFObject from "./object";
+import Dataframe from "./object";
 import Parser from "./parser";
 
-export { IO, DFObject, Parser };
+export { IO, Dataframe, Parser };

@@ -1,4 +1,4 @@
-import { DFObject } from "..";
+import { Dataframe } from "..";
 import { DataframeReadOptions } from "../../src/@types/df.types";
 import { EscapeSeq } from "../../utils";
 import { ObjectType } from "./@types/object.types";
@@ -53,12 +53,12 @@ class Parser {
    * JavaScript objects that define the transition for each state when
    * given a certain input
    * @param { string } table
-   * @returns {DFObject }
+   * @returns {Dataframe }
    */
-  generate_object(table: string, options: DataframeReadOptions): DFObject {
+  generate_object(table: string, options: DataframeReadOptions): Dataframe {
     const row = table.split(EscapeSeq.NEW_LINE).splice(1);
     this.object = row.map((line: string) => this.object_builder(line, options.delimiter));
-    return new DFObject(this.object);
+    return new Dataframe(this.object);
   }
 }
 

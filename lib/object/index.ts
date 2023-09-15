@@ -1,9 +1,8 @@
-import { DFCustomType } from "../../src/@types/df.types";
 import { ObjectType } from "../parser/@types/object.types";
 import { Condition, FilterType } from "./@types/filter.types";
 import Filters from "./filters";
 
-class DFObject {
+class Dataframe {
   private object: Array<ObjectType>;
   private filters: FilterType;
 
@@ -33,24 +32,24 @@ class DFObject {
   /**
    * This function returns the first five rows of the data frame
    */
-  get head(): DFObject {
-    return new DFObject(this.object.splice(0, 5));
+  get head(): Dataframe {
+    return new Dataframe(this.object.splice(0, 5));
   }
 
   /**
    * This function return all the objects in the array where some
    * properties are eqaul to null
    */
-  get isNull(): DFObject {
-    return new DFObject(this.object.filter((object) => Object.values(object).some((value) => !value)));
+  get isNull(): Dataframe {
+    return new Dataframe(this.object.filter((object) => Object.values(object).some((value) => !value)));
   }
 
   /**
    * This function return all the objects in the array where every object
    * property is not eqaul to `null`
    */
-  get notNull(): DFObject {
-    return new DFObject(this.object.filter((object) => Object.values(object).every((value) => value)));
+  get notNull(): Dataframe {
+    return new Dataframe(this.object.filter((object) => Object.values(object).every((value) => value)));
   }
 
   /**
@@ -72,20 +71,11 @@ class DFObject {
    * @param { string } key
    * @param { Condition } filter
    * @param { unknown } value
-   * @returns { DFObject }
+   * @returns { Dataframe }
    */
-  filter(key: string, filter: Condition, value: unknown, limit?: unknown): DFObject {
+  filter(key: string, filter: Condition, value: unknown, limit?: unknown): Dataframe {
     return this.filters[filter](this.object, key, value, limit);
   }
-
-  /**
-   * extend
-   */
-  custom: DFCustomType = {
-    operation: (callback: (object: Array<ObjectType>) => DFObject) => {
-      return callback(this.object);
-    },
-  };
 
   /**
    * This function exposes the array of objects before or after
@@ -95,6 +85,63 @@ class DFObject {
   get value(): Array<ObjectType> {
     return this.object;
   }
+
+  /**
+   * This function returns the sum of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  sum(key: string): number {
+    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0);
+  }
+
+  /**
+   * This function returns the average of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  average(key: string): number {
+    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0) / this.object.length;
+  }
+
+  /**
+   * This function returns the maximum value of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  max(key: string): number {
+    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+    return Math.max(...arr);
+  }
+
+  /**
+   * This function returns the minimum value of all the values of the
+   * specified column ie. key. Note, the values are coerse into
+   * a number type.
+   * @param { string } key
+   * @returns { number }
+   */
+  min(key: string): number {
+    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+    return Math.min(...arr);
+  }
+
+  /**
+   * This  function `use` provides a callback function that provides
+   * the value of `Dataframe.value` which can then be used to perform
+   * any custom operation you'd like on the values of the `Dataframe`
+   * @param { function } callback
+   * @returns { Dataframe }
+   */
+  use(callback: (object: Array<ObjectType>) => Dataframe): Dataframe {
+    return callback(this.object);
+  }
 }
 
-export default DFObject;
+export default Dataframe;

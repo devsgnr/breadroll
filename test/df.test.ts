@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { DataFile } from "..";
+import { TSDF } from "..";
 import assert from "assert";
 
 // Instanciate DF Class & Open file
-const file = new DataFile("./test/data/test.csv", { header: true, delimiter: "," });
+const file = new TSDF("./test/data/test.csv", { header: true, delimiter: "," });
 const df = await file.open();
 
 /**

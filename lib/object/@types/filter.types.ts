@@ -1,4 +1,4 @@
-import DFObject from "..";
+import Dataframe from "..";
 import { ObjectType } from "../../parser/@types/object.types";
 
 /**
@@ -8,7 +8,7 @@ import { ObjectType } from "../../parser/@types/object.types";
 type Condition = "equal to" | "not equal to" | "contains" | "greater than" | "less than" | "greater than or eqaul to" | "less than or equal to" | "is between";
 
 type FilterType = {
-  [key: string]: (dataframe: Array<ObjectType>, key: string, value: unknown, limit?: unknown) => DFObject;
+  [key: string]: (dataframe: Array<ObjectType>, key: string, value: unknown, limit?: unknown) => Dataframe;
 };
 
 export { Condition, FilterType };

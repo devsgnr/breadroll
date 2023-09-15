@@ -1,9 +1,12 @@
 /**
- * TS_DF (ts_df)
- * A simple lightweight application library for parsing cDF and tDF and
- * performing EDA (exploratory data analysis) written in Typescript
+ * Typescript Dataframe (ts_df)
+ * ts_df, short for Typescript Dataframe, is a simple lightweight application library for
+ * parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis),
+ * and data processing operations on multivariate datasets. Think pandas but written in
+ * Typescript and developed on the Bun.js Runtime.
  */
 
-import DataFile from "./src/df";
+import TSDF from "./src/df";
+import { Dataframe } from "./lib";
 
-export { DataFile };
+export { TSDF, Dataframe };

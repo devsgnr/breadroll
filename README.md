@@ -7,8 +7,8 @@ ts_df, short for **Typescript Dataframe**, is a simple lightweight application l
 Here an example with a dataset gotten from [Kaggle](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 
 ```typescript
-const file: DataFile = new DataFile("./test/data/ds_salaries.csv", { header: true, delimiter: "," });
-const df: DFObject = await file.open();
+const file: TSDF = new TSDF("./test/data/ds_salaries.csv", { header: true, delimiter: "," });
+const df: Dataframe = await file.open();
 
 const salaries_over_70k = df.filter("salary", "greater than", 70000).count; // 447;
 ```
@@ -16,41 +16,41 @@ const salaries_over_70k = df.filter("salary", "greater than", 70000).count; // 4
 Here another example with a dataset from [UC Irvine's Machine Learning Repository](https://archive.ics.uci.edu/dataset/2/adult)
 
 ```typescript
-const file: DataFile = new DataFile("./test/data/adult.data", { header: true, delimiter: "," });
-const df: DFObject = await file.open();
+const file: TSDF = new TSDF("./test/data/adult.data", { header: true, delimiter: "," });
+const df: Dataframe = await file.open();
 
 const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
 ```
 
 This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
-## `DataFile`
+## `TSDF`
 
-- #### `DataFile(filepath: string, options: DataframeReadOptions)`
+- #### `TSDF(filepath: string, options: DataframeReadOptions)`
   - `filepath: string` - the location of the file.
   - `options: DataframeReadOptions`
-    - `DataframeReadOptions.header: boolean` when set to `true`, `DataFile.open()` automatically gets the header from the file
+    - `DataframeReadOptions.header: boolean` when set to `true`, `TSDF.open()` automatically gets the header from the file
     - `DataframeReadOptions.delimiter: string` the delimiting string, it could be a variety of delimiter, the likes of `",", "\t"` and more
     - `DataframeReadOptions.keys?: Array<string>` this is an optional property for when `DataframeReadOptions.header` is `false`
-- #### `DataFile.open()`
-  This function opens and parses the specified file path in the `DataFile()` instance, then returns `DFObject`
-- #### `DataFile.save(data: DFObject, filepath: string)`
-  This function saves `DFObject.value` as a few type of files ie. for example `DataFile.save(DFObject, filepath).as.json()`, more file types will be added soon.
+- #### `TSDF.open()`
+  This function opens and parses the specified file path in the `TSDF()` instance, then returns `Dataframe`
+- #### `TSDF.save(data: Dataframe, filepath: string)`
+  This function saves `Dataframe.value` as a few type of files ie. for example `TSDF.save(Dataframe, filepath).as.json()`, more file types will be added soon.
 
-## `DFObject`
+## `Dataframe`
 
-- #### `DFObject.count`
+- #### `Dataframe.count`
 
-  This function returns the count of rows `number`, the most especially useful when use in tandem with the `DFObject.filter()`
+  This function returns the count of rows `number`, the most especially useful when use in tandem with the `Dataframe.filter()`
 
   ```typescript
-  const file: DataFile = new DataFile("./test/data/adult.data", { header: true, delimiter: "," });
-  const df: DFObject = await file.open();
+  const file: TSDF = new TSDF("./test/data/adult.data", { header: true, delimiter: "," });
+  const df: Dataframe = await file.open();
 
   const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
   ```
 
-- #### `DFObject.labels`
+- #### `Dataframe.labels`
 
   This function returns an array of strings `Array<string>` ie. the labels of each column of the dataframe
 
@@ -58,7 +58,7 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   const df_labels = df.labels; // ["age", "race", "workclass", ...]
   ```
 
-- #### `DFObject.head`
+- #### `Dataframe.head`
 
   This function return an array of objects `Array<ObjectType>`. NB: `ObjectType` is a custom type.
 
@@ -66,23 +66,23 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   const df_labels = df.head; // [{}, {}, {}, ...]
   ```
 
-- #### `DFObject.isNull`
+- #### `Dataframe.isNull`
 
-  This function return a new Dataframe object `DFObject` where some of it properties have a `null`
-
-  ```typescript
-  const isNull = df.isNull; // DFObject()
-  ```
-
-- #### `DFObject.notNull`
-
-  This function return a new Dataframe object `DFObject` where none of it properties have a `null`, the inverse of `DFObject.isNull`
+  This function return a new Dataframe object `Dataframe` where some of it properties have a `null`
 
   ```typescript
-  const notNull = df.notNull; // DFObject()
+  const isNull = df.isNull; // Dataframe()
   ```
 
-- #### `DFObject.dtypes`
+- #### `Dataframe.notNull`
+
+  This function return a new Dataframe object `Dataframe` where none of it properties have a `null`, the inverse of `Dataframe.isNull`
+
+  ```typescript
+  const notNull = df.notNull; // Dataframe()
+  ```
+
+- #### `Dataframe.dtypes`
 
   This function return an object `ObjectType` that shows the data type of each column in the dataframe in a key:value pair
 
@@ -90,31 +90,60 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   const dtypes = df.dtypes; // { age: "number", workclass: "string", ... }
   ```
 
-- #### `DFObject.value`
+- #### `Dataframe.value`
 
-  This function exposes ie. returns an array of objects `Array<ObjectType>` that is within the `DFObject`
+  This function exposes ie. returns an array of objects `Array<ObjectType>` that is within the `Dataframe`
 
   ```typescript
   const dtypes = df.value; // [{}, {}, {}, ...]
   ```
 
-- #### `DFObject.filter(key: string, filter: Condition, value: unknown, limit?: unknown)`
+- #### `Dataframe.filter(key: string, filter: Condition, value: unknown, limit?: unknown)`
 
-  This function returns `DFObject` and it is used to filter out `DFObject`, by checking if `key` which is the column label against a filter condition `Condition` using `value`
+  This function returns `Dataframe` and it is used to filter out `Dataframe`, by checking if `key` which is the column label against a filter condition `Condition` using `value`
   **Note:** `limit` is an optional fourth argument that is used with range filters like `in between`
 
   ```typescript
-  const filtered_salary = df.filter("salary", "greater than", 70000); // DFObject
+  const filtered_salary = df.filter("salary", "greater than", 70000); // Dataframe
   ```
 
-  Multiple / Chained Filter: you can chain the filter ie. filtering the previously filtered `DFObject`, the chained filter can be as long as you need them to be;
+  Multiple / Chained Filter: you can chain the filter ie. filtering the previously filtered `Dataframe`, the chained filter can be as long as you need them to be;
 
   ```typescript
-  const salary_and_year = df.filter("salary", "greater than", 70000).filter("work_year", "equals", 2020); // DFObject
+  const salary_and_year = df.filter("salary", "greater than", 70000).filter("work_year", "equals", 2020); // Dataframe
   ```
 
-  Programmatic Multiple / Chained Filters:
-  **Coming Soon**
+- #### `Dataframe.sum(key: string)`
+
+  This function returns the sum of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.sum("key"); // number
+  ```
+
+- #### `Dataframe.average(key: string)`
+
+  This function returns the average of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.average("key"); // number
+  ```
+
+- #### `Dataframe.max(key: string)`
+
+  This function returns the maximum value of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.max("key"); // number
+  ```
+
+- #### `Dataframe.min(key: string)`
+
+  This function returns the minimum value of all the values of the specified column `number`
+
+  ```typescript
+  const dtypes = df.min("key"); // number
+  ```
 
 ---
 
