@@ -1,5 +1,6 @@
 import { ObjectType } from "../parser/@types/object.types";
 import { IOSave } from "./@types/io.types";
+import create_sv from "./utils/create_csv";
 
 class IO {
   async read(filepath: string): Promise<string> {
@@ -13,8 +14,8 @@ class IO {
       });
   }
 
-  save(location: string, data: Array<ObjectType>): IOSave {
-    const json = async (): Promise<number> => {
+  save(data: Array<ObjectType>): IOSave {
+    const json = async (location: string): Promise<number> => {
       return Bun.write(location, JSON.stringify(data, null, 2))
         .then((value) => {
           return value;
@@ -24,10 +25,30 @@ class IO {
         });
     };
 
+    const csv = async (location: string): Promise<number> => {
+      return Bun.write(location, create_sv(data, ","))
+        .then((value) => {
+          return value;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+
+    const tsv = async (location: string): Promise<number> => {
+      return Bun.write(location, create_sv(data, "\t"))
+        .then((value) => {
+          return value;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+
     return {
-      as: {
-        json,
-      },
+      json,
+      csv,
+      tsv,
     };
   }
 }

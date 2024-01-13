@@ -1,3 +1,5 @@
+import IO from "../io";
+import { IOSave } from "../io/@types/io.types";
 import { ObjectType } from "../parser/@types/object.types";
 import { Condition, FilterType } from "./@types/filter.types";
 import Filters from "./filters";
@@ -5,10 +7,12 @@ import Filters from "./filters";
 class Dataframe {
   private object: Array<ObjectType>;
   private filters: FilterType;
+  private io: IO;
 
   constructor(object: Array<ObjectType>) {
     this.object = object;
     this.filters = Object({ ...Filters });
+    this.io = new IO();
   }
 
   /**
@@ -141,6 +145,16 @@ class Dataframe {
    */
   use(callback: (object: Array<ObjectType>) => Dataframe): Dataframe {
     return callback(this.object);
+  }
+
+  /**
+   * This function makes use of the IO class to save a variation of
+   * different types of files
+   * @param location
+   * @returns { IOSave }
+   */
+  get save(): IOSave {
+    return this.io.save(this.object);
   }
 }
 

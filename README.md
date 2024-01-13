@@ -2,7 +2,7 @@
 
 ⚠️ EXPERIMENTAL - This is still in active development and very much experimental, it is still in it's early stages very rough around the edges.
 
-ts_df, short for **Typescript Dataframe**, is a simple lightweight application library for parsing csv, tsv and other delimited file, for statistical, EDA (exploratory data analysis) and SIMD (single instruction / multiple data) operations on multivariate datasets. Think `pandas` but written in Typescript and developed on the Bun.js Runtime.
+ts_df, short for **Typescript Dataframe**, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think `pandas` but written in Typescript and developed on the Bun.js Runtime.
 
 Here an example with a dataset gotten from [Kaggle](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 
@@ -22,14 +22,14 @@ const df: Dataframe = await file.open();
 const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
 ```
 
-This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+This project running on bun v1.0.22. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 
 ## `TSDF`
 
 - #### `TSDF(filepath: string, options: DataframeReadOptions)`
   - `filepath: string` - the location of the file.
   - `options: DataframeReadOptions`
-    - `DataframeReadOptions.header: boolean` when set to `true`, `TSDF.open()` automatically gets the header from the file
+    - `DataframeReadOptions.header: boolean` when set to `true`, `TSDF.open()` automatically gets the header from the file, ie. the first line
     - `DataframeReadOptions.delimiter: string` the delimiting string, it could be a variety of delimiter, the likes of `",", "\t"` and more
     - `DataframeReadOptions.keys?: Array<string>` this is an optional property for when `DataframeReadOptions.header` is `false`
 - #### `TSDF.open()`
@@ -144,6 +144,23 @@ This project was created using `bun init` in bun v0.6.4. [Bun](https://bun.sh) i
   ```typescript
   const dtypes = df.min("key"); // number
   ```
+
+- #### `Dataframe.save`
+  - #### `.json(filepath: string)`
+    This function saves `Dataframe` as a JSON files ie. for example `Dataframe.save.json(filepath: string)`.
+    ```typescript
+    filtered_salary.save.json("./file.json");
+    ```
+  - #### `.csv(filepath: string)`
+    This function saves `Dataframe` as a CSV files ie. for example `Dataframe.save.csv(filepath: string)`.
+    ```typescript
+    filtered_salary.save.csv("./file.csv");
+    ```
+  - #### `.tsv(filepath: string)`
+    This function saves `Dataframe` as a TSV files ie. for example `Dataframe.save.tsv(filepath: string)`.
+    ```typescript
+    filtered_salary.save.tsv("./file.tsv");
+    ```
 
 ---
 
