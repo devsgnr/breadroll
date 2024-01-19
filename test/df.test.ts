@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { TSDF } from "..";
+import TSDF from "../index";
 import assert from "assert";
 
 // Instanciate DF Class & Open file
@@ -32,5 +32,23 @@ describe("testing IO - mock test", () => {
    */
   test("Head count should be 5", () => {
     expect(df.head.count).toBe(5);
+  });
+});
+
+/**
+ * Testing Other Functionalities
+ */
+
+describe("testing - dataframe functionality", () => {
+  /**
+   * Mock test - check filter features, on ckd dataset
+   * width filtered dataframe of class, equal to, notckd
+   */
+  test("get the number of class = notckd", () => {
+    expect(df.filter("class", "equal to", "notckd").count).toBe(150);
+  });
+
+  test("get the number of age >= 60", () => {
+    expect(df.filter("age", "greater than or equal to", 60).count).toBe(150);
   });
 });

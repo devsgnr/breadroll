@@ -1,14 +1,16 @@
-import { ObjectType } from "../parser/@types/object.types";
-import { Condition, FilterType } from "./@types/filter.types";
+import IO from "../io";
+import { IOSave, Condition, FilterType, ObjectType } from "../types";
 import Filters from "./filters";
 
 class Dataframe {
   private object: Array<ObjectType>;
   private filters: FilterType;
+  private io: IO;
 
   constructor(object: Array<ObjectType>) {
     this.object = object;
     this.filters = Object({ ...Filters });
+    this.io = new IO();
   }
 
   /**
@@ -141,6 +143,27 @@ class Dataframe {
    */
   use(callback: (object: Array<ObjectType>) => Dataframe): Dataframe {
     return callback(this.object);
+  }
+
+  /**
+   * This function makes use of the IO class to save a variation of
+   * different types of files
+   * @param location
+   * @returns { IOSave }
+   */
+  get save(): IOSave {
+    return this.io.save(this.object);
+  }
+
+  /**
+   * This function converts the current dataframe into a blob
+   * of the select file types "csv | tsv", and returns the blob
+   * object
+   * @param { string } filetype
+   * @returns { Blob }
+   */
+  to_blob(filetype: "csv" | "tsv"): Blob {
+    return this.io.toBlob(this.object, filetype);
   }
 }
 
