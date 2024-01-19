@@ -39,4 +39,15 @@ type ObjectType = {
   [key: string]: string | unknown;
 };
 
-export { DataframeReadOptions, IOSave, Condition, FilterType, ObjectType };
+/**
+ * Enumeration Definition
+ * EscapeSeq - hold all the escape characters
+ */
+enum EscapeSeq {
+  NEW_LINE = "\n",
+  CARRIAGE_RETURN = "\r",
+  HORIZONTAL_TAB = "\t",
+  COMMA = ",",
+}
+
+export { DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq };

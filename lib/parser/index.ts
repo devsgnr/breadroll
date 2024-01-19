@@ -1,7 +1,9 @@
 import { Dataframe } from "..";
 import { DataframeReadOptions, ObjectType } from "../types";
-import { EscapeSeq } from "../../utils";
+import { EscapeSeq } from "../types";
 import { parseIfNumber } from "./utils";
+
+const { NEW_LINE, CARRIAGE_RETURN } = EscapeSeq;
 
 class Parser {
   private keys: Array<string>;
@@ -22,8 +24,8 @@ class Parser {
    * @returns { Array<string> }
    */
   get_table_header(table: string, options: DataframeReadOptions): Array<string> {
-    const header = table.split(EscapeSeq.NEW_LINE, 1)[0].split(options.delimiter);
-    if (options.header) this.keys = header.map((header) => header.split(EscapeSeq.CARRIAGE_RETURN)[0].toLocaleLowerCase().trim());
+    const header = table.split(NEW_LINE, 1)[0].split(options.delimiter);
+    if (options.header) this.keys = header.map((header) => header.split(CARRIAGE_RETURN)[0].toLocaleLowerCase().trim());
     if (!options.header && options.keys) this.keys = options.keys;
     if (!options.header && !options.keys) throw new Error("Header set to false and no keys provided");
     return this.keys;
@@ -41,7 +43,7 @@ class Parser {
     line.split(delim).map((value: string, index: number) => {
       state = {
         ...state,
-        ...{ [this.keys[index]]: parseIfNumber(value.split(EscapeSeq.CARRIAGE_RETURN)[0].trim()) },
+        ...{ [this.keys[index]]: parseIfNumber(value.split(CARRIAGE_RETURN)[0].trim()) },
       };
     });
     return state;
@@ -54,7 +56,7 @@ class Parser {
    * @returns { Dataframe }
    */
   generate_object(table: string, options: DataframeReadOptions): Dataframe {
-    const row = table.split(EscapeSeq.NEW_LINE).splice(1);
+    const row = table.split(NEW_LINE).splice(1);
     this.object = row.map((line: string) => this.object_builder(line, options.delimiter));
     return new Dataframe(this.object);
   }
