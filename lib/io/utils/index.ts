@@ -1,4 +1,4 @@
-import { ObjectType } from "../../parser/@types/object.types";
+import { ObjectType } from "../../types";
 
 const create_sv = (data: Array<ObjectType>, delimeter: string): string => {
   /**
@@ -26,4 +26,17 @@ const create_sv = (data: Array<ObjectType>, delimeter: string): string => {
   return sv;
 };
 
-export default create_sv;
+/**
+ * This function converts the text from either a csv or tsv
+ * string and converts it to a Blob with appropriate MIME type and
+ * return the blob object
+ * @param { string } data
+ * @param { string } mime_type
+ * @returns { Blob }
+ */
+const to_blob = (data: string, mime_type: string): Blob => {
+  const blob = new Blob([data], { type: mime_type });
+  return blob;
+};
+
+export { to_blob, create_sv };

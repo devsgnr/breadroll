@@ -1,6 +1,6 @@
 import Dataframe from ".";
-import { ObjectType } from "../parser/@types/object.types";
-import { FilterType } from "./@types/filter.types";
+import { ObjectType } from "../types/object.types";
+import { FilterType } from "../types/filter.types";
 
 const Filters: FilterType = {
   "equal to": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {

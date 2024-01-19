@@ -1,7 +1,6 @@
 import { Dataframe } from "..";
-import { DataframeReadOptions } from "../../src/@types/df.types";
+import { DataframeReadOptions, ObjectType } from "../types";
 import { EscapeSeq } from "../../utils";
-import { ObjectType } from "./@types/object.types";
 import { parseIfNumber } from "./utils";
 
 class Parser {

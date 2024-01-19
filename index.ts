@@ -6,7 +6,5 @@
  * Typescript and developed on the Bun.js Runtime.
  */
 
-import TSDF from "./src/df";
-import { Dataframe } from "./lib";
-
+import TSDF, { Dataframe } from "./lib";
 export { TSDF, Dataframe };

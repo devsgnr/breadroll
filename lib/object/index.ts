@@ -1,7 +1,5 @@
 import IO from "../io";
-import { IOSave } from "../io/@types/io.types";
-import { ObjectType } from "../parser/@types/object.types";
-import { Condition, FilterType } from "./@types/filter.types";
+import { IOSave, Condition, FilterType, ObjectType } from "../types";
 import Filters from "./filters";
 
 class Dataframe {

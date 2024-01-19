@@ -1,7 +1,5 @@
-import { ObjectType } from "../parser/@types/object.types";
-import { IOSave } from "./@types/io.types";
-import create_sv from "./utils/create_csv";
-import to_blob from "./utils/to_blob";
+import { ObjectType, IOSave } from "../types";
+import { create_sv, to_blob } from "./utils";
 
 class IO {
   /**
