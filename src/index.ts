@@ -1,6 +1,4 @@
 import { IO, Parser, Dataframe } from "../lib";
-import { IOSave } from "../lib/io/@types/io.types";
-import { ObjectType } from "../lib/parser/@types/object.types";
 import { DataframeReadOptions } from "./@types/df.types";
 
 class TSDF {
@@ -39,16 +37,7 @@ class TSDF {
         throw new Error(err);
       });
   }
-
-  /**
-   * This function saves the generates finite state DataframeObj object
-   * as a JSON to the specified location and filename
-   * @param { string } filepath
-   * @returns { Promise<number> }
-   */
-  save(object: Array<ObjectType>, filepath: string): IOSave {
-    return this.io.save(filepath, object);
-  }
 }
 
 export default TSDF;
+export { Dataframe };

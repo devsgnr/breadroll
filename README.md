@@ -161,6 +161,11 @@ This project running on bun v1.0.22. [Bun](https://bun.sh) is a fast all-in-one 
     ```typescript
     filtered_salary.save.tsv("./file.tsv");
     ```
+- #### `Dataframe.to_blob(filetype: "csv" | "tsv"): Blob`
+  This function converts the current dataframe into a Blob of filetype `"csv" | "tsv"`
+  ```typescript
+  filtered_salary.to_blob("csv");
+  ```
 
 ---
 

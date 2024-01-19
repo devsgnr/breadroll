@@ -156,6 +156,17 @@ class Dataframe {
   get save(): IOSave {
     return this.io.save(this.object);
   }
+
+  /**
+   * This function converts the current dataframe into a blob
+   * of the select file types "csv | tsv", and returns the blob
+   * object
+   * @param { string } filetype
+   * @returns { Blob }
+   */
+  to_blob(filetype: "csv" | "tsv"): Blob {
+    return this.io.toBlob(this.object, filetype);
+  }
 }
 
 export default Dataframe;

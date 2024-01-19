@@ -33,7 +33,7 @@ class Parser {
   /**
    * @private
    * This function is used to build a JavaScript object of type ObjectType
-   * it is used by `this.generate_transition_object` to make the fnuction less verbose
+   * it is used by `this.generate_object` to make the function less verbose
    * @param { string } line
    * @returns { ObjectType }
    */
@@ -49,11 +49,10 @@ class Parser {
   }
 
   /**
-   * This function run through the `.fsm` file and generate an array of
-   * JavaScript objects that define the transition for each state when
-   * given a certain input
+   * This function run through the file and generate an array of
+   * JavaScript objects
    * @param { string } table
-   * @returns {Dataframe }
+   * @returns { Dataframe }
    */
   generate_object(table: string, options: DataframeReadOptions): Dataframe {
     const row = table.split(EscapeSeq.NEW_LINE).splice(1);

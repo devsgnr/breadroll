@@ -1,7 +1,8 @@
 # Changelog
 
-### January 13th, 2024 - v0.3
+### January 19th, 2024 - v0.3
 
+- `Dataframe.to_blob(filetype: "csv" | "tsv"): Blob` This function converts the current dataframe into a Blob of filetype `"csv" | "tsv"`
 - `Dataframe.save`
   - `.json(filepath: string)`
     This function saves `Dataframe` as a JSON files ie. for example `Dataframe.save.json(filepath: string)`.
