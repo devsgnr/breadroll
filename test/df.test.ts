@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import TSDF from "../src/index";
+import TSDF from "../index";
 import assert from "assert";
 
 // Instanciate DF Class & Open file

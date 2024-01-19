@@ -7,4 +7,5 @@
  */
 
 import TSDF, { Dataframe } from "./lib";
-export { TSDF, Dataframe };
+export default TSDF;
+export { Dataframe };
