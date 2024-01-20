@@ -1,9 +1,11 @@
 site_name: Breadroll
 theme:
   logo: assets/png/breadroll_white.png
+  favicon: assets/png/breadroll_brand.png
   name: material
   features:
     - navigation.tabs
+    - navigation.footer
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"

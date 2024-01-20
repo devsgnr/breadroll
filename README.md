@@ -32,6 +32,10 @@ Breadroll is built on and optimized for Bun.js. You can install Bun by running t
 ```bash
 curl https://bun.sh/install | bash
 ```
+create a new Bun project by running
+```bash
+bun init
+```
 then you can now install **Breadroll** using
 ```bash
 bun add breadroll
