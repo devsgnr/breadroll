@@ -13,7 +13,7 @@ we suggest you use it with some caution, as some unexpected behaviors can be pre
 
 - **Fast**: Breadroll is built on Bun.js, the all-in-one Javascript built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
-- **Easy-to-use**: Write queries in an easy-to-understand, with filter keyword that read as a sort-of SQL-like keyword
+- **Easy-to-use**: Compose queries using a filter keywords that reads like English and are easy to comprehend
 
 ---
 

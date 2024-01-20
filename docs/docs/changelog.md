@@ -1,15 +1,17 @@
 # Changelog
 
+### **January 20th, 2024 - v0.3.1**
+
+- `Dataframe.select(keys: Array<string>): Dataframe` This function return a new Dataframe with only the desired rows, ie. rows with the specified labels
+
 ### **January 19th, 2024 - v0.3**
 
 - `Dataframe.to_blob(filetype: "csv" | "tsv"): Blob` This function converts the current dataframe into a Blob of MIME filetype `"csv" | "tsv"`
+
 - `Dataframe.save`
-  - `.json(filepath: string)`
-    This function saves `Dataframe` as a JSON files ie. for example `Dataframe.save.json(filepath: string)`.
-  - `.csv(filepath: string)`
-    This function saves `Dataframe` as a CSV files ie. for example `Dataframe.save.csv(filepath: string)`.
-  - `.tsv(filepath: string)`
-    This function saves `Dataframe` as a TSV files ie. for example `Dataframe.save.tsv(filepath: string)`.
+    - `.json(filepath: string)`: This function saves `Dataframe` as a JSON files ie. for example `Dataframe.save.json(filepath: string)`.
+    - `.csv(filepath: string)`: This function saves `Dataframe` as a CSV files ie. for example `Dataframe.save.csv(filepath: string)`.
+    - `.tsv(filepath: string)`: This function saves `Dataframe` as a TSV files ie. for example `Dataframe.save.tsv(filepath: string)`.
 
 ### **Sept 15th, 2023 - v0.2**
 

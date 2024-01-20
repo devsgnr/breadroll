@@ -73,10 +73,25 @@ class Dataframe {
    * @param { string } key
    * @param { Condition } filter
    * @param { unknown } value
+   * @param { unknown } limit optional
    * @returns { Dataframe }
    */
   filter(key: string, filter: Condition, value: unknown, limit?: unknown): Dataframe {
     return this.filters[filter](this.object, key, value, limit);
+  }
+
+  /**
+   * This function returns the only the desired rows in the Dataframe
+   * ie. the rows with the specified keys
+   * @param { Array<string> } keys
+   * @returns { Dataframe }
+   */
+  select(keys: Array<string>): Dataframe {
+    return new Dataframe(
+      this.object.map((obj: ObjectType) => {
+        return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+      }),
+    );
   }
 
   /**

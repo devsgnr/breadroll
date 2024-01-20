@@ -51,4 +51,8 @@ describe("testing - dataframe functionality", () => {
   test("get the number of age >= 60", () => {
     expect(df.filter("age", "greater than or equal to", 60).count).toBe(150);
   });
+
+  test("select return the desired keys", () => {
+    expect(Object.keys(df.select(["class", "age", "hemo", "sc", "al", "bp"]))).toBe(["class", "age", "hemo", "sc", "al", "bp"]);
+  });
 });

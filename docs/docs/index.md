@@ -13,7 +13,7 @@ Breadroll.js, is a simple lightweight application library for parsing csv, tsv, 
 
 - **Fast**: Breadroll is built on Bun.js, the all-in-one Javascript built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
-- **Easy-to-use**: Write queries in an easy-to-understand, with filter keyword that read as a sort-of SQL-like keyword
+- **Easy-to-use**: Compose queries using a filter keywords that reads like English and are easy to comprehend.
 
 
 !!! warning "Experimental"
@@ -50,7 +50,8 @@ Breadroll provides an easy to use API that gets you from zero to data processing
 ```typescript
 const file: Breadroll = new Breadroll("./data/ds_salaries.csv", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
-const values = df.values // return [{}, {},...]
+const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]); // return Dataframe
+const values = selected.values // return [{}, {},...]
 
 console.log(values)
 ```

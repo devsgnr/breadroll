@@ -1,5 +1,5 @@
 ---
-title: .values
+title: .value
 ---
 
 #### `Dataframe.value`
