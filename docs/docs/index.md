@@ -1,27 +1,34 @@
-<div align="center">
-  <img src="./docs/docs/assets/png/breadroll_brand.png" />
+---
+hide:
+  - navigation
+---
+
+# Home
+
+<div>
+  <img src="./assets/png/breadroll_brand.png" />
 </div>
 
-<br/><br/>
+Breadroll.js, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun.js](https://bun.sh) Runtime.
 
-<p align="center">ts_df, short for Typescript Dataframe, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun.js](https://bun.sh) Runtime.</p>
-
-<br/>
-
-- **Fast**: ts_df is built on Bun.js, the all-in-one Javascript built for speed
+- **Fast**: Breadroll is built on Bun.js, the all-in-one Javascript built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
 - **Easy-to-use**: Write queries in an easy-to-understand, with filter keyword that read as a sort-of SQL-like keyword
 
 
-This library is experimental and is still in active development. Although we make sure each version is tested throughly,
-we suggest you use it with some caution, as some unexpected behaviors can be present.
+!!! warning "Experimental"
+
+    This library is experimental and is still in active development. Although we make sure each version is tested throughly,
+    we suggest you use it with some caution, as some unexpected behaviors can be present.
 
 
 ### **Easy API**
-ts_df provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
+Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
+???+ note
 
+    The dataset used in these example code snippets was gotten from Kaggle; [Employee Salaries for different job roles](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 ```typescript
-const file: TSDF = new TSDF("./data/ds_salaries.csv", { header: true, delimiter: "," });
+const file: Breadroll = new Breadroll("./data/ds_salaries.csv", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
 const values = df.values // return [{}, {},...]
 
