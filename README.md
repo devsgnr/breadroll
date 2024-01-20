@@ -4,17 +4,16 @@
 
 <br/><br/>
 
-<p align="center">ts_df, short for Typescript Dataframe, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun.js](https://bun.sh) Runtime.</p>
+<p align="center">ts_df, short for Typescript Dataframe, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the <a href="https://bun.sh" target="_blank">Bun.js</a> Runtime.</p>
+
+<p align="center">⚠️ This library is experimental and is still in active development. Although we make sure each version is tested throughly,
+we suggest you use it with some caution, as some unexpected behaviors can be present.</p>
 
 <br/>
 
 - **Fast**: ts_df is built on Bun.js, the all-in-one Javascript built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
 - **Easy-to-use**: Write queries in an easy-to-understand, with filter keyword that read as a sort-of SQL-like keyword
-
-
-This library is experimental and is still in active development. Although we make sure each version is tested throughly,
-we suggest you use it with some caution, as some unexpected behaviors can be present.
 
 
 ### **Easy API**
