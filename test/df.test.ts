@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import TSDF from "../index";
+import Breadroll from "../index";
 import assert from "assert";
 
 // Instanciate DF Class & Open file
-const file = new TSDF("./test/data/test.csv", { header: true, delimiter: "," });
+const file = new Breadroll("./test/data/test.csv", { header: true, delimiter: "," });
 const df = await file.open();
 
 /**

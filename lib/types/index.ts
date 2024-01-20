@@ -2,7 +2,7 @@ import Dataframe from "../object";
 
 /**
  * Type Definition
- * DataframeReadOptions - the type definition for the parameter of the TSDF second constructor argument
+ * DataframeReadOptions - the type definition for the parameter of the Breadroll second constructor argument
  */
 type DataframeReadOptions = {
   header: boolean;

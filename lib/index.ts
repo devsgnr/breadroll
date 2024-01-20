@@ -3,7 +3,7 @@ import Dataframe from "./object";
 import Parser from "./parser";
 import { DataframeReadOptions } from "./types";
 
-class TSDF {
+class Breadroll {
   private parser: Parser;
   private io: IO;
 
@@ -41,5 +41,5 @@ class TSDF {
   }
 }
 
-export default TSDF;
+export default Breadroll;
 export { IO, Dataframe, Parser };
