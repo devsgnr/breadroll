@@ -50,8 +50,8 @@ Breadroll provides an easy to use API that gets you from zero to data processing
 ```typescript
 const file: Breadroll = new Breadroll("./data/ds_salaries.csv", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
-const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]); // return Dataframe
-const values = selected.values // return [{}, {},...]
+const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
+const values: Array<ObjectType> = selected.values
 
 console.log(values)
 ```

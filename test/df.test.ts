@@ -31,7 +31,7 @@ describe("testing IO - mock test", () => {
    * rows of the data frame
    */
   test("Head count should be 5", () => {
-    expect(df.head.count).toBe(5);
+    expect(df.head.count).toEqual(5);
   });
 });
 
@@ -45,14 +45,15 @@ describe("testing - dataframe functionality", () => {
    * width filtered dataframe of class, equal to, notckd
    */
   test("get the number of class = notckd", () => {
-    expect(df.filter("class", "equal to", "notckd").count).toBe(150);
+    expect(df.filter("class", "equal to", "notckd").count).toEqual(150);
   });
 
   test("get the number of age >= 60", () => {
-    expect(df.filter("age", "greater than or equal to", 60).count).toBe(150);
+    expect(df.filter("age", "greater than or equal to", 60).count).toEqual(150);
   });
 
   test("select return the desired keys", () => {
-    expect(Object.keys(df.select(["class", "age", "hemo", "sc", "al", "bp"]))).toBe(["class", "age", "hemo", "sc", "al", "bp"]);
+    const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).value[0];
+    expect(Object.keys(selected)).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
   });
 });

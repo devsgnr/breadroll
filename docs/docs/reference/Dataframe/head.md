@@ -2,8 +2,8 @@
 title: .head
 ---
 #### `Dataframe.head`
-This function return an array of 5 objects `Array<ObjectType>`. NB: `ObjectType` is a custom type.
+This function return a Dataframe of the first 5 row of the Dataframe
 
 ```typescript
-const head: Array<ObjectType> = df.head; // [{}, {}, {}, ...]
+const head: Array<ObjectType> = df.head; // return Dataframe
 ```
