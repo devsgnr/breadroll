@@ -21,6 +21,26 @@ Breadroll.js, is a simple lightweight application library for parsing csv, tsv, 
     This library is experimental and is still in active development. Although we make sure each version is tested throughly,
     we suggest you use it with some caution, as some unexpected behaviors can be present.
 
+### **Installation**
+
+System Requirements:
+
+- [Bun](https://bun.sh)
+- MacOS (tested), Linux (untested)
+- Typescript >= 5.1
+
+---
+
+#### Bun
+Breadroll is built on and optimized for Bun.js. You can install Bun by running the following
+```bash
+curl https://bun.sh/install | bash
+```
+then you can now install **Breadroll** using
+```bash
+bun add breadroll
+```
+---
 
 ### **Easy API**
 Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.

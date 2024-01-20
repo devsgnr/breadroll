@@ -4,7 +4,7 @@
 
 <br/><br/>
 
-<p align="center">Breadroll, short for Typescript Dataframe, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the <a href="https://bun.sh" target="_blank">Bun.js</a> Runtime.</p>
+<p align="center">Breadroll, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the <a href="https://bun.sh" target="_blank">Bun.js</a> Runtime.</p>
 
 <p align="center">⚠️ This library is experimental and is still in active development. Although we make sure each version is tested throughly,
 we suggest you use it with some caution, as some unexpected behaviors can be present.</p>
@@ -15,6 +15,28 @@ we suggest you use it with some caution, as some unexpected behaviors can be pre
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
 - **Easy-to-use**: Write queries in an easy-to-understand, with filter keyword that read as a sort-of SQL-like keyword
 
+---
+
+### **Installation**
+
+System Requirements:
+
+- [Bun](https://bun.sh)
+- MacOS (tested), Linux (untested)
+- Typescript >= 5.1
+
+---
+
+#### Bun
+Breadroll is built on and optimized for Bun.js. You can install Bun by running the following
+```bash
+curl https://bun.sh/install | bash
+```
+then you can now install **Breadroll** using
+```bash
+bun add breadroll
+```
+---
 
 ### **Easy API**
 Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.

@@ -12,5 +12,5 @@
 const file: Breadroll = new Breadroll("./test/data/adult.data", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
 
-const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // 22,696
+const workclass_equals_private = df.filter("workclass", "equals", "Private").count; // number
 ```
