@@ -2,9 +2,13 @@
 title: .average
 ---
 
-#### `Dataframe.average(key: string)`
-This function returns the average of all the values of the specified column `number`, `key` is the labels in `Dataframe.labels`
+#### `Dataframe.average(...)`
+Parameters
+
+- `key: string` - this is the column key or label, if unsure of the labels, it can be retrived by running `Dataframe.labels`
+
+This function returns the average of all the values of the specified column `number`
 
 ```typescript
-const average: number = df.average("key"); // number
+const average: number = df.average("key");
 ```

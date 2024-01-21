@@ -2,6 +2,14 @@ import Dataframe from "../object";
 
 /**
  * Type Definition
+ * Breadroll.open - the type definition for the return value of the open getter
+ */
+type BreadrollOpen = {
+  local: (filepath: string) => Promise<Dataframe>;
+};
+
+/**
+ * Type Definition
  * DataframeReadOptions - the type definition for the parameter of the Breadroll second constructor argument
  */
 type DataframeReadOptions = {
@@ -50,4 +58,4 @@ enum EscapeSeq {
   COMMA = ",",
 }
 
-export { DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq };
+export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq };

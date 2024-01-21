@@ -8,23 +8,18 @@
 import IO from "./io";
 import Dataframe from "./object";
 import Parser from "./parser";
-import { DataframeReadOptions } from "./types";
+import { BreadrollOpen, DataframeReadOptions } from "./types";
 
 class Breadroll {
   private parser: Parser;
   private io: IO;
 
-  private filepath: string;
   private options: DataframeReadOptions;
-
   public object: Dataframe;
 
-  constructor(filepath: string, options: DataframeReadOptions) {
-    this.filepath = filepath;
+  constructor(options: DataframeReadOptions) {
     this.options = options;
-
     this.object = new Dataframe([]);
-
     this.parser = new Parser();
     this.io = new IO();
   }
@@ -34,17 +29,22 @@ class Breadroll {
    * and then also generate the object array and returns the array
    * @returns { Promise<Array<ObjectType>> }
    */
-  async open(): Promise<Dataframe> {
-    return this.io
-      .read(this.filepath)
-      .then((value) => {
-        this.parser.get_table_header(value, this.options);
-        this.object = this.parser.generate_object(value, this.options);
-        return this.object;
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
+  get open(): BreadrollOpen {
+    const local = async (filepath: string): Promise<Dataframe> => {
+      return this.io
+        .read(filepath)
+        .then((value) => {
+          this.parser.get_table_header(value, this.options);
+          this.object = this.parser.generate_object(value, this.options);
+          return this.object;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+    return {
+      local: local,
+    };
   }
 }
 
