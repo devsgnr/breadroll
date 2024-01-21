@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./docs/docs/assets/png/breadroll_brand.png" />
+  <img src="https://github.com/devsgnr/breadroll/docs/docs/assets/png/breadroll_brand.png" />
 </div>
 
 <br/><br/>
