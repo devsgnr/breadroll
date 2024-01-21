@@ -9,9 +9,9 @@ hide:
   <img align="center" src="./assets/png/breadroll_brand.png" />
 </div>
 
-Breadroll.js, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun.js](https://bun.sh) Runtime.
+Breadroll.js, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
-- **Fast**: Breadroll is built on Bun.js, the all-in-one Javascript built for speed
+- **Fast**: Breadroll is built on Bun.js, the all-in-one Javascript runtime built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
 - **Easy-to-use**: Compose queries using a filter keywords that reads like English and are easy to comprehend.
 
