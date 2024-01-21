@@ -1,4 +1,4 @@
-import { Dataframe } from "..";
+import Dataframe from "../object";
 import { DataframeReadOptions, ObjectType } from "../types";
 import { EscapeSeq } from "../types";
 import { parseIfNumber } from "./utils";

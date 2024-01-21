@@ -1,7 +1,17 @@
 {
   "name": "breadroll",
   "version": "0.3.1",
-  "module": "index.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "devsgnr",
+    "url": "https://github.com/devsgnr",
+    "email": "hi@devsgnr.xyz"
+  },
+  "main": "./dist/index.js",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
@@ -17,7 +27,8 @@
     "typescript": "5.1.6"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts"
   },
   "type": "module",
   "lint-staged": {

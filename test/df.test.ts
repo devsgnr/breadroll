@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import Breadroll from "../index";
+import Breadroll from "../src/index";
 import assert from "assert";
 
 // Instanciate DF Class & Open file

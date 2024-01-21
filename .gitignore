@@ -176,4 +176,4 @@ dist
 result.json
 
 # code that doesn't need to be in the repository
-src/
+src/demo.ts

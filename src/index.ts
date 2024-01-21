@@ -1,3 +1,10 @@
+/**
+ * Breadroll, is a simple lightweight application library for
+ * parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis),
+ * and data processing operations on multivariate datasets. Think pandas but written in
+ * Typescript and developed on the Bun.js Runtime.
+ */
+
 import IO from "./io";
 import Dataframe from "./object";
 import Parser from "./parser";
@@ -42,4 +49,4 @@ class Breadroll {
 }
 
 export default Breadroll;
-export { IO, Dataframe, Parser };
+export { Dataframe };
