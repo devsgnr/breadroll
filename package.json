@@ -15,7 +15,7 @@
   "license": "MIT",
   "keywords": [
     "bun",
-    "data-engineering http",
+    "data-engineering",
     "csv",
     "tsv",
     "csv-parser",
