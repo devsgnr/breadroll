@@ -15,7 +15,7 @@
   "license": "MIT",
   "keywords": [
     "bun",
-    "data-engineering http",
+    "data-engineering",
     "csv",
     "tsv",
     "csv-parser",
@@ -24,7 +24,7 @@
     "data-science"
   ],
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
@@ -47,7 +47,8 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts"
+    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts",
+    "build:documentation": "cd docs && mkdocs gh-deploy --force"
   },
   "type": "module",
   "types": "./dist/index.d.ts"
