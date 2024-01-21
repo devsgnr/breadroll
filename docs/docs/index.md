@@ -1,21 +1,25 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png" />
+---
+hide:
+  - navigation
+---
+
+# Home
+
+<div>
+  <img align="center" src="./assets/png/breadroll_brand.png" />
 </div>
 
-<br/><br/>
-
-<p align="center">Breadroll, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the <a href="https://bun.sh" target="_blank">Bun</a> Runtime.</p>
-
-<p align="center">⚠️ This library is experimental and is still in active development. Although we make sure each version is tested throughly,
-we suggest you use it with some caution, as some unexpected behaviors can be present.</p>
-
-<br/>
+Breadroll.js, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
 - **Fast**: Breadroll is built on Bun, the all-in-one Javascript runtime built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
-- **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend
+- **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend.
 
----
+
+!!! warning "Experimental"
+
+    This library is experimental and is still in active development. Although we make sure each version is tested throughly,
+    we suggest you use it with some caution, as some unexpected behaviors can be present.
 
 ### **Installation**
 
@@ -44,7 +48,9 @@ bun add breadroll
 
 ### **Easy API**
 Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
+???+ note
 
+    The dataset used in these example code snippets was gotten from Kaggle; [Employee Salaries for different job roles](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 ```typescript
 const file: Breadroll = new Breadroll("./data/ds_salaries.csv", { header: true, delimiter: "," });
 const df: Dataframe = await file.open();
