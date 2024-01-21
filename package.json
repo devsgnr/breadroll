@@ -1,11 +1,28 @@
 {
   "name": "breadroll",
-  "version": "0.3.2",
+  "version": "0.3.3-alpha",
   "author": {
     "name": "devsgnr",
     "url": "https://github.com/devsgnr",
     "email": "hi@devsgnr.xyz"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devsgnr/breadroll"
+  },
+  "bugs": "https://github.com/devsgnr/breadroll/issues",
+  "homepage": "https://github.com/devsgnr/breadroll",
+  "license": "MIT",
+  "keywords": [
+    "bun",
+    "data-engineering http",
+    "csv",
+    "tsv",
+    "csv-parser",
+    "tsv-parser",
+    "eda",
+    "data-science"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "devDependencies": {
