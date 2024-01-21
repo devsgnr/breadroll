@@ -5,7 +5,7 @@ title: .filter
 #### `Dataframe.filter(key: string, filter: Condition, value: unknown, limit?: unknown)`
 This function returns `Dataframe` and it is used to filter out `Dataframe`, by checking if `key` which is the column label against a filter condition `Condition` using `value`.
 
-#### `Condtion`
+#### `Condition`: 
 This is a `Union` type that sets the available filters, given by: `"equal to" | "not equal to" | "contains" | "greater than" | "less than" | "greater than or equal to" | "less than or equal to" | "is between"`
 
 !!! note 

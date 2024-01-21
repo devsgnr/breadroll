@@ -11,9 +11,9 @@ we suggest you use it with some caution, as some unexpected behaviors can be pre
 
 <br/>
 
-- **Fast**: Breadroll is built on Bun.js, the all-in-one Javascript runtime built for speed
+- **Fast**: Breadroll is built on Bun, the all-in-one Javascript runtime built for speed
 - **File I/O**: With current support for local data sources, **remote sources support coming soon**
-- **Easy-to-use**: Compose queries using a filter keywords that reads like English and are easy to comprehend
+- **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend
 
 ---
 
