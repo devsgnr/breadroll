@@ -47,7 +47,8 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts"
+    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts",
+    "build:documentation": "cd docs && mkdocs gh-deploy --force"
   },
   "type": "module",
   "types": "./dist/index.d.ts"
