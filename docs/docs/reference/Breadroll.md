@@ -17,6 +17,6 @@ Parameters
 
       ```typescript
       const file: Breadroll = new Breadroll({ header: true, delimiter: "," });
-      const df: Dataframe = await file.open("./test/data/adult.data");
+      const df: Dataframe = await file.open.local("./test/data/adult.data");
       const filtered = df.filter("workclass", "equals", "Private").count;
       ```
