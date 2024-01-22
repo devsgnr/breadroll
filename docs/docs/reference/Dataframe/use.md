@@ -1,0 +1,18 @@
+---
+title: .use
+---
+
+#### `Dataframe.use(...)`
+Parameters
+
+- `callback: (object: Array<ObjectType>) => Dataframe` - this callback function gives you the ability to perform whatever computation needed and must return a Dataframe at the end; here you can even use other external libraries
+
+This function allow the user to opt-out of or eject from using the pre-defined filter functions, to perform user specified computation
+and return a Dataframe
+
+```typescript
+const has_question_mark: Dataframe = df.use((obj) => {
+  const filtered = obj.filter((object) => Object.values(object).some((value) => value === "?"));
+  return new Dataframe(filtered);
+});
+```

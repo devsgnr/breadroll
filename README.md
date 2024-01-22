@@ -46,8 +46,8 @@ bun add breadroll
 Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
 
 ```typescript
-const file: Breadroll = new Breadroll("./data/ds_salaries.csv", { header: true, delimiter: "," });
-const df: Dataframe = await file.open();
+const file: Breadroll = new Breadroll({ header: true, delimiter: "," });
+const df: Dataframe = await file.open.local("./data/ds_salaries.csv");
 const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 const values: Array<ObjectType> = selected.values
 

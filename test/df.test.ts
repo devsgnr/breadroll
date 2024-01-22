@@ -3,8 +3,8 @@ import Breadroll from "../src/index";
 import assert from "assert";
 
 // Instanciate DF Class & Open file
-const file = new Breadroll("./test/data/test.csv", { header: true, delimiter: "," });
-const df = await file.open();
+const file = new Breadroll({ header: true, delimiter: "," });
+const df = await file.open.local("./test/data/test.csv");
 
 /**
  * Testing IO (Input/Output) of none empty file
