@@ -1,5 +1,10 @@
 name: Unit Testing
-on: [push, pull_request]
+on:  
+  push:
+  pull_request:
+    branches:
+      - main
+
 jobs:
   my-job:
     name: breadroll Test Suite
