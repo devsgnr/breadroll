@@ -2,7 +2,7 @@
 title: .open.https
 ---
 #### `Breadroll.open.https(...)`
-This function fetchs and return a file via a URL over https, with a default `GET` method, with optional provision for custom headers
+This function fetches and return a file via a URL over https, with a default `GET` method, with optional provision for custom headers
 
 Parameter
 

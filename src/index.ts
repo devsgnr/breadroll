@@ -49,7 +49,7 @@ class Breadroll {
     };
 
     /**
-     * This function fetchs and return a file via a URL over https, with a default `GET` method
+     * This function fetches and return a file via a URL over https, with a default `GET` method
      * read and converts the file to a Dataframe, with provision for optional custom headers
      * @param { string } url
      * @param { Headers } headers
