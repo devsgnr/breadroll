@@ -27,7 +27,7 @@ class Breadroll {
   /**
    * This function opens the seperated value file; gets the table headers (if present)
    * and then also generate the object array and returns the array
-   * @returns { Promise<Array<ObjectType>> }
+   * @returns { BreadrollOpen }
    */
   get open(): BreadrollOpen {
     const local = async (filepath: string): Promise<Dataframe> => {
@@ -42,8 +42,25 @@ class Breadroll {
           throw new Error(err);
         });
     };
+
+    const https = async (url: string, headers?: Headers): Promise<Dataframe> => {
+      const req: Request = new Request(url);
+
+      return await fetch(req, { method: "GET", headers: headers })
+        .then((response: Response) => response.text())
+        .then((value) => {
+          this.parser.get_table_header(value, this.options);
+          this.object = this.parser.generate_object(value, this.options);
+          return this.object;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+
     return {
       local: local,
+      https: https,
     };
   }
 }

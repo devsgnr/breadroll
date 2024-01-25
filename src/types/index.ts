@@ -6,6 +6,7 @@ import Dataframe from "../object";
  */
 type BreadrollOpen = {
   local: (filepath: string) => Promise<Dataframe>;
+  https: (url: string, headers?: Headers) => Promise<Dataframe>;
 };
 
 /**
