@@ -1,15 +1,14 @@
-/**
- * Breadroll, is a simple lightweight application library for
- * parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis),
- * and data processing operations on multivariate datasets. Think pandas but written in
- * Typescript and developed on the Bun.js Runtime.
- */
-
 import IO from "./io";
 import Dataframe from "./object";
 import Parser from "./parser";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
 
+/**
+ * breadroll 🥟 is a simple lightweight application library for parsing csv, tsv,
+ * and other delimited files, performing EDA (exploratory data analysis),
+ * and data processing operations on multivariate datasets. Think pandas but written in
+ * Typescript and developed on the [Bun](https://bun.sh) Runtime.
+ */
 class Breadroll {
   private parser: Parser;
   private io: IO;
@@ -30,6 +29,12 @@ class Breadroll {
    * @returns { BreadrollOpen }
    */
   get open(): BreadrollOpen {
+    /**
+     * This function opens the local data source ie. the file on disk, reads it
+     * and converts it to a Dataframe
+     * @param { string } filepath
+     * @returns { Promise<Dataframe> }
+     */
     const local = async (filepath: string): Promise<Dataframe> => {
       return this.io
         .read(filepath)
@@ -43,6 +48,13 @@ class Breadroll {
         });
     };
 
+    /**
+     * This function fetchs and return a file via a URL over https, with a default `GET` method
+     * read and converts the file to a Dataframe, with provision for optional custom headers
+     * @param { string } url
+     * @param { Headers } headers
+     * @returns { Promise<Dataframe> }
+     */
     const https = async (url: string, headers?: Headers): Promise<Dataframe> => {
       const req: Request = new Request(url);
 
