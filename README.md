@@ -15,7 +15,7 @@ we suggest you use it with some caution, as some unexpected behaviors can be pre
 <br/>
 
 - **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
-- **File I/O**: With current support for local data sources, **remote sources support** for `https`
+- **File I/O**: With current support for local data sources, **remote sources support** currently include - `https`
 - **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend
 
 ---
@@ -66,8 +66,8 @@ console.log(values)
 breadroll makes it easy to work with remote data sources with current support for fetching over `https`. With other remote data sources on the roadmap.
 
 ```typescript
-const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
-const selected: Dataframe = df..select(["class", "age", "hemo", "sc", "al", "bp"]);
+const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/.../ds_salaries.csv");
+const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 ```
 
 ### **Filtering**
