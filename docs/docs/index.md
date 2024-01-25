@@ -5,15 +5,13 @@ hide:
 
 # Home
 
-<div>
-  <img align="center" src="./assets/png/breadroll_brand.png" />
-</div>
+![](./assets/png/breadroll_brand.png)
 
-Breadroll.js, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
+breadroll 🥟 is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
-- **Fast**: Breadroll is built on Bun, the all-in-one Javascript runtime built for speed
-- **File I/O**: With current support for local data sources, **remote sources support coming soon**
-- **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend.
+- **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
+- **File I/O**: With current support for local data sources, **remote sources support** currently include - `https`
+- **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend
 
 
 !!! warning "Experimental"
@@ -47,17 +45,31 @@ bun add breadroll
 ---
 
 ### **Easy API**
-Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
+breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
 ???+ note
 
     The dataset used in these example code snippets was gotten from Kaggle; [Employee Salaries for different job roles](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
+
 ```typescript
-const file: Breadroll = new Breadroll({ header: true, delimiter: "," });
-const df: Dataframe = await file.open.local("./data/ds_salaries.csv");
+const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+```
+
+Example: From one instance example above, you can open multiple `csv` files
+
+```typescript
+const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 const values: Array<ObjectType> = selected.values
 
 console.log(values)
+```
+
+### **Remote Data Sources**
+breadroll makes it easy to work with remote data sources with current support for fetching over `https`, with other remote data sources on the roadmap.
+
+```typescript
+const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/.../ds_salaries.csv");
+const selected: Dataframe = df..select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 ```
 
 ### **Filtering**

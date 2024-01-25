@@ -2,9 +2,12 @@ import { describe, expect, test } from "bun:test";
 import Breadroll from "../src/index";
 import assert from "assert";
 
-// Instanciate DF Class & Open file
+// Instanciate DF Class
 const file = new Breadroll({ header: true, delimiter: "," });
+
+// Open various data sources - local and remote sources
 const df = await file.open.local("./test/data/test.csv");
+const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
 
 /**
  * Testing IO (Input/Output) of none empty file
@@ -55,5 +58,28 @@ describe("testing - dataframe functionality", () => {
   test("select return the desired keys", () => {
     const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).value[0];
     expect(Object.keys(selected)).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
+  });
+});
+
+/**
+ * Testing I/O Remote Data Source - HTTPS
+ */
+
+describe("testing IO remote data source - https", () => {
+  /**
+   * Test that the remote source retrieve the remote data source
+   * via https and then converts to Dataframe and can read out values
+   */
+  test("get a remote data source", () => {
+    expect(remote_https.value).toBeTypeOf("object");
+  });
+
+  /**
+   * Test that you can select specific rows of interest in the dataframe
+   * after the dataframe has been returned
+   */
+  test("select specific rows from remote data source", () => {
+    const selected = remote_https.select(["age", "hemo"]);
+    expect(selected.value).toBeTypeOf("object");
   });
 });

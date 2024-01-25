@@ -9,7 +9,7 @@ Parameter
 - `filepath: string` - the location of the file.
 
 ```typescript
-const file: Breadroll = new Breadroll({ header: true, delimiter: "," });
-const df: Dataframe = await file.open.local("./test/data/adult.data");
-const filtered = df.filter("workclass", "equals", "Private").count;
+const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
+const filtered = df.filter("job_title", "equals", "Data Scientist").count;
 ```
