@@ -2,12 +2,12 @@ import { describe, expect, test } from "bun:test";
 import Breadroll from "../src/index";
 import assert from "assert";
 
-// Instanciate DF Class & Open file
+// Instanciate DF Class
 const file = new Breadroll({ header: true, delimiter: "," });
+
+// Open various data sources
 const df = await file.open.local("./test/data/test.csv");
-const remote_https = await file.open.https(
-  "https://firebasestorage.googleapis.com/v0/b/data-entry-fa6df.appspot.com/o/backup%2F2023-10-23T12%3A21%3A12.467Z.csv?alt=media&token=cbccdc42-aa43-4ee4-82fb-7ea5180df918",
-);
+const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
 
 /**
  * Testing IO (Input/Output) of none empty file
@@ -62,15 +62,24 @@ describe("testing - dataframe functionality", () => {
 });
 
 /**
- * Testting Remote Data Source - HTTPS
+ * Testing I/O Remote Data Source - HTTPS
  */
 
-describe("testing remote data source - https", () => {
+describe("testing IO remote data source - https", () => {
   /**
    * Test that the remote source retrieve the remote data source
    * via https and then converts to Dataframe and can read out values
    */
-  test("get a remote data source and return Dataframe", () => {
+  test("get a remote data source", () => {
     expect(remote_https.value).toBeTypeOf("object");
+  });
+
+  /**
+   * Test that you can select specific rows of interest in the dataframe
+   * after the dataframe has been returned
+   */
+  test("select specific rows from remote data source", () => {
+    const selected = remote_https.select(["age", "hemo"]);
+    expect(selected.value).toBeTypeOf("object");
   });
 });

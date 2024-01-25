@@ -1,18 +1,21 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png" />
-</div>
+breadroll 🥟 The lightweight application toolkit for data analysis and data processing operations in JavaScript
 
-<br/><br/>
-
-<p align="center">Breadroll, is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the <a href="https://bun.sh" target="_blank">Bun</a> Runtime.</p>
-
-<p align="center">⚠️ This library is experimental and is still in active development. Although we make sure each version is tested throughly,
-we suggest you use it with some caution, as some unexpected behaviors can be present.</p>
+---
 
 <br/>
 
-- **Fast**: Breadroll is built on Bun, the all-in-one Javascript runtime built for speed
-- **File I/O**: With current support for local data sources, **remote sources support coming soon**
+![](https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png)
+
+
+breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
+
+⚠️ This library is experimental and is still in active development. Although we make sure each version is tested throughly,
+we suggest you use it with some caution, as some unexpected behaviors can be present.
+
+<br/>
+
+- **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
+- **File I/O**: With current support for local data sources, **remote sources support** for `https`
 - **Easy-to-use**: Compose queries using filter keywords that reads like English and are easy to comprehend
 
 ---
@@ -28,7 +31,7 @@ System Requirements:
 ---
 
 #### Bun
-Breadroll is built on and optimized for Bun.js. You can install Bun by running the following
+breadroll is built on and optimized for Bun.js. You can install Bun by running the following
 ```bash
 curl https://bun.sh/install | bash
 ```
@@ -36,22 +39,35 @@ create a new Bun project by running
 ```bash
 bun init
 ```
-then you can now install **Breadroll** using
+then you can now install **breadroll** using
 ```bash
 bun add breadroll
 ```
 ---
 
 ### **Easy API**
-Breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
+breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
 
 ```typescript
-const file: Breadroll = new Breadroll({ header: true, delimiter: "," });
-const df: Dataframe = await file.open.local("./data/ds_salaries.csv");
+const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+```
+
+Example: From one instance example above, you can open multiple `csv` files
+
+```typescript
+const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 const values: Array<ObjectType> = selected.values
 
 console.log(values)
+```
+
+### **Remote Data Sources**
+breadroll makes it easy to work with remote data sources with current support for fetching over `https`. With other remote data sources on the roadmap.
+
+```typescript
+const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
+const selected: Dataframe = df..select(["class", "age", "hemo", "sc", "al", "bp"]);
 ```
 
 ### **Filtering**
