@@ -5,6 +5,9 @@ import assert from "assert";
 // Instanciate DF Class & Open file
 const file = new Breadroll({ header: true, delimiter: "," });
 const df = await file.open.local("./test/data/test.csv");
+const remote_https = await file.open.https(
+  "https://firebasestorage.googleapis.com/v0/b/data-entry-fa6df.appspot.com/o/backup%2F2023-10-23T12%3A21%3A12.467Z.csv?alt=media&token=cbccdc42-aa43-4ee4-82fb-7ea5180df918",
+);
 
 /**
  * Testing IO (Input/Output) of none empty file
@@ -55,5 +58,19 @@ describe("testing - dataframe functionality", () => {
   test("select return the desired keys", () => {
     const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).value[0];
     expect(Object.keys(selected)).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
+  });
+});
+
+/**
+ * Testting Remote Data Source - HTTPS
+ */
+
+describe("testing remote data source - https", () => {
+  /**
+   * Test that the remote source retrieve the remote data source
+   * via https and then converts to Dataframe and can read out values
+   */
+  test("get a remote data source and return Dataframe", () => {
+    expect(remote_https.value).toBeTypeOf("object");
   });
 });
