@@ -5,7 +5,7 @@ import assert from "assert";
 // Instanciate DF Class
 const file = new Breadroll({ header: true, delimiter: "," });
 
-// Open various data sources
+// Open various data sources - local and remote sources
 const df = await file.open.local("./test/data/test.csv");
 const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
 
