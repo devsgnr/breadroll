@@ -74,7 +74,7 @@ breadroll makes it easy to work with remote data sources with current support fo
 
 ```typescript
 const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/.../ds_salaries.csv");
-const selected: Dataframe = df..select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
+const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 ```
 
 ### **Filtering**
