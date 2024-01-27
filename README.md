@@ -6,6 +6,10 @@ breadroll 🥟 The lightweight application toolkit for data analysis and data pr
 
 ![](https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png)
 
+![npm](https://img.shields.io/npm/v/breadroll)
+![breadroll docs status](https://github.com/devsgnr/breadroll/actions/workflows/docs.yml/badge.svg)
+![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/testing.yml/badge.svg)
+![GitHub Stars](https://img.shields.io/github/stars/devsgnr/breadroll)
 
 breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
