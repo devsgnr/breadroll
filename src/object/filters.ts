@@ -14,7 +14,7 @@ const Filters: FilterType = {
   },
 
   contains: (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
-    const copy = Object.assign(dataframe.filter((object) => (<string>object[key]).includes(<string>value)));
+    const copy = Object.assign(dataframe.filter((object) => String(object[key]).includes(<string>value)));
     return new Dataframe(copy);
   },
 

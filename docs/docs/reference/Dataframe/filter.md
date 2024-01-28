@@ -6,7 +6,11 @@ title: .filter
 Parameters
 
 - `key: string` - this is the column key or label, if unsure of the labels, it can be retrived by running `Dataframe.labels`
-- `filter: Condition` - is a `Union` type that sets the available filters, it can any of the following: `"equal to" | "not equal to" | "contains" | "greater than" | "less than" | "greater than or equal to" | "less than or equal to" | "is between"`
+- `filter: Condition` - is a `enum` type that has the available filters (1) 
+    { .annotate }
+   
+    1. `"equal to" | "not equal to" | "contains" | "greater than" | "less than" | "greater than or equal to" | "less than or equal to" | "is between"`
+
 - `value: unknown` - this can be a number of data types, this is determined based on the type of filter query
 - `limit?: unknown` - this is an optional argument, used with range filters like `in between`
 
