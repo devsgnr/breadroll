@@ -95,22 +95,22 @@ class Dataframe {
   }
 
   /**
-   * This function returns columns strictly using interger location indexing
-   * similar to panda's `iloc`, this function takes the start and the end
+   * This function returns columns strictly using interger based indexing
+   * similar to panda's `iloc`, this function takes an object with either the start or the end
    * index and return the columns
    * @param { Cols } args
    * @returns { Dataframe }
    */
   cols(args: Cols): Dataframe {
     const start: number = args.start ? args.start : 0;
-    const end: number = args.end ? args.end : this.labels.length - 1;
+    const end: number = args.end ? args.end : this.labels.length;
     const keys = this.labels.slice(start, end);
 
-    this.object = this.object.map((obj: ObjectType) => {
-      return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
-    });
-
-    return new Dataframe(this.object);
+    return new Dataframe(
+      this.object.map((obj: ObjectType) => {
+        return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+      }),
+    );
   }
 
   /**

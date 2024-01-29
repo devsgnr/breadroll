@@ -92,9 +92,18 @@ describe("testing IO remote data source - https", () => {
 describe("testing integer based indexing", () => {
   test("get the first 5 columns in the dataframe", () => {
     const [start, end] = [0, 4];
-    const mock_label = df.labels.splice(start, end);
-    const iloc = df.cols({ start, end });
+    const mock_label = remote_https.labels.splice(start, end);
+    const iloc = remote_https.cols({ start, end });
+    expect(iloc.labels).toEqual(mock_label);
+  });
 
-    expect(Object.keys(iloc.value[0])).toEqual(mock_label);
+  /**
+   * Test to see if providing none of the values give the entire
+   * Dataframe columns as the return value
+   */
+  test("return the entire columns of the dataframe if both indices are not provided", () => {
+    const mock_label = remote_https.labels;
+    const iloc = remote_https.cols({});
+    expect(iloc.labels).toEqual(mock_label);
   });
 });
