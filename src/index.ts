@@ -24,8 +24,8 @@ class Breadroll {
   }
 
   /**
-   * This function opens the seperated value file; gets the table headers (if present)
-   * and then also generate the object array and returns the array
+   * This function returns an object of functions that opens file; from different sources
+   * gets the table headers (if present) and then also generate the Dataframe and returns it
    * @returns { BreadrollOpen }
    */
   get open(): BreadrollOpen {

@@ -83,3 +83,18 @@ describe("testing IO remote data source - https", () => {
     expect(selected.value).toBeTypeOf("object");
   });
 });
+
+/**
+ * Testing interger based indexing or selection for
+ * Dataframe
+ */
+
+describe("testing integer based indexing", () => {
+  test("get the first 5 columns in the dataframe", () => {
+    const [start, end] = [0, 4];
+    const mock_label = df.labels.splice(start, end);
+    const iloc = df.cols({ start, end });
+
+    expect(Object.keys(iloc.value[0])).toEqual(mock_label);
+  });
+});

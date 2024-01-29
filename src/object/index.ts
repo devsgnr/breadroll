@@ -1,5 +1,5 @@
 import IO from "../io";
-import { IOSave, Condition, FilterType, ObjectType } from "../types";
+import { IOSave, Condition, FilterType, ObjectType, Cols } from "../types";
 import Filters from "./filters";
 
 class Dataframe {
@@ -92,6 +92,25 @@ class Dataframe {
         return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
       }),
     );
+  }
+
+  /**
+   * This function returns columns strictly using interger location indexing
+   * similar to panda's `iloc`, this function takes the start and the end
+   * index and return the columns
+   * @param { Cols } args
+   * @returns { Dataframe }
+   */
+  cols(args: Cols): Dataframe {
+    const start: number = args.start ? args.start : 0;
+    const end: number = args.end ? args.end : this.labels.length - 1;
+    const keys = this.labels.slice(start, end);
+
+    this.object = this.object.map((obj: ObjectType) => {
+      return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+    });
+
+    return new Dataframe(this.object);
   }
 
   /**
