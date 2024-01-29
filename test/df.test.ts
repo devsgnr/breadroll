@@ -56,8 +56,8 @@ describe("testing - dataframe functionality", () => {
   });
 
   test("select return the desired keys", () => {
-    const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).value[0];
-    expect(Object.keys(selected)).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
+    const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).labels;
+    expect(selected).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
   });
 });
 
@@ -75,10 +75,10 @@ describe("testing IO remote data source - https", () => {
   });
 
   /**
-   * Test that you can select specific rows of interest in the dataframe
+   * Test that you can select specific columns of interest in the dataframe
    * after the dataframe has been returned
    */
-  test("select specific rows from remote data source", () => {
+  test("select specific columns from remote data source", () => {
     const selected = remote_https.select(["age", "hemo"]);
     expect(selected.value).toBeTypeOf("object");
   });
