@@ -8,6 +8,7 @@ const file = new Breadroll({ header: true, delimiter: "," });
 // Open various data sources - local and remote sources
 const df = await file.open.local("./test/data/test.csv");
 const salary = await file.open.local("./test/data/ds_salaries.csv");
+const adult = await file.open.local("./test/data/adult.csv");
 const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
 
 /**
@@ -43,7 +44,7 @@ describe("testing IO - mock test", () => {
  * Testing Other Functionalities
  */
 
-describe("testing - dataframe functionality", () => {
+describe("testing dataframe functionality", () => {
   /**
    * Mock test - check filter features, on ckd dataset
    * width filtered dataframe of class, equal to, notckd
@@ -148,6 +149,15 @@ describe("testing matches filter with RegExp", () => {
   test("match all job_title with engineer - i", () => {
     const re = new RegExp(/engineer/, "i");
     const filtered = salary.filter("job_title", "matches", re);
+    assert.notEqual(filtered.value, []);
+  });
+
+  /**
+   * This test with large dataset of 35k+ entries
+   */
+  test("match all occupation with manager - i, larger dataset of 35k+", () => {
+    const re = new RegExp(/manager*/, "i");
+    const filtered = adult.filter("occupation", "matches", re);
     assert.notEqual(filtered.value, []);
   });
 });
