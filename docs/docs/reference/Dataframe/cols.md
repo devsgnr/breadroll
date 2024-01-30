@@ -10,13 +10,19 @@ Parameter
 - `Indexer.start?: number` - if provided, specifies the begin, or else default to the first column in the dataframe
 - `Indexer.end?: number` - if provided, specifies the end, or else default to the last column in the dataframe
 
+The example below returns the first 4 columns, starting from index `0`
 ```typescript
 const count: Dataframe = df.cols({ start: 0, end: 4 });
 ```
 
+The example below returns the specified columns starting from the second column and the next three columns
+```typescript
+const count: Dataframe = df.cols({ start: 1, end: 4 });
+```
+
 ---
 
-Let's say you want the dataframe to have all the columns except the last column of the dataframe, making the value of `end`, `-1` return the dataframe with the last column omitted, and intuitively, making the value of `end`, `-2` omits the lasts two columns and so on.
+Let's say you want the dataframe to have none of the columns except the last column of the dataframe, making the value of `end`, `-1` returns the last column of the dataframe with the rest omitted, and intuitively, making the value of `end`, `-2` returns the lasts two columns and so on.
 
 ```typescript
 const count: Dataframe = df.cols({ end: -1 });

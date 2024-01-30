@@ -103,12 +103,16 @@ class Dataframe {
    */
   cols(args: Indexer): Dataframe {
     const start: number = args.start ? args.start : 0;
-    const end: number = args.end ? args.end : this.labels.length;
-    const keys = this.labels.slice(start, end);
+    const end: number = args.end ? args.end : this.object.length;
+
+    const keys = (): Array<string> => {
+      if (!args.start && args.end && args.end < 0) return this.labels.slice(args.end);
+      else return this.labels.splice(start, end);
+    };
 
     return new Dataframe(
       this.object.map((obj: ObjectType) => {
-        return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+        return keys().reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
       }),
     );
   }

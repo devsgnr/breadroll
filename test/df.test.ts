@@ -102,6 +102,13 @@ describe("testing integer based indexing", () => {
     expect(iloc.labels).toEqual(mock_label);
   });
 
+  test("get 4 columns from the second index", () => {
+    const [start, end] = [1, 4];
+    const mock_label = remote_https.labels.splice(start, end);
+    const iloc = remote_https.cols({ start, end });
+    expect(iloc.labels).toEqual(mock_label);
+  });
+
   /**
    * Test to see if providing none of the values give the entire
    * Dataframe columns as the return value
