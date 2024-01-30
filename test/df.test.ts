@@ -137,3 +137,17 @@ describe("testing integer based indexing", () => {
     expect(rows.count).toEqual(608);
   });
 });
+
+/**
+ * Testing `matches` filter that uses RegExp
+ */
+describe("testing matches filter with RegExp", () => {
+  /**
+   * This test makes case-insensitive matches
+   */
+  test("match all job_title with engineer - i", () => {
+    const re = new RegExp(/engineer/, "i");
+    const filtered = salary.filter("job_title", "matches", re);
+    assert.notEqual(filtered.value, []);
+  });
+});

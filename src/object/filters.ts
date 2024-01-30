@@ -18,6 +18,12 @@ const Filters: FilterType = {
     return new Dataframe(copy);
   },
 
+  matches: (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+    const re: RegExp = value as RegExp;
+    const copy = Object.assign(dataframe.filter((object) => re.test(<string>object[key])));
+    return new Dataframe(copy);
+  },
+
   "greater than": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => <number>object[key] > <number>value));
     return new Dataframe(copy);
