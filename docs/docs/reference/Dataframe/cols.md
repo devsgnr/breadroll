@@ -5,10 +5,10 @@ title: .cols
 #### `Dataframe.cols`
 This function returns specific columns of the dataframe strictly using interger based indexing similar to panda's `iloc`, this function takes an object with either the start or the end index and return the dataframe with the specified columns
 
-Parameter
+Parameter 
 
-- `Cols.start?: number` - if provided, specifies the begin, or else default to the first column in the dataframe
-- `Cols.end?: number` - if provided, specifies the end, or else default to the last column in the dataframe
+- `Indexer.start?: number` - if provided, specifies the begin, or else default to the first column in the dataframe
+- `Indexer.end?: number` - if provided, specifies the end, or else default to the last column in the dataframe
 
 ```typescript
 const count: Dataframe = df.cols({ start: 0, end: 4 });
@@ -24,7 +24,7 @@ const count: Dataframe = df.cols({ end: -1 });
 
 !!! note
 
-    Note providing the `start` and `end` value will by default return the entire columns of the dataframe
+    Not providing the `start` and `end` value will by default returns the entire columns of the dataframe
 
 ```typescript
 const count: Dataframe = df.cols({});

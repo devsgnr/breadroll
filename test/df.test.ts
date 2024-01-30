@@ -7,6 +7,7 @@ const file = new Breadroll({ header: true, delimiter: "," });
 
 // Open various data sources - local and remote sources
 const df = await file.open.local("./test/data/test.csv");
+const salary = await file.open.local("./test/data/ds_salaries.csv");
 const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
 
 /**
@@ -71,7 +72,7 @@ describe("testing IO remote data source - https", () => {
    * via https and then converts to Dataframe and can read out values
    */
   test("get a remote data source", () => {
-    expect(remote_https.value).toBeTypeOf("object");
+    expect(remote_https.value).toBeArrayOfSize(400);
   });
 
   /**
@@ -80,7 +81,7 @@ describe("testing IO remote data source - https", () => {
    */
   test("select specific columns from remote data source", () => {
     const selected = remote_https.select(["age", "hemo"]);
-    expect(selected.value).toBeTypeOf("object");
+    expect(selected.labels).toEqual(["age", "hemo"]);
   });
 });
 
@@ -90,6 +91,10 @@ describe("testing IO remote data source - https", () => {
  */
 
 describe("testing integer based indexing", () => {
+  /**
+   * Test to see if Dataframe.cols return the correct columns
+   * specified from the integer based indexing arguments
+   */
   test("get the first 5 columns in the dataframe", () => {
     const [start, end] = [0, 4];
     const mock_label = remote_https.labels.splice(start, end);
@@ -105,5 +110,23 @@ describe("testing integer based indexing", () => {
     const mock_label = remote_https.labels;
     const iloc = remote_https.cols({});
     expect(iloc.labels).toEqual(mock_label);
+  });
+
+  /**
+   * Testing to see if the Dataframe.rows return the correct rows
+   * specified from the integer based indexing arguments
+   */
+  test("return the first 20 rows of the dataframe", () => {
+    const rows = remote_https.rows({ end: 20 });
+    expect(rows.count).toEqual(20);
+  });
+
+  /**
+   * Test to see if providing none of the values give the entire
+   * rows of the Dataframe in return
+   */
+  test("return the entire rows of the dataframe", () => {
+    const rows = salary.rows({});
+    expect(rows.count).toEqual(608);
   });
 });

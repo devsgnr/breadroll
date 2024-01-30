@@ -50,9 +50,9 @@ type ObjectType = {
 
 /**
  * Type Definition
- * Dataframe.cols - this object defines the named parameters for interger location indexing
+ * Indexer object for Dataframe.cols & Dataframe.rows - this object defines the named parameters for interger location indexing
  */
-type Cols = {
+type Indexer = {
   start?: number;
   end?: number;
 };
@@ -68,4 +68,4 @@ enum EscapeSeq {
   COMMA = ",",
 }
 
-export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq, Cols };
+export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq, Indexer };

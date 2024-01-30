@@ -57,10 +57,12 @@ breadroll provides an easy to use API that gets you from zero to data processing
     The dataset used in these example code snippets was gotten from Kaggle; [Employee Salaries for different job roles](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 
 ```typescript
+import Breadroll, { Dataframe } from "breadroll";
+
 const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
 ```
 
-Example: From one instance example above, you can open multiple `csv` files
+From the one Breadroll instance above, you can open multiple `csv` files
 
 ```typescript
 const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
