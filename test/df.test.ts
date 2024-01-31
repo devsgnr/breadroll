@@ -7,6 +7,8 @@ const file = new Breadroll({ header: true, delimiter: "," });
 
 // Open various data sources - local and remote sources
 const df = await file.open.local("./test/data/test.csv");
+const salary = await file.open.local("./test/data/ds_salaries.csv");
+const adult = await file.open.local("./test/data/adult.csv");
 const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
 
 /**
@@ -42,7 +44,7 @@ describe("testing IO - mock test", () => {
  * Testing Other Functionalities
  */
 
-describe("testing - dataframe functionality", () => {
+describe("testing dataframe functionality", () => {
   /**
    * Mock test - check filter features, on ckd dataset
    * width filtered dataframe of class, equal to, notckd
@@ -56,8 +58,8 @@ describe("testing - dataframe functionality", () => {
   });
 
   test("select return the desired keys", () => {
-    const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).value[0];
-    expect(Object.keys(selected)).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
+    const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).labels;
+    expect(selected).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
   });
 });
 
@@ -71,15 +73,91 @@ describe("testing IO remote data source - https", () => {
    * via https and then converts to Dataframe and can read out values
    */
   test("get a remote data source", () => {
-    expect(remote_https.value).toBeTypeOf("object");
+    expect(remote_https.value).toBeArrayOfSize(400);
   });
 
   /**
-   * Test that you can select specific rows of interest in the dataframe
+   * Test that you can select specific columns of interest in the dataframe
    * after the dataframe has been returned
    */
-  test("select specific rows from remote data source", () => {
+  test("select specific columns from remote data source", () => {
     const selected = remote_https.select(["age", "hemo"]);
-    expect(selected.value).toBeTypeOf("object");
+    expect(selected.labels).toEqual(["age", "hemo"]);
+  });
+});
+
+/**
+ * Testing interger based indexing or selection for
+ * Dataframe
+ */
+
+describe("testing integer based indexing", () => {
+  /**
+   * Test to see if Dataframe.cols return the correct columns
+   * specified from the integer based indexing arguments
+   */
+  test("get the first 5 columns in the dataframe", () => {
+    const [start, end] = [0, 4];
+    const mock_label = remote_https.labels.splice(start, end);
+    const iloc = remote_https.cols({ start, end });
+    expect(iloc.labels).toEqual(mock_label);
+  });
+
+  test("get 4 columns from the second index", () => {
+    const [start, end] = [1, 4];
+    const mock_label = remote_https.labels.splice(start, end);
+    const iloc = remote_https.cols({ start, end });
+    expect(iloc.labels).toEqual(mock_label);
+  });
+
+  /**
+   * Test to see if providing none of the values give the entire
+   * Dataframe columns as the return value
+   */
+  test("return the entire columns of the dataframe if both indices are not provided", () => {
+    const mock_label = remote_https.labels;
+    const iloc = remote_https.cols({});
+    expect(iloc.labels).toEqual(mock_label);
+  });
+
+  /**
+   * Testing to see if the Dataframe.rows return the correct rows
+   * specified from the integer based indexing arguments
+   */
+  test("return the first 20 rows of the dataframe", () => {
+    const rows = remote_https.rows({ end: 20 });
+    expect(rows.count).toEqual(20);
+  });
+
+  /**
+   * Test to see if providing none of the values give the entire
+   * rows of the Dataframe in return
+   */
+  test("return the entire rows of the dataframe", () => {
+    const rows = salary.rows({});
+    expect(rows.count).toEqual(608);
+  });
+});
+
+/**
+ * Testing `matches` filter that uses RegExp
+ */
+describe("testing matches filter with RegExp", () => {
+  /**
+   * This test makes case-insensitive matches
+   */
+  test("match all job_title with engineer - i", () => {
+    const re = new RegExp(/engineer/, "i");
+    const filtered = salary.filter("job_title", "matches", re);
+    assert.notEqual(filtered.value, []);
+  });
+
+  /**
+   * This test with large dataset of 35k+ entries
+   */
+  test("match all occupation with manager - i, larger dataset of 35k+", () => {
+    const re = new RegExp(/manager*/, "i");
+    const filtered = adult.filter("occupation", "matches", re);
+    assert.notEqual(filtered.value, []);
   });
 });

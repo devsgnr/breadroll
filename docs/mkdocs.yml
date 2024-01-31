@@ -1,4 +1,4 @@
-site_name: Breadroll
+site_name: breadroll 🥟
 theme:
   logo: assets/png/breadroll_white.png
   favicon: assets/png/breadroll_brand.png
@@ -34,5 +34,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
 repo_url: https://github.com/devsgnr/breadroll
 repo_name: devsgnr/breadroll

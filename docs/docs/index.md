@@ -7,6 +7,12 @@ hide:
 
 ![](./assets/png/breadroll_brand.png)
 
+![npm](https://img.shields.io/npm/v/breadroll)
+![breadroll docs status](https://github.com/devsgnr/breadroll/actions/workflows/docs.yml/badge.svg)
+![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/testing.yml/badge.svg)
+![GitHub Stars](https://img.shields.io/github/stars/devsgnr/breadroll)
+[![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
+
 breadroll 🥟 is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
 - **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
@@ -51,15 +57,17 @@ breadroll provides an easy to use API that gets you from zero to data processing
     The dataset used in these example code snippets was gotten from Kaggle; [Employee Salaries for different job roles](https://www.kaggle.com/datasets/inductiveanks/employee-salaries-for-different-job-roles)
 
 ```typescript
+import Breadroll, { Dataframe } from "breadroll";
+
 const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
 ```
 
-Example: From one instance example above, you can open multiple `csv` files
+From the one Breadroll instance above, you can open multiple `csv` files
 
 ```typescript
 const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
-const values: Array<ObjectType> = selected.values
+const values = selected.values 
 
 console.log(values)
 ```
@@ -69,7 +77,7 @@ breadroll makes it easy to work with remote data sources with current support fo
 
 ```typescript
 const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/.../ds_salaries.csv");
-const selected: Dataframe = df..select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
+const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
 ```
 
 ### **Filtering**
