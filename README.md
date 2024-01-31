@@ -72,9 +72,9 @@ Example: From one instance example above, you can open multiple `csv` files
 ```typescript
 const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
-const values: Array<ObjectType> = selected.values
+const values = selected.values;
 
-console.log(values)
+console.log(values);
 ```
 
 ### **Remote Data Sources**
