@@ -25,6 +25,14 @@ we suggest you use it with some caution, as some unexpected behaviors can be pre
 
 ---
 
+### Table of Content
+
+1. <a href="https://devsgnr.github.io/breadroll/" target="_blank">Introduction</a>
+2. <a href="https://devsgnr.github.io/breadroll/reference/Breadroll/" target="_blank">API Reference</a>
+3. <a href="https://devsgnr.github.io/breadroll/changelog/breadroll-v0.1.0/" target="_blank">Changelog</a>
+
+---
+
 ### **Installation**
 
 System Requirements:
