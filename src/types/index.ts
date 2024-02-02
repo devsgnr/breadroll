@@ -192,6 +192,56 @@ type NumericConstantType = {
      */
     golden_angle: number;
   };
+  physical: {
+    /**
+     * The speed of light in vacuum, commonly denoted c, is a universal physical constant that is exactly equal to 299,792,458 metres per second
+     */
+    speed_of_light_in_vacuum: number;
+    /**
+     * The Planck constant, or Planck's constant, is a fundamental physical constant of foundational importance in quantum mechanics
+     */
+    planck_constant: number;
+    /**
+     * The Boltzmann constant (kB or k) is the proportionality factor that relates the average relative thermal energy of particles in a gas with the thermodynamic temperature of the gas.
+     */
+    boltzman_constant: number;
+    /**
+     * The gravitational constant (also known as the universal gravitational constant, the Newtonian constant of gravitation, denoted by the capital letter G, is an empirical physical constant involved in the calculation of gravitational effects...
+     */
+    gravitational_constant: number;
+    /**
+     * Coulomb's inverse-square law, or simply Coulomb's law, is an experimental law[1] of physics that calculates the amount of force between two electrically charged particles at rest.
+     */
+    coulombs_constant: number;
+    /**
+     * In cosmology (usually denoted by the Greek capital letter lambda: Λ), also called Einstein's cosmological constant, is the constant coefficient of a term that Albert Einstein temporarily added to his field equations of general relativity.
+     */
+    cosmological_constant: number;
+    /**
+     * The elementary charge, usually denoted by e, is a fundamental physical constant, defined as the electric charge carried by a single proton or, equivalently, the magnitude of the negative electric charge carried by a single electron
+     */
+    elementary_charge: number;
+    /**
+     * In particle physics, the electron mass (symbol: me) is the mass of a stationary electron, also known as the invariant mass of the electron. It is one of the fundamental constants of physics.
+     */
+    electron_mass: number;
+    /**
+     * A proton is a stable subatomic particle, symbol p, H+, or 1H+ with a positive electric charge of +1 e (elementary charge). Its mass is slightly less than that of a neutron and 1,836 times the mass of an electron
+     */
+    proton_mass: number;
+    /**
+     * The neutron is a subatomic particle, symbol n or n0, which has a neutral (not positive or negative) charge, and a mass slightly greater than that of a proton
+     */
+    neutron_mass: number;
+    /**
+     * It is defined as the number of constituent particles (usually molecules, atoms, or ions) per mole (SI unit) and used as a normalization factor in the amount of substance in a sample.
+     */
+    avogadro_constant: number;
+    /**
+     * In physical chemistry, the Faraday constant (symbol F, sometimes stylized as ℱ) is a physical constant defined as the quotient of the total electric charge (q) by the amount (n) of elementary charge carriers in any given sample of matte
+     */
+    faraday_constant: number;
+  };
 };
 
 export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq, Indexer, NumericConstantType };

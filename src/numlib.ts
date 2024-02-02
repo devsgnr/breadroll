@@ -32,7 +32,20 @@ const CONSTANT: NumericConstantType = {
     second_favard_constant: 1.233700550136169,
     golden_angle: 2.399963229728653,
   },
-  physical: {},
+  physical: {
+    speed_of_light_in_vacuum: 299792458,
+    planck_constant: 6.62607015e-23,
+    boltzman_constant: 1.380649e-23,
+    gravitational_constant: 6.674e-11,
+    coulombs_constant: 8.9875517923e9,
+    cosmological_constant: 1.089e-52,
+    elementary_charge: 1.602176634e-19,
+    electron_mass: 9.1093837015e-31,
+    proton_mass: 1.67262192369e-27,
+    neutron_mass: 1.67492749804e-27,
+    avogadro_constant: 6.02214076e23,
+    faraday_constant: 9.648533212331001e4,
+  },
 };
 
 export default CONSTANT;
