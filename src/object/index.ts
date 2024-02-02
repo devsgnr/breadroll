@@ -132,6 +132,21 @@ class Dataframe {
   }
 
   /**
+   * This function takes two dataframes and combines or concatenate
+   * them to form a bigger dataframe
+   * @param { Dataframe } frame_1
+   * @param { Dataframe } frame_2
+   * @returns { Dataframe }
+   */
+  concat(frame: Dataframe): Dataframe {
+    const combined: Array<ObjectType> = this.object.map((data, index) => {
+      return { ...data, ...frame.value[index] };
+    });
+
+    return new Dataframe(combined);
+  }
+
+  /**
    * This function exposes the array of objects before or after
    * filter has been applied to it
    * @returns { Array<ObjectType> }
