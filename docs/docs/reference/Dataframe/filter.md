@@ -9,7 +9,7 @@ Parameters
 - `filter: Condition` - is a `enum` type that has the available filters (1) 
     { .annotate }
    
-    1. `"==" | "!=" | "E" | "matches" | ">" | "<" | ">=" | "<=" | "is between"`
+    1. `"==" | "!=" | "E" | "matches" | ">" | "<" | ">=" | "<=" | "is between"`. The `"E"` stands for; "is an element of" or "contains" usually used with `string`
 
 - `value: unknown` - this can be a number of data types, this is determined based on the type of filter query
 - `limit?: unknown` - this is an optional argument, used with range filters like `in between`
