@@ -132,10 +132,9 @@ class Dataframe {
   }
 
   /**
-   * This function takes two dataframes and combines or concatenate
-   * them to form a bigger dataframe
-   * @param { Dataframe } frame_1
-   * @param { Dataframe } frame_2
+   * This function takes a dataframe and combines or concatenate
+   * with the current dataframe to form a bigger dataframe
+   * @param { Dataframe } frame
    * @returns { Dataframe }
    */
   concat(frame: Dataframe): Dataframe {
