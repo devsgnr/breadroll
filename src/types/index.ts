@@ -34,7 +34,7 @@ type IOSave = {
  * Condition - the list of string allowed as identifiers for selecting filter functions
  * FilterType - the object type definition for the filter object
  */
-type Condition = "equal to" | "not equal to" | "contains" | "matches" | "greater than" | "less than" | "greater than or equal to" | "less than or equal to" | "is between";
+type Condition = "==" | "!=" | "E" | "matches" | ">" | "<" | ">=" | "<=" | "is between";
 
 type FilterType = {
   [key: string]: (dataframe: Array<ObjectType>, key: string, value: unknown, limit?: unknown) => Dataframe;
@@ -192,6 +192,7 @@ type NumericConstantType = {
      */
     golden_angle: number;
   };
+
   physical: {
     /**
      * The speed of light in vacuum, commonly denoted c, is a universal physical constant that is exactly equal to 299,792,458 metres per second

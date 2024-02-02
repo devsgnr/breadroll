@@ -50,11 +50,11 @@ describe("testing dataframe functionality", () => {
    * width filtered dataframe of class, equal to, notckd
    */
   test("get the number of class = notckd", () => {
-    expect(df.filter("class", "equal to", "notckd").count).toEqual(150);
+    expect(df.filter("class", "==", "notckd").count).toEqual(150);
   });
 
   test("get the number of age >= 60", () => {
-    expect(df.filter("age", "greater than or equal to", 60).count).toEqual(150);
+    expect(df.filter("age", ">=", 60).count).toEqual(150);
   });
 
   test("select return the desired keys", () => {

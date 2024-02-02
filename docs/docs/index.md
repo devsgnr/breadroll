@@ -88,8 +88,8 @@ df.filter("age", "is between", 30, 40); // returns number
 Perform even more complex filtering with multiple / chained filter, you can chain the filter ie. filtering the previously filtered `Dataframe`, the chained filter can be as long as you need them to be.
 ```typescript
 df.filter("age", "is between", 30, 40)
-  .filter("salary", "greater than", 70000)
-  .filter("work_year", "equals", 2020); // return Dataframe
+  .filter("salary", ">", 70000)
+  .filter("work_year", "==", 2020); // return Dataframe
 ```
 
 ### **A Little Math**
