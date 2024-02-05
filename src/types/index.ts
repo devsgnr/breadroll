@@ -199,6 +199,14 @@ type NumericConstantType = {
      */
     speed_of_light_in_vacuum: number;
     /**
+     * The gravity of Earth, denoted by g, is the net acceleration that is imparted to objects due to the combined effect of gravitation (from mass distribution within Earth) and the centrifugal force (from the Earth's rotation)
+     */
+    gravitational_acceleration_constant: number;
+    /**
+     * The precise strength of Earth's gravity varies with location. The agreed upon value for standard gravity is 9.80665 m/s2 (32.1740 ft/s2) by definition.
+     */
+    standard_gravitational_acceleration_constant: number;
+    /**
      * The Planck constant, or Planck's constant, is a fundamental physical constant of foundational importance in quantum mechanics
      */
     planck_constant: number;

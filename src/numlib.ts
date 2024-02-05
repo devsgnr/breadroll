@@ -34,6 +34,8 @@ const CONSTANT: NumericConstantType = {
   },
   physical: {
     speed_of_light_in_vacuum: 299792458,
+    gravitational_acceleration_constant: 9.81,
+    standard_gravitational_acceleration_constant: 9.80665,
     planck_constant: 6.62607015e-23,
     boltzman_constant: 1.380649e-23,
     gravitational_constant: 6.674e-11,
