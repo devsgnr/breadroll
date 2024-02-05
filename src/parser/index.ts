@@ -25,7 +25,7 @@ class Parser {
    */
   get_table_header(table: string, options: DataframeReadOptions): Array<string> {
     const header = table.split(NEW_LINE, 1)[0].split(options.delimiter);
-    if (options.header) this.keys = header.map((header) => header.split(CARRIAGE_RETURN)[0].toLocaleLowerCase().trim());
+    if (options.header) this.keys = header.map((header) => header.split(CARRIAGE_RETURN)[0].trim());
     if (!options.header && options.keys) this.keys = options.keys;
     if (!options.header && !options.keys) throw new Error("Header set to false and no keys provided");
     return this.keys;
