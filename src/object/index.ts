@@ -1,5 +1,5 @@
 import IO from "../io";
-import { IOSave, Condition, FilterType, ObjectType, Indexer } from "../types";
+import { IOSave, Condition, FilterType, ObjectType, Indexer, Apply } from "../types";
 import Filters from "./filters";
 
 class Dataframe {
@@ -129,6 +129,22 @@ class Dataframe {
     const end: number = args.end ? args.end : this.object.length;
 
     return new Dataframe(this.object.splice(start, end));
+  }
+
+  /**
+   * This function applies an operation to values of the rows
+   * of a specified column of the dataframe
+   * @param { Apply } Apply
+   * @returns { Dataframe }
+   */
+  apply({ key, fn, inplace = false, newkey }: Apply): Dataframe {
+    return new Dataframe(
+      this.object.map((value) => {
+        if (!inplace && !newkey) return { ...value, ...{ [`${key}_1`]: fn(value[key]) } };
+        if (!inplace && newkey) return { ...value, ...{ [newkey]: fn(value[key]) } };
+        return { ...value, ...{ [key]: fn(value[key]) } };
+      }),
+    );
   }
 
   /**

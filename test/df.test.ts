@@ -61,6 +61,11 @@ describe("testing dataframe functionality", () => {
     const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).labels;
     expect(selected).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
   });
+
+  test("applying an operation to a specific column", () => {
+    const applied = df.apply({ key: "age", fn: (value) => value / 2 });
+    expect(applied.labels.includes("age_1")).toEqual(true);
+  });
 });
 
 /**

@@ -68,6 +68,14 @@ enum EscapeSeq {
   COMMA = ",",
 }
 
+type Apply = {
+  key: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fn: (value: any) => any;
+  inplace?: boolean;
+  newkey?: string;
+};
+
 /**
  * Type Definition
  * NumericConstantType - Constant Numeric Value
@@ -253,4 +261,4 @@ type NumericConstantType = {
   };
 };
 
-export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq, Indexer, NumericConstantType };
+export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq, Indexer, NumericConstantType, Apply };
