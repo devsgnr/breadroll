@@ -4,9 +4,6 @@ import Parser from "./parser";
 import NumericConstants from "./numeric_constants";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
 
-// Third party libraries imports
-import { createClient } from "@supabase/supabase-js";
-
 /**
  * breadroll 🥟 is a simple lightweight application library for parsing csv, tsv,
  * and other delimited files, performing EDA (exploratory data analysis),
@@ -26,7 +23,7 @@ class Breadroll {
     this.object = new Dataframe([]);
     this.parser = new Parser();
     this.io = new IO();
-    this.supabase = createClient(this.options.supabase?.supabaseUrl ?? "", this.options.supabase?.supabaseKey ?? "");
+    this.supabase = this.options.supabase;
   }
 
   /**
@@ -77,18 +74,21 @@ class Breadroll {
     };
 
     const supabaseStorage = async (bucketName: string, filepath: string): Promise<Dataframe> => {
-      return await this.supabase.storage
-        .from(bucketName)
-        .download(filepath)
-        .then((response) => response.data?.text())
-        .then((value) => {
-          this.parser.get_table_header(String(value), this.options);
-          this.object = this.parser.generate_object(String(value), this.options);
-          return this.object;
-        })
-        .catch((err) => {
-          throw new Error(err);
-        });
+      if (this.supabase) {
+        return await this.supabase.storage
+          .from(bucketName)
+          .download(filepath)
+          .then((response) => response.data?.text())
+          .then((value) => {
+            this.parser.get_table_header(String(value), this.options);
+            this.object = this.parser.generate_object(String(value), this.options);
+            return this.object;
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+      }
+      return new Dataframe([]);
     };
 
     return {

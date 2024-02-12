@@ -1,5 +1,8 @@
 import Dataframe from "../object";
 
+// Third party types import
+import { SupabaseClient } from "@supabase/supabase-js";
+
 /**
  * Type Definition
  * Breadroll.open - the type definition for the return value of the open getter
@@ -39,10 +42,8 @@ type DataframeReadOptions = {
    * This provides the @supabase client with the url
    * and the public anon key for the createClient object
    */
-  supabase?: {
-    supabaseUrl?: string;
-    supabaseKey?: string;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  supabase?: SupabaseClient<any, "public", any>;
 };
 
 /**
