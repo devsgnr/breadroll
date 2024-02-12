@@ -51,5 +51,8 @@
     "build:documentation": "cd docs && mkdocs gh-deploy --force"
   },
   "type": "module",
-  "types": "./dist/index.d.ts"
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.3"
+  }
 }

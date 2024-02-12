@@ -7,6 +7,7 @@ import Dataframe from "../object";
 type BreadrollOpen = {
   local: (filepath: string) => Promise<Dataframe>;
   https: (url: string, headers?: Headers) => Promise<Dataframe>;
+  supabaseStorage: (bucketName: string, filepath: string) => Promise<Dataframe>;
 };
 
 /**
@@ -14,10 +15,34 @@ type BreadrollOpen = {
  * DataframeReadOptions - the type definition for the parameter of the Breadroll second constructor argument
  */
 type DataframeReadOptions = {
+  /**
+   * Set to true, if the file has a header or to false if the
+   * file does not have a header
+   */
   header: boolean;
+  /**
+   * Specific the delimiter in the file
+   */
   delimiter: string;
+  /**
+   * When header is set to false then a array of string equal
+   * to the number of columns in the dataset needs to be
+   * provided
+   */
   keys?: Array<string>;
+  /**
+   * This is used to switch on or switch off the automatic
+   * parsing of number in the datasets; defaults to `true`
+   */
   parseNumber?: boolean;
+  /**
+   * This provides the @supabase client with the url
+   * and the public anon key for the createClient object
+   */
+  supabase?: {
+    supabaseUrl?: string;
+    supabaseKey?: string;
+  };
 };
 
 /**

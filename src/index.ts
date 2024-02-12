@@ -4,6 +4,9 @@ import Parser from "./parser";
 import NumericConstants from "./numeric_constants";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
 
+// Third party libraries imports
+import { createClient } from "@supabase/supabase-js";
+
 /**
  * breadroll 🥟 is a simple lightweight application library for parsing csv, tsv,
  * and other delimited files, performing EDA (exploratory data analysis),
@@ -16,12 +19,14 @@ class Breadroll {
 
   private options: DataframeReadOptions;
   private object: Dataframe;
+  private supabase;
 
   constructor(options: DataframeReadOptions) {
     this.options = { ...options, parseNumber: options.parseNumber ?? true };
     this.object = new Dataframe([]);
     this.parser = new Parser();
     this.io = new IO();
+    this.supabase = createClient(this.options.supabase?.supabaseUrl ?? "", this.options.supabase?.supabaseKey ?? "");
   }
 
   /**
@@ -60,7 +65,7 @@ class Breadroll {
       const req: Request = new Request(url);
 
       return await fetch(req, { method: "GET", headers: headers })
-        .then((response: Response) => response.text())
+        .then((response) => response.text())
         .then((value) => {
           this.parser.get_table_header(value, this.options);
           this.object = this.parser.generate_object(value, this.options);
@@ -71,9 +76,25 @@ class Breadroll {
         });
     };
 
+    const supabaseStorage = async (bucketName: string, filepath: string): Promise<Dataframe> => {
+      return await this.supabase.storage
+        .from(bucketName)
+        .download(filepath)
+        .then((response) => response.data?.text())
+        .then((value) => {
+          this.parser.get_table_header(String(value), this.options);
+          this.object = this.parser.generate_object(String(value), this.options);
+          return this.object;
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+
     return {
       local: local,
       https: https,
+      supabaseStorage: supabaseStorage,
     };
   }
 }
