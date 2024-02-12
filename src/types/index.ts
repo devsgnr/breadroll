@@ -39,7 +39,7 @@ type DataframeReadOptions = {
    */
   parseNumber?: boolean;
   /**
-   * This provides the @supabase client with the url
+   * This provides the supabase client with the url
    * and the public anon key for the createClient object
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
