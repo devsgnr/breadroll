@@ -4,12 +4,16 @@ import assert from "assert";
 
 // Instanciate DF Class
 const file = new Breadroll({ header: true, delimiter: "," });
+// Do not parse numbers
+const csv = new Breadroll({ header: true, delimiter: ",", parseNumber: false });
 
 // Open various data sources - local and remote sources
 const df = await file.open.local("./test/data/test.csv");
 const salary = await file.open.local("./test/data/ds_salaries.csv");
 const adult = await file.open.local("./test/data/adult.csv");
 const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
+// Open data source - without parsing numbers
+const cities = await csv.open.local("./test/data/cities.csv");
 
 /**
  * Testing IO (Input/Output) of none empty file
@@ -65,6 +69,11 @@ describe("testing dataframe functionality", () => {
   test("applying an operation to a specific column", () => {
     const applied = df.apply({ key: "age", fn: (value) => value / 2 });
     expect(applied.labels.includes("age_1")).toEqual(true);
+  });
+
+  test("setting parseNumber to false - does not parse numbers", () => {
+    const notParsed = Object.values(cities.dtypes);
+    expect(notParsed.includes("number")).toEqual(false);
   });
 });
 

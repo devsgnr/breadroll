@@ -17,6 +17,7 @@ type DataframeReadOptions = {
   header: boolean;
   delimiter: string;
   keys?: Array<string>;
+  parseNumber?: boolean;
 };
 
 /**
@@ -32,7 +33,7 @@ type IOSave = {
 /**
  * Types Definitions
  * Condition - the list of string allowed as identifiers for selecting filter functions
- * FilterType - the object type definition for the filter object
+ * - FilterType - the object type definition for the filter object
  */
 type Condition = "==" | "!=" | "E" | "matches" | ">" | "<" | ">=" | "<=" | "is between";
 

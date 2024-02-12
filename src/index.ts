@@ -1,6 +1,7 @@
 import IO from "./io";
 import Dataframe from "./object";
 import Parser from "./parser";
+import NumericConstants from "./numeric_constants";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
 
 /**
@@ -14,10 +15,10 @@ class Breadroll {
   private io: IO;
 
   private options: DataframeReadOptions;
-  public object: Dataframe;
+  private object: Dataframe;
 
   constructor(options: DataframeReadOptions) {
-    this.options = options;
+    this.options = { ...options, parseNumber: options.parseNumber ?? true };
     this.object = new Dataframe([]);
     this.parser = new Parser();
     this.io = new IO();
@@ -78,4 +79,4 @@ class Breadroll {
 }
 
 export default Breadroll;
-export { Dataframe };
+export { Dataframe, NumericConstants };
