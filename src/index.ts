@@ -73,6 +73,13 @@ class Breadroll {
         });
     };
 
+    /**
+     * This function fetches and returns a file via a via Supabase Storage,
+     * read and converts the file to a Dataframe
+     * @param { string } bucketName
+     * @param { string } filepath
+     * @returns { Promise<Dataframe> }
+     */
     const supabaseStorage = async (bucketName: string, filepath: string): Promise<Dataframe> => {
       if (this.supabase) {
         return await this.supabase.storage
