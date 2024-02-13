@@ -230,7 +230,7 @@ class Dataframe {
    * @param { string } filetype
    * @returns { Blob }
    */
-  to_blob(filetype: "csv" | "tsv"): Blob {
+  toBlob(filetype: "csv" | "tsv"): Blob {
     return this.io.toBlob(this.object, filetype);
   }
 }
