@@ -40,7 +40,7 @@ Regex filter uses regular expression to perform complex queries like matching ce
 
 ???+ danger
 
-    Please using this Regex filter is a big trade off on time, performing a query with a simple regex like `/engineer/i` on a dataset of almost 35,000+ rows take `~7.9ms` to `~10ms`, and performing a query with a regex like `/(a*)*b/` on the same dataset can take `~100ms`, as we see a `asymptotic` time complexity, it searches `n` characters of `n` rows, ie. time grows with growth in search space. We recommend you use `"contains"` or `"equals"`, and only use the RegEx when time is not a factor.
+    Please using this Regex filter is a big trade off on time, performing a query with a simple regex like `/engineer/i` on a dataset of almost 35,000+ rows take `~7.9ms` to `~10ms`, and performing a query with a regex like `/(a*)*b/` on the same dataset can take `~100ms`, as we see a `asymptotic` time complexity, it searches `n` characters of `n` rows, ie. time grows with growth in search space. We recommend you use `"E"` or `"=="`, and only use the RegEx when time is not a factor.
 
 There are two ways to work with the "matches" regex filter
 

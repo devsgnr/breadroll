@@ -2,8 +2,15 @@ import { describe, expect, test } from "bun:test";
 import Breadroll from "../src/index";
 import assert from "assert";
 
+// Third Party Import
+import { createClient } from "@supabase/supabase-js";
+
+const url = String(Bun.env.SUPABASE_URL);
+const key = String(Bun.env.SUPABASE_KEY);
+const client = createClient(url, key);
+
 // Instanciate DF Class
-const file = new Breadroll({ header: true, delimiter: "," });
+const file = new Breadroll({ header: true, delimiter: ",", supabase: client });
 // Do not parse numbers
 const csv = new Breadroll({ header: true, delimiter: ",", parseNumber: false });
 
@@ -12,6 +19,7 @@ const df = await file.open.local("./test/data/test.csv");
 const salary = await file.open.local("./test/data/ds_salaries.csv");
 const adult = await file.open.local("./test/data/adult.csv");
 const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
+const supabase_storage = await file.open.supabaseStorage("breadroll-test", "cities.csv");
 // Open data source - without parsing numbers
 const cities = await csv.open.local("./test/data/cities.csv");
 
@@ -97,6 +105,23 @@ describe("testing IO remote data source - https", () => {
   test("select specific columns from remote data source", () => {
     const selected = remote_https.select(["age", "hemo"]);
     expect(selected.labels).toEqual(["age", "hemo"]);
+  });
+
+  /**
+   * Test that the remote source "Supabase Storage" retrive that
+   * data and converts it
+   */
+  test("get a remote data source - supabase", () => {
+    expect(supabase_storage.value).toBeArrayOfSize(148062);
+  });
+
+  /**
+   * Test that you can select specific columns of interest in the dataframe
+   * after the dataframe has been returned from Supabase
+   */
+  test("select specific columns from remote data source - supabase", () => {
+    const selected = supabase_storage.select(["longitude", "latitude"]);
+    expect(selected.labels).toEqual(["longitude", "latitude"]);
   });
 });
 
