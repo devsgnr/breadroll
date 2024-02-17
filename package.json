@@ -1,6 +1,7 @@
 {
   "name": "breadroll",
   "version": "0.4.0",
+  "description": "breadroll 🥟 is a simple lightweight library for data processing operations written in Typescript and powered by Bun.",
   "author": {
     "name": "devsgnr",
     "url": "https://github.com/devsgnr",
@@ -21,7 +22,8 @@
     "csv-parser",
     "tsv-parser",
     "eda",
-    "data-science"
+    "data-science",
+    "data-transformation"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -47,8 +49,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts",
-    "build:documentation": "cd docs && mkdocs gh-deploy --force"
+    "build:pre-release": "bun tsc --project tsconfig.esm.json && bun run build.ts"
   },
   "type": "module",
   "types": "./dist/index.d.ts",

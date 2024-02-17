@@ -82,6 +82,13 @@ df.filter("age", "is between", 30, 40)
   .filter("work_year", "==", 2020);
 ```
 
+
+### **Data Transformation**
+Perform whatever transformation you'd like to perform on the value of a specified column, from simple transformation like `value + 2`, to complex mathematical transformations that can be paired with the in-built numeric constant object
+```typescript
+df.apply({ key: "salary", fn: (v) => v / (40 * 4), newkey: "per_hour" });
+```
+
 ### **A Little Math**
 Get a single number that accurately represents the underlying data with the many provided aggregation functions, the likes of average (mean), max, min, sum, count, etc. with more in development
 ```typescript

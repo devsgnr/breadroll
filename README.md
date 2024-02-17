@@ -1,4 +1,11 @@
-![](https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png)
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png" />
+</div>
+
+<br/>
+
+<div align="center">
 
 ![npm](https://img.shields.io/npm/v/breadroll)
 ![breadroll docs status](https://github.com/devsgnr/breadroll/actions/workflows/docs.yml/badge.svg)
@@ -6,6 +13,8 @@
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/macos_testing.yml/badge.svg)
 ![GitHub Stars](https://img.shields.io/github/stars/devsgnr/breadroll)
 [![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
+
+</div>
 
 breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
@@ -83,6 +92,12 @@ Perform even more complex filtering with multiple / chained filter, you can chai
 df.filter("age", "is between", 30, 40)
   .filter("salary", ">", 70000)
   .filter("work_year", "==", 2020);
+```
+
+### **Data Transformation**
+Perform whatever transformation you'd like to perform on the value of a specified column, from simple transformation like `value + 2`, to complex mathematical transformations that can be paired with the in-built numeric constant object
+```typescript
+df.apply({ key: "salary", fn: (v) => v / (40 * 4), newkey: "per_hour" });
 ```
 
 ### **A Little Math**
