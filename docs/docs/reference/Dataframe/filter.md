@@ -3,6 +3,8 @@ title: .filter
 ---
 
 #### `Dataframe.filter(...)`
+This function returns `Dataframe` and it is used to filter out `Dataframe`, by checking if `key` which is the column label against a filter condition `Condition` using `value`.
+
 Parameters
 
 - `key: string` - this is the column key or label, if unsure of the labels, it can be retrived by running `Dataframe.labels`
@@ -13,8 +15,6 @@ Parameters
 
 - `value: unknown` - this can be a number of data types, this is determined based on the type of filter query
 - `limit?: unknown` - this is an optional argument, used with range filters like `in between`
-
-This function returns `Dataframe` and it is used to filter out `Dataframe`, by checking if `key` which is the column label against a filter condition `Condition` using `value`.
 
 ```typescript
 const filtered: Dataframe = df.filter("salary", ">", 70000);

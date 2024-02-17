@@ -36,7 +36,7 @@ breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv,
 System Requirements:
 
 - [Bun](https://bun.sh)
-- MacOS (tested), Linux (tested)
+- MacOS, Linux
 - Typescript >= 5.1
 
 ---

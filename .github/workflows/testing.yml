@@ -1,4 +1,4 @@
-name: ubuntu-latest Testing
+name: ubuntu-latest
 on:  
   push:
   pull_request:

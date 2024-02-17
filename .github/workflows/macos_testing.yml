@@ -1,4 +1,4 @@
-name: macos-latest Testing
+name: macos-latest
 on:  
   push:
   pull_request:
