@@ -1,6 +1,7 @@
 import IO from "./io";
 import Dataframe from "./object";
 import Parser from "./parser";
+import NumericConstants from "./numeric_constants";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
 
 /**
@@ -14,13 +15,15 @@ class Breadroll {
   private io: IO;
 
   private options: DataframeReadOptions;
-  public object: Dataframe;
+  private object: Dataframe;
+  private supabase;
 
   constructor(options: DataframeReadOptions) {
-    this.options = options;
+    this.options = { ...options, parseNumber: options.parseNumber ?? true };
     this.object = new Dataframe([]);
     this.parser = new Parser();
     this.io = new IO();
+    this.supabase = this.options.supabase;
   }
 
   /**
@@ -59,7 +62,7 @@ class Breadroll {
       const req: Request = new Request(url);
 
       return await fetch(req, { method: "GET", headers: headers })
-        .then((response: Response) => response.text())
+        .then((response) => response.text())
         .then((value) => {
           this.parser.get_table_header(value, this.options);
           this.object = this.parser.generate_object(value, this.options);
@@ -70,12 +73,38 @@ class Breadroll {
         });
     };
 
+    /**
+     * This function fetches and returns a file via a via Supabase Storage,
+     * read and converts the file to a Dataframe
+     * @param { string } bucketName
+     * @param { string } filepath
+     * @returns { Promise<Dataframe> }
+     */
+    const supabaseStorage = async (bucketName: string, filepath: string): Promise<Dataframe> => {
+      if (this.supabase) {
+        return await this.supabase.storage
+          .from(bucketName)
+          .download(filepath)
+          .then((response) => response.data?.text())
+          .then((value) => {
+            this.parser.get_table_header(String(value), this.options);
+            this.object = this.parser.generate_object(String(value), this.options);
+            return this.object;
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+      }
+      return new Dataframe([]);
+    };
+
     return {
       local: local,
       https: https,
+      supabaseStorage: supabaseStorage,
     };
   }
 }
 
 export default Breadroll;
-export { Dataframe };
+export { Dataframe, NumericConstants };

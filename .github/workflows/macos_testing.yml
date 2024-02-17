@@ -1,0 +1,29 @@
+name: macos-latest
+on:  
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  my-job:
+    name: breadroll Test Suite
+    runs-on: macos-latest
+    steps:
+      # ...
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 1.0.22 
+          
+      # create .env.local file and echo variable into it
+      - uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          ENV_SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+
+      # run any `bun` or `bunx` command
+      - run: bun install
+      - run: bun test

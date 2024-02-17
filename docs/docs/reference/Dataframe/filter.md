@@ -3,36 +3,45 @@ title: .filter
 ---
 
 #### `Dataframe.filter(...)`
+This function returns `Dataframe` and it is used to filter out `Dataframe`, by checking if `key` which is the column label against a filter condition `Condition` using `value`.
+
 Parameters
 
 - `key: string` - this is the column key or label, if unsure of the labels, it can be retrived by running `Dataframe.labels`
-- `filter: Condition` - is a `enum` type that has the available filters (1) 
-    { .annotate }
-   
-    1. `"equal to" | "not equal to" | "contains" | "matches" | "greater than" | "less than" | "greater than or equal to" | "less than or equal to" | "is between"`
+- `filter: Condition` - is a `enum` type that has the following available filters 
+    
+    | `Condition`                   | Meaning(s)                                           |
+    | ----------------------------- | ---------------------------------------------------: |
+    | `==`                          | `equal to`                                           |
+    | `!=`                          | `not equal to`                                       |
+    | `>`                           | `greater than`                                       |
+    | `<`                           | `less than`                                          |
+    | `>=`                          | `greater than or eqaul to`                           |
+    | `<=`                          | `less than or eqaul to`                              |
+    | `E`                           | `contains` or `is an element of`                     |
+    | `is between`                  | `is between` lower & upper limit                     |
+    | `matches`                     | `matches` - a RegEx                                  |
 
 - `value: unknown` - this can be a number of data types, this is determined based on the type of filter query
-- `limit?: unknown` - this is an optional argument, used with range filters like `in between`
-
-This function returns `Dataframe` and it is used to filter out `Dataframe`, by checking if `key` which is the column label against a filter condition `Condition` using `value`.
+- `limit?: unknown` - this is an optional argument, used with range filters like `is between`
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", "greater than", 70000);
+const filtered: Dataframe = df.filter("salary", ">", 70000);
 ```
 
 #### Multiple / Chained Filter
 You can chain the filter ie. filtering the previously filtered `Dataframe`, the chained filter can be as long as you need them to be;
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", "greater than", 70000)
-                              .filter("work_year", "equals", 2020);
+const filtered: Dataframe = df.filter("salary", ">", 70000)
+                              .filter("work_year", "==", 2020);
 ```
 
 #### Range Filters
 Range filters filter numerical values in the Dataframe that fall between a certain range (lower limit and upper limit);
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", "in between", 70000, 100000);
+const filtered: Dataframe = df.filter("salary", "is between", 70000, 100000);
 ```
 
 #### Regex Filter
@@ -40,7 +49,7 @@ Regex filter uses regular expression to perform complex queries like matching ce
 
 ???+ danger
 
-    Please using this Regex filter is a big trade off on time, performing a query with a simple regex like `/engineer/i` on a dataset of almost 35,000+ rows take `~7.9ms` to `~10ms`, and performing a query with a regex like `/(a*)*b/` on the same dataset can take `~100ms`, as we see a `asymptotic` time complexity, it searches `n` characters of `n` rows, ie. time grows with growth in search space. We recommend you use `"contains"` or `"equals"`, and only use the RegEx when time is not a factor.
+    Please using this Regex filter is a big trade off on time, performing a query with a simple regex like `/engineer/i` on a dataset of almost 35,000+ rows take `~7.9ms` to `~10ms`, and performing a query with a regex like `/(a*)*b/` on the same dataset can take `~100ms`, as we see a `asymptotic` time complexity, it searches `n` characters of `n` rows, ie. time grows with growth in search space. We recommend you use `"E"` or `"=="`, and only use the RegEx when time is not a factor.
 
 There are two ways to work with the "matches" regex filter
 

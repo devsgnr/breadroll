@@ -1,5 +1,5 @@
 import IO from "../io";
-import { IOSave, Condition, FilterType, ObjectType, Indexer } from "../types";
+import { IOSave, Condition, FilterType, ObjectType, Indexer, Apply } from "../types";
 import Filters from "./filters";
 
 class Dataframe {
@@ -132,6 +132,22 @@ class Dataframe {
   }
 
   /**
+   * This function applies an operation to values of the rows
+   * of a specified column of the dataframe
+   * @param { Apply } Apply
+   * @returns { Dataframe }
+   */
+  apply({ key, fn, inplace = false, newkey }: Apply): Dataframe {
+    return new Dataframe(
+      this.object.map((value) => {
+        if (!inplace && !newkey) return { ...value, ...{ [`${key}_1`]: fn(value[key]) } };
+        if (!inplace && newkey) return { ...value, ...{ [newkey]: fn(value[key]) } };
+        return { ...value, ...{ [key]: fn(value[key]) } };
+      }),
+    );
+  }
+
+  /**
    * This function exposes the array of objects before or after
    * filter has been applied to it
    * @returns { Array<ObjectType> }
@@ -214,7 +230,7 @@ class Dataframe {
    * @param { string } filetype
    * @returns { Blob }
    */
-  to_blob(filetype: "csv" | "tsv"): Blob {
+  toBlob(filetype: "csv" | "tsv"): Blob {
     return this.io.toBlob(this.object, filetype);
   }
 }

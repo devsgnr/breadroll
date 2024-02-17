@@ -1,7 +1,7 @@
 import Dataframe from "../object";
 import { DataframeReadOptions, ObjectType } from "../types";
 import { EscapeSeq } from "../types";
-import { parseIfNumber } from "./utils";
+import { parse } from "./utils";
 
 const { NEW_LINE, CARRIAGE_RETURN } = EscapeSeq;
 
@@ -25,7 +25,7 @@ class Parser {
    */
   get_table_header(table: string, options: DataframeReadOptions): Array<string> {
     const header = table.split(NEW_LINE, 1)[0].split(options.delimiter);
-    if (options.header) this.keys = header.map((header) => header.split(CARRIAGE_RETURN)[0].toLocaleLowerCase().trim());
+    if (options.header) this.keys = header.map((header) => header.split(CARRIAGE_RETURN)[0].trim());
     if (!options.header && options.keys) this.keys = options.keys;
     if (!options.header && !options.keys) throw new Error("Header set to false and no keys provided");
     return this.keys;
@@ -38,12 +38,12 @@ class Parser {
    * @param { string } line
    * @returns { ObjectType }
    */
-  private object_builder(line: string, delim: string): ObjectType {
+  private object_builder(line: string, delim: string, option: DataframeReadOptions): ObjectType {
     let state: ObjectType = {};
     line.split(delim).map((value: string, index: number) => {
       state = {
         ...state,
-        ...{ [this.keys[index]]: parseIfNumber(value.split(CARRIAGE_RETURN)[0].trim()) },
+        ...{ [this.keys[index]]: parse(value.split(CARRIAGE_RETURN)[0].trim(), option) },
       };
     });
     return state;
@@ -57,7 +57,7 @@ class Parser {
    */
   generate_object(table: string, options: DataframeReadOptions): Dataframe {
     const row = table.split(NEW_LINE).splice(1);
-    this.object = row.map((line: string) => this.object_builder(line, options.delimiter));
+    this.object = row.map((line: string) => this.object_builder(line, options.delimiter, options));
     return new Dataframe(this.object);
   }
 }

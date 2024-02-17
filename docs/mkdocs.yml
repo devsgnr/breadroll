@@ -1,11 +1,15 @@
 site_name: breadroll 🥟
 theme:
+  font:
+    text: Inter
+    code: JetBrains Mono
   logo: assets/png/breadroll_white.png
   favicon: assets/png/breadroll_brand.png
   name: material
   features:
     - navigation.tabs
     - navigation.footer
+    - content.tabs.link
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -37,5 +41,6 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.superfences
+  - tables
 repo_url: https://github.com/devsgnr/breadroll
 repo_name: devsgnr/breadroll

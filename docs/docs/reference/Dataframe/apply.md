@@ -1,0 +1,17 @@
+---
+title: .apply
+---
+
+#### `Dataframe.apply(...)`
+This function allows you to perform data transformation on a specified column of the dataframe
+
+Parameters
+
+- `Apply.key: string` - this is the column key or label, if unsure of the labels, it can be retrived by running `Dataframe.labels`
+- `Apply.fn: (value: any) => void` - this callback function allows to perform whatever transformation you'd like to perform on the value, from as simple as `value + 2`, to complex mathematical transformations
+- `Apply?.inplace: boolean` - defaults to `true`; when set to `false` assigns the transformation to a new column with the label being the column label with a suffix attached
+- `Apply?.newkey: string` - when this is provided in tandem with `inplace: false`, the new column label will be assigned `newkey`
+
+```typescript
+df.apply({ key: "salary", fn: (v) => v / (40 * 4), newkey: "per_hour" });
+```

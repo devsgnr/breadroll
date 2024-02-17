@@ -3,7 +3,6 @@
 
 :root {
   --md-text-font: "geistregular";
-  --md-code-font: "geist_monomedium";
 }
 
 strong,
@@ -12,12 +11,12 @@ strong,
 .admonition-title,
 .md-typeset h4,
 .md-typeset h5,
-.md-typeset h6 {
+.md-typeset h6,
+th {
   font-family: "geistsemibold";
-  font-weight: normal;
+  font-weight: normal !important;
 }
 
 .md-typeset h4 code {
-  font-family: var(--md-code-font);
   font-weight: normal;
 }

@@ -10,6 +10,5 @@ Parameter
 - `header?:` [`Headers`](https://developer.mozilla.org/en-US/docs/Web/API/Headers) - add custom headers to the HTTP request
 
 ```typescript
-const df: Dataframe = await csv.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/.../ds_salaries.csv");
-const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
+const df: Dataframe = await csv.open.https("https://.../.../file.csv");
 ```

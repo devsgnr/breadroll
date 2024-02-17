@@ -3,17 +3,17 @@ import { ObjectType } from "../types";
 import { FilterType } from "../types";
 
 const Filters: FilterType = {
-  "equal to": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  "==": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => object[key] === value));
     return new Dataframe(copy);
   },
 
-  "not equal to": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  "!=": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => object[key] !== value));
     return new Dataframe(copy);
   },
 
-  contains: (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  E: (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => String(object[key]).includes(<string>value)));
     return new Dataframe(copy);
   },
@@ -24,21 +24,21 @@ const Filters: FilterType = {
     return new Dataframe(copy);
   },
 
-  "greater than": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  ">": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => <number>object[key] > <number>value));
     return new Dataframe(copy);
   },
 
-  "less than": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  "<": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => <number>value > <number>object[key]));
     return new Dataframe(copy);
   },
-  "greater than or equal to": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  ">=": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => <number>object[key] >= <number>value));
     return new Dataframe(copy);
   },
 
-  "less than or equal to": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
+  "<=": (dataframe: Array<ObjectType>, key: string, value: unknown): Dataframe => {
     const copy = Object.assign(dataframe.filter((object) => <number>value >= <number>object[key]));
     return new Dataframe(copy);
   },
