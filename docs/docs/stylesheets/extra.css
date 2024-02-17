@@ -11,9 +11,10 @@ strong,
 .admonition-title,
 .md-typeset h4,
 .md-typeset h5,
-.md-typeset h6 {
+.md-typeset h6,
+th {
   font-family: "geistsemibold";
-  font-weight: normal;
+  font-weight: normal !important;
 }
 
 .md-typeset h4 code {

@@ -71,13 +71,13 @@ const df: Dataframe = await csv.open.supabaseStorage("bucketName", "filepath");
 ```
 
 ### **Filtering**
-Peform complex filtering; with various filters including range filters like `in between` that can be achieved using an optional function parameter `limit` which is the upper limit. These range filter are only effective with numbers (integers, floating-point).
+Peform complex filtering; with various filters including range filters like `is between` that can be achieved using an optional function parameter `limit` which is the upper limit. These range filter are only effective with numbers (integers, floating-point).
 ```typescript
-df.filter("age", "in between", 30, 40);
+df.filter("age", "is between", 30, 40);
 ```
 Perform even more complex filtering with multiple / chained filter, you can chain the filter ie. filtering the previously filtered `Dataframe`, the chained filter can be as long as you need them to be.
 ```typescript
-df.filter("age", "in between", 30, 40)
+df.filter("age", "is between", 30, 40)
   .filter("salary", ">", 70000)
   .filter("work_year", "==", 2020);
 ```

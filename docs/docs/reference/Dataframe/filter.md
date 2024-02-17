@@ -8,13 +8,22 @@ This function returns `Dataframe` and it is used to filter out `Dataframe`, by c
 Parameters
 
 - `key: string` - this is the column key or label, if unsure of the labels, it can be retrived by running `Dataframe.labels`
-- `filter: Condition` - is a `enum` type that has the available filters (1) 
-    { .annotate }
-   
-    1. `"==" | "!=" | "E" | "matches" | ">" | "<" | ">=" | "<=" | "is between"`. The `"E"` stands for; "is an element of" or "contains" usually used with `string`
+- `filter: Condition` - is a `enum` type that has the following available filters 
+    
+    | `Condition`                   | Meaning(s)                                           |
+    | ----------------------------- | ---------------------------------------------------: |
+    | `==`                          | `equal to`                                           |
+    | `!=`                          | `not equal to`                                       |
+    | `>`                           | `greater than`                                       |
+    | `<`                           | `less than`                                          |
+    | `>=`                          | `greater than or eqaul to`                           |
+    | `<=`                          | `less than or eqaul to`                              |
+    | `E`                           | `contains` or `is an element of`                     |
+    | `is between`                  | `is between` lower & upper limit                     |
+    | `matches`                     | `matches` - a RegEx                                  |
 
 - `value: unknown` - this can be a number of data types, this is determined based on the type of filter query
-- `limit?: unknown` - this is an optional argument, used with range filters like `in between`
+- `limit?: unknown` - this is an optional argument, used with range filters like `is between`
 
 ```typescript
 const filtered: Dataframe = df.filter("salary", ">", 70000);
@@ -32,7 +41,7 @@ const filtered: Dataframe = df.filter("salary", ">", 70000)
 Range filters filter numerical values in the Dataframe that fall between a certain range (lower limit and upper limit);
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", "in between", 70000, 100000);
+const filtered: Dataframe = df.filter("salary", "is between", 70000, 100000);
 ```
 
 #### Regex Filter
