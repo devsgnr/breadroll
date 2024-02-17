@@ -66,7 +66,7 @@ const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 ```
 
 ### **Remote Data Sources**
-breadroll makes it easy to work with remote data sources with current support for HTTPS and @supabase Storage. With other remote data sources on the roadmap.
+breadroll makes it easy to work with remote data sources with current support for HTTPS and Supabase Storage. With other remote data sources on the roadmap.
 
 ```typescript
 const df: Dataframe = await csv.open.https("https://.../.../filename.csv");

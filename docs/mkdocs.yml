@@ -9,6 +9,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.footer
+    - content.tabs.link
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -40,5 +41,6 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.superfences
+  - tables
 repo_url: https://github.com/devsgnr/breadroll
 repo_name: devsgnr/breadroll
