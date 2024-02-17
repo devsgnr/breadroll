@@ -11,6 +11,10 @@
     "type": "git",
     "url": "https://github.com/devsgnr/breadroll"
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/devsgnr"
+  },
   "bugs": "https://github.com/devsgnr/breadroll/issues",
   "homepage": "https://devsgnr.github.io/breadroll/",
   "license": "MIT",
