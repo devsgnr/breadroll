@@ -16,9 +16,9 @@ hide:
 
 breadroll 🥟 is a simple lightweight application library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
-- **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
-- **File I/O**: Support for local & remote sources loved by JS developers - **Local, HTTPS, & Supabase Storage**
-- **Easy-to-use**: Compose queries using filter keywords that are simple and are easy to comprehend
+- ⚡ **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
+- 📁 **File I/O**: Support for local & remote sources loved by JS developers - **Local, HTTPS, & Supabase Storage**
+- 😊 **Easy-to-use**: Compose queries using filter keywords that are simple and are easy to comprehend
 
 ### **Installation**
 

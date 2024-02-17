@@ -1,9 +1,3 @@
-breadroll 🥟 The lightweight application toolkit for data analysis and data processing operations in JavaScript
-
----
-
-<br/>
-
 ![](https://raw.githubusercontent.com/devsgnr/breadroll/v0.3.1/docs/docs/assets/png/breadroll_brand.png)
 
 ![npm](https://img.shields.io/npm/v/breadroll)
@@ -17,9 +11,9 @@ breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv,
 
 <br/>
 
-- **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
-- **File I/O**: Support for local & remote sources loved by JS developers - **Local, HTTPS, & Supabase Storage**
-- **Easy-to-use**: Compose queries using filter keywords that are simple and are easy to comprehend
+- ⚡ **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
+- 📁 **File I/O**: Support for local & remote sources loved by JS developers - **Local, HTTPS, & Supabase Storage**
+- 😊 **Easy-to-use**: Compose queries using filter keywords that are simple and are easy to comprehend
 
 ---
 
