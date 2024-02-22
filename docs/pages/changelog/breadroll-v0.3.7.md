@@ -1,5 +1,5 @@
 ---
-title: breadroll v0.3.7-alpha
+title: v0.3.7-alpha
 ---
 
 <small>January 31st, 2024</small>

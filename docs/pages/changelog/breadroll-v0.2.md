@@ -1,5 +1,5 @@
 ---
-title: breadroll v0.2
+title: v0.2
 ---
 
 <small>Sept 15th, 2023</small>

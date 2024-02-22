@@ -1,5 +1,5 @@
 ---
-title: breadroll v0.4.0
+title: v0.4.0
 ---
 
 <small>February 14, 2024</small>
@@ -25,11 +25,11 @@ The `Breadroll` & `Dataframe` APIs got a little face lift, with two major additi
 - By default headers (labels) were being converted to lower-case, now headers (labels) maintain case-sensitivity
 - `Dataframe.apply({...}: Apply)` - This function allows you to perform data transformation on a specified column of the dataframe
 
-### New Remote Data Source :rocket: - Supabase
+### New Remote Data Source 🚀 - Supabase
 - `Breadroll.open.supabaseStorage(bucketName: string, filepath: string)` - This function takes in the bucket name and filepath of the file, downloads the file, parses the files and retuns a Dataframe
 
 ### Symbol-based Filter Keywords
-The use of symbols as keyword ensurces less verbosity; most of the filter keywords have been replaced with symbols; `"eqauls"` is now `"=="` see the full changes [here](/reference/Dataframe/filter/)
+The use of symbols as keyword ensurces less verbosity; most of the filter keywords have been replaced with symbols; `"eqauls"` is now `"=="` see the full changes [here](/docs/Dataframe/filter/)
 
 ## Numeric Constants
 In addition to having the ability to perform data transformation using `Dataframe.apply({...})`, the numeric constant object provides mathematical (`math`) and physical (`physical`) constants. These two can be nicely paired to make cool data transformation, most especially with scientific datasets. 
