@@ -19,6 +19,7 @@ const config: DocsThemeConfig = {
       titleTemplate: "%s - breadroll",
     };
   },
+  faviconGlyph: "🥟",
 };
 
 export default config;

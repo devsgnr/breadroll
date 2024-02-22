@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
+body {
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1,
+    "ss01" 1,
+    "ss06" 1 !important;
+}
 code {
   font-family: "JetBrains Mono" !important;
 }
