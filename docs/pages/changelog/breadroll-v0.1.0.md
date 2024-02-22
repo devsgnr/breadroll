@@ -4,7 +4,6 @@ title: breadroll v0.1
 
 <small>Aug 19th, 2023</small>
 
----
 
 - `Dataframe.head: Dataframe` returns the first five rows of the dataframe
 - `Dataframe.labels: Array<string>` returns the labels of the dataframe
