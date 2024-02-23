@@ -1,7 +1,8 @@
 {
   "index": {
     "title": "Home",
-    "type": "page"
+    "type": "page",
+    "display": "hidden"
   },
   "docs": {
     "title": "Documentation",

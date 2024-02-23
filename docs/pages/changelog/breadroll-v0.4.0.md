@@ -13,7 +13,7 @@ In breadroll's new version **0.4.0** a lot of new shiny features are introduced,
 - Changed filter keywords in favor of symbols over length words
 - A snazzy new way to perform data transformation
 - Introuducing `NumericConstants` - a collection of mathematical and physical constants
-- breadroll hit 35 :stars: stars on GitHub - help breadroll rise higher, drop a :star: star.
+- breadroll hit 35 🌠 stars on GitHub - help breadroll rise higher, drop a :star: star.
 
 ---
 
