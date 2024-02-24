@@ -6,7 +6,7 @@ title: v0.1.3
 
 ---
 
-`Dataframe.use(callback: (dataframe: Array<ObjectType>) => Dataframe): Dataframe` it provides access to the object ie. it kinda ejects from the base class allowing user to perform their own custom operation on a the current dataframe version, eg. after running `Dataframe.filter`
+`Dataframe.use(callback: (dataframe: Array<Record<string, unknown>>) => Dataframe): Dataframe` it provides access to the object ie. it kinda ejects from the base class allowing user to perform their own custom operation on a the current dataframe version, eg. after running `Dataframe.filter`
 
 Added more filters, `greater than or equal to`, `less than or equal to`, `is between`
 

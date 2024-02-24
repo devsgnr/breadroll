@@ -4,8 +4,8 @@ title: .dtypes
 
 #### `Dataframe.dtypes`
 
-This function return an object `ObjectType` that shows the data type of each column in the dataframe in a key:value pair
+This function return an object `Record<string, unknown>{:ts}` that shows the data type of each column in the dataframe in a key:value pair
 
 ```typescript
-const dtypes: ObjectType = df.dtypes; // { age: "number", ... }
+const dtypes: Record<string, unknown> = df.dtypes; // { age: "number", ... }
 ```

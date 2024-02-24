@@ -1,6 +1,4 @@
-import { ObjectType } from "../../types";
-
-const create_sv = (data: Array<ObjectType>, delimeter: string): string => {
+const create_sv = (data: Array<Record<string, unknown>>, delimeter: string): string => {
   /**
    * Initialize the value for header by getting the keys of a single
    * value in the array, then add the header as the first element of the
