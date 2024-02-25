@@ -1,5 +1,6 @@
 ---
 title: v0.3.6-alpha
+description: Changelog, v0.3.6-alpha
 ---
 
 <small>January 25th, 2024</small>

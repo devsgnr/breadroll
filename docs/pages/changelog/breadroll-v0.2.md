@@ -1,5 +1,6 @@
 ---
 title: v0.2
+description: Changelog, v0.2
 ---
 
 <small>Sept 15th, 2023</small>

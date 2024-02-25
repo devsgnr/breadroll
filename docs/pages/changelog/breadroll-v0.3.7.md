@@ -1,5 +1,6 @@
 ---
 title: v0.3.7-alpha
+description: In breadroll's new version 0.3.7-alpha two new features are introduced, Here are the cool new features; Regex filter using `"matches"` keyword, Integer-based indexing / selection
 ---
 
 <small>January 31st, 2024</small>

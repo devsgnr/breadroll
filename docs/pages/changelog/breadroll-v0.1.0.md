@@ -1,5 +1,6 @@
 ---
 title: v0.1
+description: Changelog, v0.1
 ---
 
 <small>Aug 19th, 2023</small>

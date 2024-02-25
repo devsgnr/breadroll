@@ -1,5 +1,6 @@
 ---
 title: v0.3.0
+description: Changelog, v0.3.0
 ---
 
 <small>January 19th, 2024</small>
