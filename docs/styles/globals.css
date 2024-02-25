@@ -11,8 +11,12 @@ html {
     "cv11" 1,
     "tnum" 1 !important;
 }
+
 code {
-  font-feature-settings: normal !important;
+  font-feature-settings:
+    "rlig" 0,
+    "calt" 0 !important;
+  font-variant-ligatures: none !important;
   font-family: "JetBrains Mono" !important;
 }
 

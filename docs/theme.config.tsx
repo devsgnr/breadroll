@@ -14,6 +14,11 @@ const config: DocsThemeConfig = {
     dismissible: false,
     text: <a href="/changelog/breadroll-v0.4.0">🎉 breadroll 0.4.0 is released. Read more →</a>,
   },
+  head: (
+    <>
+      <meta name="twitter:site" content="@breadrolljs" />
+    </>
+  ),
   useNextSeoProps() {
     const { frontMatter } = useConfig();
 

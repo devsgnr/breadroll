@@ -8,14 +8,13 @@
 <div align="center">
 
 ![npm](https://img.shields.io/npm/v/breadroll)
-![breadroll docs status](https://github.com/devsgnr/breadroll/actions/workflows/docs.yml/badge.svg)
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/testing.yml/badge.svg)
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/macos_testing.yml/badge.svg)
 ![GitHub Stars](https://img.shields.io/github/stars/devsgnr/breadroll)
 
 </div>
 
-breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
+breadroll 🥟 is a simple lightweight  toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
 <br/>
 
