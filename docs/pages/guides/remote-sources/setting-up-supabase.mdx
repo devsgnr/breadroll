@@ -34,7 +34,7 @@ const key = String(Bun.env.SUPABASE_KEY);
 const client = createClient("https://org.supabase.co", key);
 ```
 
-Next, we import and setup the `Breadroll` instance and then pass the Supabase client to the `Breadroll` via the `DataframeReadOptions.supabase`, and then we are set to retrieve our CSV file from our Supabase bucket. **Note**: This uses `.download()` internally and will only work with <Link className="text-blue-600 underline" href="https://supabase.com/docs/reference/javascript/storage-from-download" target="_blank">private</Link> buckets.
+Next, we import and setup the `Breadroll` instance and then pass the Supabase client to the `Breadroll` instance via the `DataframeReadOptions.supabase`, and then we are set to retrieve our CSV file from our Supabase bucket. **Note**: This uses `.download()` internally and will only work with <Link className="text-blue-600 underline" href="https://supabase.com/docs/reference/javascript/storage-from-download" target="_blank">private</Link> buckets.
 
 ```ts filename="index.ts" copy
 import Breadroll from "breadroll";
