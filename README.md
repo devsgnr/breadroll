@@ -62,7 +62,6 @@ breadroll provides an easy to use API that gets you from zero to data processing
 
 ```typescript
 import Breadroll, { Dataframe } from "breadroll";
-
 const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
 ```
 
