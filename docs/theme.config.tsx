@@ -27,9 +27,17 @@ const config: DocsThemeConfig = {
       description: frontMatter.description ?? "breadroll - Data processing in Javascript",
       openGraph: {
         siteName: "breadroll",
-        title: "breadroll - Data processing in Javascript",
-        description: "breadroll - Data processing in Javascript",
-        images: [{ url: "/png/social-card.png", alt: "breadroll - Data processing in Javascript", width: 800, height: 600, type: "image/png" }],
+        title: frontMatter.title ?? "breadroll - Data processing in Javascript",
+        description: frontMatter.description ?? "breadroll - Data processing in Javascript",
+        images: [
+          {
+            url: "https://breadrolljs.vercel.app/png/social-card.png",
+            alt: "breadroll - Data processing in Javascript",
+            width: 800,
+            height: 600,
+            type: "image/png",
+          },
+        ],
       },
       twitter: {
         handle: "@breadrolljs",
