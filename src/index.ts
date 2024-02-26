@@ -94,14 +94,27 @@ class Breadroll {
           .catch((err) => {
             throw new Error(err);
           });
-      }
-      return new Dataframe([]);
+      } else throw new Error("No Supabase Client provided");
+    };
+
+    /**
+     * This function reads a JSON object passed in as an argument,
+     * read and converts the JSON to a Dataframe, normally the JSON object
+     * is a `Record<string, never>` | `{}` converted to fit the requirements
+     * for Array<Record<string, unknown>>
+     * @param { any } object
+     * @returns { Dataframe }
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const json = (object: any): Dataframe => {
+      return new Dataframe(object as Array<Record<string, unknown>>);
     };
 
     return {
       local: local,
       https: https,
       supabaseStorage: supabaseStorage,
+      json: json,
     };
   }
 }

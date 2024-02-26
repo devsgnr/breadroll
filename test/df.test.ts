@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import Breadroll from "../src/index";
+import demo from "./data/demo.json";
 import assert from "assert";
 
 // Third Party Import
@@ -22,6 +23,7 @@ const remote_https = await file.open.https("https://raw.githubusercontent.com/de
 const supabase_storage = await file.open.supabaseStorage("breadroll-test", "cities.csv");
 // Open data source - without parsing numbers
 const cities = await csv.open.local("./test/data/cities.csv");
+const json = csv.open.json(demo);
 
 /**
  * Testing IO (Input/Output) of none empty file
@@ -49,6 +51,13 @@ describe("testing IO - mock test", () => {
    */
   test("Head count should be 5", () => {
     expect(df.head.count).toEqual(5);
+  });
+
+  /**
+   * Test JSON loading
+   */
+  test("JSON loads and returns a value", () => {
+    assert.notEqual([], json.value);
   });
 });
 
@@ -86,7 +95,7 @@ describe("testing dataframe functionality", () => {
 });
 
 /**
- * Testing I/O Remote Data Source - HTTPS
+ * Testing I/O Remote Data Source - HTTPS & Supabase Storage
  */
 
 describe("testing IO remote data source - https", () => {
@@ -122,6 +131,16 @@ describe("testing IO remote data source - https", () => {
   test("select specific columns from remote data source - supabase", () => {
     const selected = supabase_storage.select(["longitude", "latitude"]);
     expect(selected.labels).toEqual(["longitude", "latitude"]);
+  });
+
+  /**
+   * Test that supabase should throw an error if the supabase client is
+   * not provided in the constructor
+   */
+  test("throw error when there's no client", () => {
+    expect(async () => {
+      await csv.open.supabaseStorage("breadroll-test", "cities.csv");
+    }).toThrow("No Supabase Client provided");
   });
 });
 

@@ -12,6 +12,10 @@ Parameter
 - `url: string` - the remote location of the file.
 - `header?:` [`Headers`](https://developer.mozilla.org/en-US/docs/Web/API/Headers) - add custom headers to the HTTP request
 
+Returns
+
+- `Promise<Dataframe>`
+
 ```typescript
 const df: Dataframe = await csv.open.https("https://.../.../file.csv");
 ```

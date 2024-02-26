@@ -11,6 +11,10 @@ Parameter
 
 - `filepath: string` - the location of the file.
 
+Returns
+
+- `Promise<Dataframe>`
+
 ```typescript
 const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
 const df: Dataframe = await csv.open.local("./path/to/file.csv");

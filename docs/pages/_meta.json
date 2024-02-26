@@ -4,8 +4,12 @@
     "type": "page",
     "display": "hidden"
   },
+  "guides": {
+    "title": "Guides",
+    "type": "page"
+  },
   "docs": {
-    "title": "Documentation",
+    "title": "Docs",
     "type": "page"
   },
   "changelog": {

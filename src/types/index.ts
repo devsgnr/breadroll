@@ -11,6 +11,8 @@ type BreadrollOpen = {
   local: (filepath: string) => Promise<Dataframe>;
   https: (url: string, headers?: Headers) => Promise<Dataframe>;
   supabaseStorage: (bucketName: string, filepath: string) => Promise<Dataframe>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  json: (object: any) => Dataframe;
 };
 
 /**

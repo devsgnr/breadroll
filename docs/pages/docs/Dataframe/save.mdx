@@ -7,6 +7,14 @@ description: Return a Promise which is the size of the file that has been saved 
 
 This is a getter function that return the following functions, each of these functions return a `Promise<number>` which returns the size of the file that has been saved to disk, that is:
 
+Parameters
+
+- `filepath` - location to save the file
+
+Returns
+
+- `Promise<number>`
+
 ```typescript
 // Save as json
 df.save.json("./file.json");

@@ -12,6 +12,10 @@ Parameters
 
 - `callback: (object: Array<Record<string, unknown>>) => Dataframe` - this callback function gives you the ability to perform whatever computation needed and must return a Dataframe at the end; here you can even use other external libraries
 
+Returns
+
+- `Dataframe`
+
 ```typescript
 const has_question_mark: Dataframe = df.use((obj) => {
   const filtered = obj.filter((object) => Object.values(object).some((value) => value === "?"));

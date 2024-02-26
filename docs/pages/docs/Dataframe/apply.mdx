@@ -14,6 +14,10 @@ Parameters
 - `Apply?.inplace: boolean` - defaults to `true`; when set to `false` assigns the transformation to a new column with the label being the column label with a suffix attached
 - `Apply?.newkey: string` - when this is provided in tandem with `inplace: false`, the new column label will be assigned `newkey`
 
+Returns
+
+- `Dataframe`
+
 ```typescript
 df.apply({ key: "salary", fn: (v) => v / (40 * 4), newkey: "per_hour" });
 ```

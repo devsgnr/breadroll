@@ -29,6 +29,10 @@ Parameters
 - `value: unknown` - this can be a number of data types, this is determined based on the type of filter query
 - `limit?: unknown` - this is an optional argument, used with range filters like `is between`
 
+Returns
+
+- `Dataframe`
+
 ```typescript
 const filtered: Dataframe = df.filter("salary", ">", 70000);
 ```

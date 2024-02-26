@@ -12,6 +12,10 @@ Parameter
 - `bucketName: string` - the Supabase bucket name.
 - `filepath: string` - the specific file name in the specified bucket
 
+Returns
+
+- `Promise<Dataframe>`
+
 ```typescript
 const df: Dataframe = await csv.open.supabseStorage("bucketName", "filepath");
 ```

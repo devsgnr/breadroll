@@ -7,6 +7,10 @@ description: Returns an object that shows the data type of each column in the da
 
 This function return an object `Record<string, unknown>{:ts}` that shows the data type of each column in the dataframe in a key:value pair
 
+Returns
+
+- `Record<string, unknown>{:ts}`
+
 ```typescript
 const dtypes: Record<string, unknown> = df.dtypes; // { age: "number", ... }
 ```
