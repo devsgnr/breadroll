@@ -1,5 +1,5 @@
 import Dataframe from "../object";
-import { DataframeReadOptions, ObjectType } from "../types";
+import { DataframeReadOptions } from "../types";
 import { EscapeSeq } from "../types";
 import { parse } from "./utils";
 
@@ -8,7 +8,7 @@ const { NEW_LINE, CARRIAGE_RETURN } = EscapeSeq;
 class Parser {
   private keys: Array<string>;
   private states: Array<string>;
-  private object: Array<ObjectType>;
+  private object: Array<Record<string, unknown>>;
 
   constructor() {
     this.keys = [];
@@ -33,13 +33,13 @@ class Parser {
 
   /**
    * @private
-   * This function is used to build a JavaScript object of type ObjectType
+   * This function is used to build a JavaScript object of type Record<string, unknown>
    * it is used by `this.generate_object` to make the function less verbose
    * @param { string } line
-   * @returns { ObjectType }
+   * @returns { Record<string, unknown> }
    */
-  private object_builder(line: string, delim: string, option: DataframeReadOptions): ObjectType {
-    let state: ObjectType = {};
+  private object_builder(line: string, delim: string, option: DataframeReadOptions): Record<string, unknown> {
+    let state: Record<string, unknown> = {};
     line.split(delim).map((value: string, index: number) => {
       state = {
         ...state,

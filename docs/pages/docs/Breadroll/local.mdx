@@ -1,0 +1,21 @@
+---
+title: Local
+description: Opens the local data source, ie. the file on disk and return a Dataframe
+---
+
+#### `Breadroll.open.local(...)`
+
+This function opens the local data source, ie. the file on disk and return a Dataframe
+
+Parameter
+
+- `filepath: string` - the location of the file.
+
+Returns
+
+- `Promise<Dataframe>`
+
+```typescript
+const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+const df: Dataframe = await csv.open.local("./path/to/file.csv");
+```

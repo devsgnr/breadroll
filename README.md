@@ -8,15 +8,13 @@
 <div align="center">
 
 ![npm](https://img.shields.io/npm/v/breadroll)
-![breadroll docs status](https://github.com/devsgnr/breadroll/actions/workflows/docs.yml/badge.svg)
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/testing.yml/badge.svg)
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/macos_testing.yml/badge.svg)
 ![GitHub Stars](https://img.shields.io/github/stars/devsgnr/breadroll)
-[![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
 
 </div>
 
-breadroll 🥟 is a simple lightweight application toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
+breadroll 🥟 is a simple lightweight  toolkit for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
 
 <br/>
 
@@ -64,7 +62,6 @@ breadroll provides an easy to use API that gets you from zero to data processing
 
 ```typescript
 import Breadroll, { Dataframe } from "breadroll";
-
 const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
 ```
 

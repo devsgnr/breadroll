@@ -11,6 +11,8 @@ type BreadrollOpen = {
   local: (filepath: string) => Promise<Dataframe>;
   https: (url: string, headers?: Headers) => Promise<Dataframe>;
   supabaseStorage: (bucketName: string, filepath: string) => Promise<Dataframe>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  json: (object: any) => Dataframe;
 };
 
 /**
@@ -63,17 +65,7 @@ type IOSave = {
  */
 type Condition = "==" | "!=" | "E" | "matches" | ">" | "<" | ">=" | "<=" | "is between";
 
-type FilterType = {
-  [key: string]: (dataframe: Array<ObjectType>, key: string, value: unknown, limit?: unknown) => Dataframe;
-};
-
-/**
- * Type Definition
- * ObjectType - the object type definition for the Dataframe object
- */
-type ObjectType = {
-  [key: string]: string | unknown;
-};
+type FilterType = Record<Condition, (dataframe: Array<Record<string, unknown>>, key: string, value: unknown, limit?: unknown) => Dataframe>;
 
 /**
  * Type Definition
@@ -288,4 +280,4 @@ type NumericConstantType = {
   };
 };
 
-export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, ObjectType, EscapeSeq, Indexer, NumericConstantType, Apply };
+export { BreadrollOpen, DataframeReadOptions, IOSave, Condition, FilterType, Indexer, NumericConstantType, Apply, EscapeSeq };

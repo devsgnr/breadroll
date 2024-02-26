@@ -1,0 +1,19 @@
+{
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden"
+  },
+  "guides": {
+    "title": "Guides",
+    "type": "page"
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  },
+  "changelog": {
+    "title": "Changelog",
+    "type": "page"
+  }
+}

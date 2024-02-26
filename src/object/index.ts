@@ -1,13 +1,13 @@
 import IO from "../io";
-import { IOSave, Condition, FilterType, ObjectType, Indexer, Apply } from "../types";
+import { IOSave, Condition, FilterType, Indexer, Apply } from "../types";
 import Filters from "./filters";
 
 class Dataframe {
-  private object: Array<ObjectType>;
+  private object: Array<Record<string, unknown>>;
   private filters: FilterType;
   private io: IO;
 
-  constructor(object: Array<ObjectType>) {
+  constructor(object: Array<Record<string, unknown>>) {
     this.object = object;
     this.filters = Object({ ...Filters });
     this.io = new IO();
@@ -58,8 +58,8 @@ class Dataframe {
    * This function return the data types of each column
    * in the dataframe in a { key: value } pair
    */
-  get dtypes(): ObjectType {
-    let types: ObjectType = {};
+  get dtypes(): Record<string, unknown> {
+    let types: Record<string, unknown> = {};
     Object.values(this.object[0]).map((value, index) => {
       types = { ...types, ...{ [Object.keys(this.object[0])[index]]: typeof value } };
     });
@@ -88,8 +88,8 @@ class Dataframe {
    */
   select(keys: Array<string>): Dataframe {
     return new Dataframe(
-      this.object.map((obj: ObjectType) => {
-        return keys.reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+      this.object.map((obj: Record<string, unknown>) => {
+        return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
       }),
     );
   }
@@ -111,8 +111,8 @@ class Dataframe {
     };
 
     return new Dataframe(
-      this.object.map((obj: ObjectType) => {
-        return keys().reduce((acc: ObjectType, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+      this.object.map((obj: Record<string, unknown>) => {
+        return keys().reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
       }),
     );
   }
@@ -150,9 +150,9 @@ class Dataframe {
   /**
    * This function exposes the array of objects before or after
    * filter has been applied to it
-   * @returns { Array<ObjectType> }
+   * @returns { Array<Record<string, unknown>> }
    */
-  get value(): Array<ObjectType> {
+  get value(): Array<Record<string, unknown>> {
     return this.object;
   }
 
@@ -209,7 +209,7 @@ class Dataframe {
    * @param { function } callback
    * @returns { Dataframe }
    */
-  use(callback: (object: Array<ObjectType>) => Dataframe): Dataframe {
+  use(callback: (object: Array<Record<string, unknown>>) => Dataframe): Dataframe {
     return callback(this.object);
   }
 

@@ -1,4 +1,4 @@
-import { ObjectType, IOSave } from "../types";
+import { IOSave } from "../types";
 import { create_sv, to_blob } from "./utils";
 
 class IO {
@@ -22,10 +22,10 @@ class IO {
   /**
    * This function provides an interface for saving the dataframe in
    * three various formats; ie. json, csv, and tsv
-   * @param { Array<ObjectType> } data
+   * @param { Array<Record<string, unknown>> } data
    * @returns { IOSave }
    */
-  save(data: Array<ObjectType>): IOSave {
+  save(data: Array<Record<string, unknown>>): IOSave {
     const json = async (location: string): Promise<number> => {
       return Bun.write(location, JSON.stringify(data, null, 2))
         .then((value) => {
@@ -66,11 +66,11 @@ class IO {
   /**
    * This function converts the dataframe into either a csv or
    * a tsv string, and then converts the string into a blob object
-   * @param { Array<ObjectType> } data
+   * @param { Array<Record<string, unknown>> } data
    * @param { string } filetype
    * @returns { Blob }
    */
-  toBlob(data: Array<ObjectType>, filetype: "csv" | "tsv"): Blob {
+  toBlob(data: Array<Record<string, unknown>>, filetype: "csv" | "tsv"): Blob {
     const type: { [key: string]: string } = {
       csv: create_sv(data, ","),
       tsv: create_sv(data, "\t"),

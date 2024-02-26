@@ -1,6 +1,6 @@
 {
   "name": "breadroll",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "breadroll 🥟 is a simple lightweight library for data processing operations written in Typescript and powered by Bun.",
   "author": {
     "name": "devsgnr",

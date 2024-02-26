@@ -1,0 +1,23 @@
+---
+title: JSON
+description: Converts imported JSON object, from remote source or on disk and returns a dataframe
+---
+
+#### `Breadroll.open.json(...)`
+
+This function casts imported JSON object into the required type; from an API call or on disk and returns a dataframe, **Note**: the JSON needs to have a shape of `Array<Record<string, unknown>>{:ts}`
+
+Parameter
+
+- `object: Record<string, never> | {}` `as any` - the location of the file.
+
+Returns
+
+- `Dataframe`
+
+```typescript
+import data from "/path/to/file.json";
+const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+
+const df: Dataframe = csv.open.json(data);
+```

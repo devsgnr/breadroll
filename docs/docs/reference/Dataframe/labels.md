@@ -1,9 +1,0 @@
----
-title: .labels
----
-#### `Dataframe.labels`
-This function returns an array of strings ie. the labels of each column of the dataframe
-
-```typescript
-const labels: Arrat<string> = df.labels; // ["age", "workclass", ...]
-```
