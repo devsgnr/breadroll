@@ -1,4 +1,5 @@
 import IO from "../io";
+import { defaultparse } from "../parser/utils";
 import { IOSave, Condition, FilterType, Indexer, Apply } from "../types";
 import Filters from "./filters";
 
@@ -87,11 +88,13 @@ class Dataframe {
    * @returns { Dataframe }
    */
   select(keys: Array<string>): Dataframe {
-    return new Dataframe(
-      this.object.map((obj: Record<string, unknown>) => {
-        return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
-      }),
-    );
+    if (keys.length > 0) {
+      return new Dataframe(
+        this.object.map((obj: Record<string, unknown>) => {
+          return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
+        }),
+      );
+    } else return new Dataframe(this.object);
   }
 
   /**
@@ -145,6 +148,22 @@ class Dataframe {
         return { ...value, ...{ [key]: fn(value[key]) } };
       }),
     );
+  }
+
+  /**
+   * This function converts all values of the specified columns into a
+   * number
+   * @param { Array<string> } keys
+   * @returns { Dataframe }
+   */
+  toNumber(keys: Array<string>): Dataframe {
+    if (keys.length === 0) {
+      return new Dataframe(this.object);
+    } else {
+      const key = keys[keys.length - 1];
+      const newFrame = this.object.map((obj) => ({ ...obj, [key]: defaultparse(obj[key] as string) }));
+      return new Dataframe(newFrame).toNumber(keys.slice(0, -1));
+    }
   }
 
   /**

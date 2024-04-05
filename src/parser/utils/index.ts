@@ -19,4 +19,19 @@ const parse = (value: string, options: DataframeReadOptions): string | number | 
   return value;
 };
 
-export { parse };
+/**
+ * Performs the same actions as `parser/utils/parse` but without needing the
+ * DataframeOptions
+ * @param { string } value
+ * @returns { string | number | null }
+ */
+const defaultparse = (value: string): string | number | null => {
+  const num = parseFloat(value);
+
+  if (!value) return null;
+  if (!isNaN(num)) return num;
+  if (isNaN(num)) return value;
+  return value;
+};
+
+export { parse, defaultparse };
