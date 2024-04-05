@@ -17,6 +17,7 @@ class Dataframe {
   /**
    * This function retuns the count of occurance of a dataframe's key's
    * value
+   *
    * @returns {number}
    */
   get count(): number {
@@ -26,6 +27,7 @@ class Dataframe {
   /**
    * This function gets and return all the keys from within the
    * oject
+   *
    * @returns { Array<string> }
    */
   get labels(): Array<string> {
@@ -34,14 +36,30 @@ class Dataframe {
 
   /**
    * This function returns the first five rows of the data frame
+   *
+   * @returns { Dataframe }
    */
   get head(): Dataframe {
     return new Dataframe(this.object.splice(0, 5));
   }
 
   /**
+   * This function returns the shape of the dataframe, ie
+   * [columns, rows]
+   *
+   * @returns { Array<number> }
+   */
+  get shape(): Array<number> {
+    const cols = this.labels.length;
+    const rows = this.object.length;
+    return [cols, rows];
+  }
+
+  /**
    * This function return all the objects in the array where some
    * properties are eqaul to null
+   *
+   * @returns { Dataframe }
    */
   get isNull(): Dataframe {
     return new Dataframe(this.object.filter((object) => Object.values(object).some((value) => !value)));
@@ -50,6 +68,8 @@ class Dataframe {
   /**
    * This function return all the objects in the array where every object
    * property is not eqaul to `null`
+   *
+   * @returns { Dataframe }
    */
   get notNull(): Dataframe {
     return new Dataframe(this.object.filter((object) => Object.values(object).every((value) => value)));
@@ -58,9 +78,11 @@ class Dataframe {
   /**
    * This function return the data types of each column
    * in the dataframe in a { key: value } pair
+   *
+   * @returns { Record<string, string> }
    */
-  get dtypes(): Record<string, unknown> {
-    let types: Record<string, unknown> = {};
+  get dtypes(): Record<string, string> {
+    let types: Record<string, string> = {};
     Object.values(this.object[0]).map((value, index) => {
       types = { ...types, ...{ [Object.keys(this.object[0])[index]]: typeof value } };
     });
@@ -143,7 +165,7 @@ class Dataframe {
   apply({ key, fn, inplace = false, newkey }: Apply): Dataframe {
     return new Dataframe(
       this.object.map((value) => {
-        if (!inplace && !newkey) return { ...value, ...{ [`${key}_1`]: fn(value[key]) } };
+        if (!inplace && !newkey) return { ...value, ...{ [`${key}_new`]: fn(value[key]) } };
         if (!inplace && newkey) return { ...value, ...{ [newkey]: fn(value[key]) } };
         return { ...value, ...{ [key]: fn(value[key]) } };
       }),
