@@ -35,7 +35,7 @@ class Dataframe {
   }
 
   /**
-   * This function returns the first five rows of the data frame
+   * This function returns the first five rows of the dataframe
    *
    * @returns { Dataframe }
    */
@@ -44,15 +44,24 @@ class Dataframe {
   }
 
   /**
+   * This function returns the last five rows of the dataframe
+   *
+   * @returns { Dataframe }
+   */
+  get tail(): Dataframe {
+    return new Dataframe(this.object.splice(-5));
+  }
+
+  /**
    * This function returns the shape of the dataframe, ie
-   * [columns, rows]
+   * [rows, columns]
    *
    * @returns { Array<number> }
    */
   get shape(): Array<number> {
     const cols = this.labels.length;
     const rows = this.object.length;
-    return [cols, rows];
+    return [rows, cols];
   }
 
   /**

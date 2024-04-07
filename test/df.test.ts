@@ -85,7 +85,7 @@ describe("testing dataframe functionality", () => {
 
   test("applying an operation to a specific column", () => {
     const applied = df.apply({ key: "age", fn: (value) => value / 2 });
-    expect(applied.labels.includes("age_1")).toEqual(true);
+    expect(applied.labels.includes("age_new")).toEqual(true);
   });
 
   test("setting parseNumber to false - does not parse numbers", () => {
