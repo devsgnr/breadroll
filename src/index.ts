@@ -38,13 +38,13 @@ class Breadroll {
      * @param { string } filepath
      * @returns { Promise<Dataframe> }
      */
-    const local = async (filepath: string): Promise<Dataframe> => {
+    const local = async <T extends Record<string, unknown>>(filepath: string): Promise<Dataframe<T>> => {
       return this.io
         .read(filepath)
         .then((value) => {
           this.parser.get_table_header(value, this.options);
-          this.object = this.parser.generate_object(value, this.options);
-          return this.object;
+          this.object = this.parser.generate_object<T>(value, this.options);
+          return this.object as Dataframe<T>;
         })
         .catch((err) => {
           throw new Error(err);
@@ -58,7 +58,7 @@ class Breadroll {
      * @param { Headers } headers
      * @returns { Promise<Dataframe> }
      */
-    const https = async (url: string, headers?: Headers): Promise<Dataframe> => {
+    const https = async <T extends Record<string, unknown>>(url: string, headers?: Headers): Promise<Dataframe<T>> => {
       const req: Request = new Request(url);
 
       return await fetch(req, { method: "GET", headers: headers })
@@ -66,7 +66,7 @@ class Breadroll {
         .then((value) => {
           this.parser.get_table_header(value, this.options);
           this.object = this.parser.generate_object(value, this.options);
-          return this.object;
+          return this.object as Dataframe<T>;
         })
         .catch((err) => {
           throw new Error(err);
@@ -80,7 +80,7 @@ class Breadroll {
      * @param { string } filepath
      * @returns { Promise<Dataframe> }
      */
-    const supabaseStorage = async (bucketName: string, filepath: string): Promise<Dataframe> => {
+    const supabaseStorage = async <T extends Record<string, unknown>>(bucketName: string, filepath: string): Promise<Dataframe<T>> => {
       if (this.supabase) {
         return await this.supabase.storage
           .from(bucketName)
@@ -89,7 +89,7 @@ class Breadroll {
           .then((value) => {
             this.parser.get_table_header(String(value), this.options);
             this.object = this.parser.generate_object(String(value), this.options);
-            return this.object;
+            return this.object as Dataframe<T>;
           })
           .catch((err) => {
             throw new Error(err);
@@ -106,8 +106,8 @@ class Breadroll {
      * @returns { Dataframe }
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const json = (object: any): Dataframe => {
-      return new Dataframe(object as Array<Record<string, unknown>>);
+    const json = <T extends Record<string, unknown>>(object: any): Dataframe<T> => {
+      return new Dataframe<T>(object as Array<T>);
     };
 
     return {

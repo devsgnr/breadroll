@@ -55,10 +55,10 @@ class Parser {
    * @param { string } table
    * @returns { Dataframe }
    */
-  generate_object(table: string, options: DataframeReadOptions): Dataframe {
+  generate_object<T extends Record<string, unknown>>(table: string, options: DataframeReadOptions): Dataframe<T> {
     const row = table.split(NEW_LINE).splice(1);
     this.object = row.map((line: string) => this.object_builder(line, options.delimiter, options));
-    return new Dataframe(this.object);
+    return new Dataframe<T>(this.object as T[]);
   }
 }
 

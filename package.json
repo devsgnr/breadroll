@@ -1,6 +1,6 @@
 {
   "name": "breadroll",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "breadroll 🥟 is a simple lightweight library for data processing operations written in Typescript and powered by Bun.",
   "author": {
     "name": "devsgnr",
@@ -16,7 +16,7 @@
     "url": "https://github.com/sponsors/devsgnr"
   },
   "bugs": "https://github.com/devsgnr/breadroll/issues",
-  "homepage": "https://devsgnr.github.io/breadroll/",
+  "homepage": "https://breadrolljs.vercel.app",
   "license": "MIT",
   "keywords": [
     "bun",

@@ -8,11 +8,11 @@ import { SupabaseClient } from "@supabase/supabase-js";
  * Breadroll.open - the type definition for the return value of the open getter
  */
 type BreadrollOpen = {
-  local: (filepath: string) => Promise<Dataframe>;
-  https: (url: string, headers?: Headers) => Promise<Dataframe>;
-  supabaseStorage: (bucketName: string, filepath: string) => Promise<Dataframe>;
+  local: <T extends Record<string, unknown>>(filepath: string) => Promise<Dataframe<T>>;
+  https: <T extends Record<string, unknown>>(url: string, headers?: Headers) => Promise<Dataframe<T>>;
+  supabaseStorage: <T extends Record<string, unknown>>(bucketName: string, filepath: string) => Promise<Dataframe<T>>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  json: (object: any) => Dataframe;
+  json: <T extends Record<string, unknown>>(object: any) => Dataframe<T>;
 };
 
 /**
@@ -87,8 +87,8 @@ enum EscapeSeq {
   COMMA = ",",
 }
 
-type Apply = {
-  key: string;
+type Apply<T> = {
+  key: keyof T;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fn: (value: any) => any;
   inplace?: boolean;

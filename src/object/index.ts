@@ -3,12 +3,12 @@ import { defaultparse } from "../parser/utils";
 import { IOSave, Condition, FilterType, Indexer, Apply } from "../types";
 import Filters from "./filters";
 
-class Dataframe {
-  private object: Array<Record<string, unknown>>;
+class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
+  private object: Array<T>;
   private filters: FilterType;
   private io: IO;
 
-  constructor(object: Array<Record<string, unknown>>) {
+  constructor(object: Array<T>) {
     this.object = object;
     this.filters = Object({ ...Filters });
     this.io = new IO();
@@ -31,7 +31,7 @@ class Dataframe {
    * @returns { Array<string> }
    */
   get labels(): Array<string> {
-    return Object.keys(this.object[0]);
+    return Object.keys(this.object[0] as object);
   }
 
   /**
@@ -39,8 +39,8 @@ class Dataframe {
    *
    * @returns { Dataframe }
    */
-  get head(): Dataframe {
-    return new Dataframe(this.object.splice(0, 5));
+  get head(): Dataframe<T> {
+    return new Dataframe<T>(this.object.splice(0, 5));
   }
 
   /**
@@ -48,7 +48,7 @@ class Dataframe {
    *
    * @returns { Dataframe }
    */
-  get tail(): Dataframe {
+  get tail(): Dataframe<T> {
     return new Dataframe(this.object.splice(-5));
   }
 
@@ -70,7 +70,7 @@ class Dataframe {
    *
    * @returns { Dataframe }
    */
-  get isNull(): Dataframe {
+  get isNull(): Dataframe<T> {
     return new Dataframe(this.object.filter((object) => Object.values(object).some((value) => !value)));
   }
 
@@ -80,7 +80,7 @@ class Dataframe {
    *
    * @returns { Dataframe }
    */
-  get notNull(): Dataframe {
+  get notNull(): Dataframe<T> {
     return new Dataframe(this.object.filter((object) => Object.values(object).every((value) => value)));
   }
 
@@ -108,8 +108,8 @@ class Dataframe {
    * @param { unknown } limit optional
    * @returns { Dataframe }
    */
-  filter(key: string, filter: Condition, value: unknown, limit?: unknown): Dataframe {
-    return this.filters[filter](this.object, key, value, limit);
+  filter(key: keyof T, filter: Condition, value: unknown, limit?: unknown): Dataframe<T> {
+    return this.filters[filter](this.object, key as string, value, limit) as Dataframe<T>;
   }
 
   /**
@@ -118,12 +118,12 @@ class Dataframe {
    * @param { Array<string> } keys
    * @returns { Dataframe }
    */
-  select(keys: Array<string>): Dataframe {
+  select(keys: Array<keyof T>): Dataframe<T> {
     if (keys.length > 0) {
-      return new Dataframe(
+      return new Dataframe<T>(
         this.object.map((obj: Record<string, unknown>) => {
-          return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
-        }),
+          return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr as string] = obj[curr as string]), acc), {});
+        }) as T[],
       );
     } else return new Dataframe(this.object);
   }
@@ -135,7 +135,7 @@ class Dataframe {
    * @param { Indexer } args
    * @returns { Dataframe }
    */
-  cols(args: Indexer): Dataframe {
+  cols(args: Indexer): Dataframe<T> {
     const start: number = args.start ? args.start : 0;
     const end: number = args.end ? args.end : this.object.length;
 
@@ -144,10 +144,10 @@ class Dataframe {
       else return this.labels.splice(start, end);
     };
 
-    return new Dataframe(
+    return new Dataframe<T>(
       this.object.map((obj: Record<string, unknown>) => {
         return keys().reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
-      }),
+      }) as T[],
     );
   }
 
@@ -158,7 +158,7 @@ class Dataframe {
    * @param { Indexer } args
    * @returns { Dataframe }
    */
-  rows(args: Indexer): Dataframe {
+  rows(args: Indexer): Dataframe<T> {
     const start: number = args.start ? args.start : 0;
     const end: number = args.end ? args.end : this.object.length;
 
@@ -171,10 +171,10 @@ class Dataframe {
    * @param { Apply } Apply
    * @returns { Dataframe }
    */
-  apply({ key, fn, inplace = false, newkey }: Apply): Dataframe {
-    return new Dataframe(
+  apply({ key, fn, inplace = false, newkey }: Apply<T>): Dataframe<T> {
+    return new Dataframe<T>(
       this.object.map((value) => {
-        if (!inplace && !newkey) return { ...value, ...{ [`${key}_new`]: fn(value[key]) } };
+        if (!inplace && !newkey) return { ...value, ...{ [`${key as string}_new`]: fn(value[key]) } };
         if (!inplace && newkey) return { ...value, ...{ [newkey]: fn(value[key]) } };
         return { ...value, ...{ [key]: fn(value[key]) } };
       }),
@@ -187,13 +187,13 @@ class Dataframe {
    * @param { Array<string> } keys
    * @returns { Dataframe }
    */
-  toNumber(keys: Array<string>): Dataframe {
+  toNumber(keys: Array<keyof T>): Dataframe<T> {
     if (keys.length === 0) {
-      return new Dataframe(this.object);
+      return new Dataframe<T>(this.object);
     } else {
       const key = keys[keys.length - 1];
       const newFrame = this.object.map((obj) => ({ ...obj, [key]: defaultparse(obj[key] as string) }));
-      return new Dataframe(newFrame).toNumber(keys.slice(0, -1));
+      return new Dataframe<T>(newFrame).toNumber(keys.slice(0, -1));
     }
   }
 
@@ -202,7 +202,7 @@ class Dataframe {
    * filter has been applied to it
    * @returns { Array<Record<string, unknown>> }
    */
-  get value(): Array<Record<string, unknown>> {
+  get value(): Array<T> {
     return this.object;
   }
 
@@ -214,7 +214,7 @@ class Dataframe {
    * @returns { number }
    */
   sum(key: string): number {
-    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0);
+    return this.object.reduce((acc, curr) => acc + Number(curr[key]), 0);
   }
 
   /**
@@ -225,7 +225,7 @@ class Dataframe {
    * @returns { number }
    */
   average(key: string): number {
-    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0) / this.object.length;
+    return this.object.reduce((acc, curr) => acc + Number(curr[key]), 0) / this.object.length;
   }
 
   /**
@@ -236,7 +236,7 @@ class Dataframe {
    * @returns { number }
    */
   max(key: string): number {
-    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+    const arr = this.object.map((obj) => Number(obj[key])) as Array<number>;
     return Math.max(...arr);
   }
 
@@ -248,7 +248,7 @@ class Dataframe {
    * @returns { number }
    */
   min(key: string): number {
-    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+    const arr = this.object.map((obj) => Number(obj[key])) as Array<number>;
     return Math.min(...arr);
   }
 
@@ -259,7 +259,7 @@ class Dataframe {
    * @param { function } callback
    * @returns { Dataframe }
    */
-  use(callback: (object: Array<Record<string, unknown>>) => Dataframe): Dataframe {
+  use(callback: (object: Array<T>) => Dataframe<T>): Dataframe<T> {
     return callback(this.object);
   }
 

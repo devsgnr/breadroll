@@ -26,9 +26,9 @@ breadroll 🥟 is a simple lightweight  toolkit for parsing csv, tsv, and other 
 
 ### Table of Content
 
-1. <a href="https://devsgnr.github.io/breadroll/" target="_blank">Introduction</a>
-2. <a href="https://devsgnr.github.io/breadroll/reference/Breadroll/" target="_blank">API Reference</a>
-3. <a href="https://devsgnr.github.io/breadroll/changelog/breadroll-v0.1.0/" target="_blank">Changelog</a>
+1. <a href="https://breadrolljs.vercel.app/docs" target="_blank">Introduction</a>
+2. <a href="https://breadrolljs.vercel.app/docs/Breadroll" target="_blank">API Reference</a>
+3. <a href="https://breadrolljs.vercel.app/changelog/breadroll-v0.1.0" target="_blank">Changelog</a>
 
 ---
 
