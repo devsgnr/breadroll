@@ -213,7 +213,7 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @param { string } key
    * @returns { number }
    */
-  sum(key: string): number {
+  sum(key: keyof T): number {
     return this.object.reduce((acc, curr) => acc + Number(curr[key]), 0);
   }
 
@@ -224,7 +224,7 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @param { string } key
    * @returns { number }
    */
-  average(key: string): number {
+  average(key: keyof T): number {
     return this.object.reduce((acc, curr) => acc + Number(curr[key]), 0) / this.object.length;
   }
 
@@ -235,7 +235,7 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @param { string } key
    * @returns { number }
    */
-  max(key: string): number {
+  max(key: keyof T): number {
     const arr = this.object.map((obj) => Number(obj[key])) as Array<number>;
     return Math.max(...arr);
   }
@@ -247,7 +247,7 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @param { string } key
    * @returns { number }
    */
-  min(key: string): number {
+  min(key: keyof T): number {
     const arr = this.object.map((obj) => Number(obj[key])) as Array<number>;
     return Math.min(...arr);
   }
