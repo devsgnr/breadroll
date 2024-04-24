@@ -3,6 +3,7 @@ import { defaultparse } from "../parser/utils";
 import { IOSave, Condition, FilterType, Indexer, Apply } from "../types";
 import Filters from "./filters";
 import { isEqual } from "lodash";
+import { cloneThenNullify } from "./utils";
 
 class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
   private object: Array<T>;
@@ -212,6 +213,43 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
       throw new Error("Label Mismatch - Cannot concatanate");
     }
     return new Dataframe<T>([...this.object, ...dataframe.value]);
+  }
+
+  /**
+   * This function adds both columns and rows to the dataframe,
+   * ie. it adds new labels to the dataframe and if one dataframe
+   * is larger than the other, then it adds in those rows with empty
+   * values
+   *
+   * @param { Dataframe<B> } dataframe
+   * @returns { Dataframe<K & B> }
+   */
+  merge<K extends Record<string, unknown> = T, B extends Record<string, unknown> = T>(dataframe: Dataframe<B>): Dataframe<K & B> {
+    if (this.count > dataframe.count) {
+      return new Dataframe<K & B>(
+        this.object.map((object, index) => {
+          const def = dataframe.value[0];
+          const columns = dataframe.value[index] ?? cloneThenNullify(def);
+          return { ...columns, ...(object as K & B) };
+        }),
+      );
+    }
+
+    if (this.count < dataframe.count) {
+      return new Dataframe<K & B>(
+        dataframe.value.map((object, index) => {
+          const def = this.object[0];
+          const columns = this.object[index] ?? cloneThenNullify(def);
+          return { ...columns, ...(object as K & B) };
+        }),
+      );
+    }
+
+    return new Dataframe<K & B>(
+      this.object.map((object, index) => {
+        return { ...(object as K & B), ...dataframe.value[index] };
+      }),
+    );
   }
 
   /**
