@@ -2,6 +2,7 @@ import IO from "../io";
 import { defaultparse } from "../parser/utils";
 import { IOSave, Condition, FilterType, Indexer, Apply } from "../types";
 import Filters from "./filters";
+import { isEqual } from "lodash";
 
 class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
   private object: Array<T>;
@@ -198,9 +199,26 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
   }
 
   /**
-   * This function exposes the array of objects before or after
-   * filter has been applied to it
-   * @returns { Array<Record<string, unknown>> }
+   * This function adds more rows to the dataframe, ie.
+   * pushes more rows at the end of the dataframe.
+   *
+   * __Note: Both dataframes must have the same labels__
+   *
+   * @param { Dataframe } dataframe
+   * @returns { Dataframe }
+   */
+  concat(dataframe: Dataframe<T>): Dataframe<T> {
+    if (!isEqual(this.labels, dataframe.labels)) {
+      throw new Error("Label Mismatch - Cannot concatanate");
+    }
+    return new Dataframe<T>([...this.object, ...dataframe.value]);
+  }
+
+  /**
+   * This function exposes the array of objects within
+   * the Dataframe
+   *
+   * @returns { Array<T> }
    */
   get value(): Array<T> {
     return this.object;
