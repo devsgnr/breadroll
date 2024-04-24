@@ -71,7 +71,7 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @returns { Dataframe }
    */
   get isNull(): Dataframe<T> {
-    return new Dataframe(this.object.filter((object) => Object.values(object).some((value) => !value)));
+    return new Dataframe<T>(this.object.filter((object) => Object.values(object).some((value) => !value)));
   }
 
   /**
@@ -81,7 +81,7 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @returns { Dataframe }
    */
   get notNull(): Dataframe<T> {
-    return new Dataframe(this.object.filter((object) => Object.values(object).every((value) => value)));
+    return new Dataframe<T>(this.object.filter((object) => Object.values(object).every((value) => value)));
   }
 
   /**
