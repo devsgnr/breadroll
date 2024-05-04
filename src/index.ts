@@ -46,7 +46,7 @@ class Breadroll {
           return this.object as Dataframe<T>;
         })
         .catch((err) => {
-          throw new Error(err);
+          throw new Error("File Not Found", { cause: err });
         });
     };
 
@@ -68,7 +68,7 @@ class Breadroll {
           return this.object as Dataframe<T>;
         })
         .catch((err) => {
-          throw new Error(err);
+          throw new Error("Remote Resource: Not Found", { cause: err });
         });
     };
 
@@ -91,9 +91,9 @@ class Breadroll {
             return this.object as Dataframe<T>;
           })
           .catch((err) => {
-            throw new Error(err);
+            throw new Error("Supabase: File Error", { cause: err });
           });
-      } else throw new Error("No Supabase Client provided");
+      } else throw new Error("No Supabase Client provided", { cause: {} });
     };
 
     /**
