@@ -26,9 +26,9 @@ breadroll 🥟 is a simple lightweight  toolkit for parsing csv, tsv, and other 
 
 ### Table of Content
 
-1. <a href="https://devsgnr.github.io/breadroll/" target="_blank">Introduction</a>
-2. <a href="https://devsgnr.github.io/breadroll/reference/Breadroll/" target="_blank">API Reference</a>
-3. <a href="https://devsgnr.github.io/breadroll/changelog/breadroll-v0.1.0/" target="_blank">Changelog</a>
+1. <a href="https://breadrolljs.vercel.app/docs" target="_blank">Introduction</a>
+2. <a href="https://breadrolljs.vercel.app/docs/Breadroll" target="_blank">API Reference</a>
+3. <a href="https://breadrolljs.vercel.app/changelog/breadroll-v0.1.0" target="_blank">Changelog</a>
 
 ---
 
@@ -62,21 +62,21 @@ breadroll provides an easy to use API that gets you from zero to data processing
 
 ```typescript
 import Breadroll, { Dataframe } from "breadroll";
-const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+const csv = new Breadroll({ header: true, delimiter: "," });
 ```
 
 Example: From one instance example above, you can open multiple `csv` files
 
 ```typescript
-const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
+const df = await csv.open.local<Type>("./data/ds_salaries.csv");
 ```
 
 ### **Remote Data Sources**
 breadroll makes it easy to work with remote data sources with current support for HTTPS and Supabase Storage. With other remote data sources on the roadmap.
 
 ```typescript
-const df: Dataframe = await csv.open.https("https://.../.../filename.csv");
-const df: Dataframe = await csv.open.supabaseStorage("bucketName", "filepath");
+const df = await csv.open.https<Type>("https://.../.../filename.csv");
+const df = await csv.open.supabaseStorage<Type>("bucketName", "filepath");
 ```
 
 ### **Filtering**
