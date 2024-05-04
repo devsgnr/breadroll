@@ -6,6 +6,9 @@ import assert from "assert";
 // Third Party Import
 import { createClient } from "@supabase/supabase-js";
 
+// Types
+import { CKD, Cities } from "./types";
+
 const url = String(Bun.env.SUPABASE_URL);
 const key = String(Bun.env.SUPABASE_KEY);
 const client = createClient(url, key);
@@ -16,14 +19,19 @@ const file = new Breadroll({ header: true, delimiter: ",", supabase: client });
 const csv = new Breadroll({ header: true, delimiter: ",", parseNumber: false });
 
 // Open various data sources - local and remote sources
-const df = await file.open.local("./test/data/test.csv");
+const df = await file.open.local<CKD>("./test/data/test.csv");
 const salary = await file.open.local("./test/data/ds_salaries.csv");
 const adult = await file.open.local("./test/data/adult.csv");
-const remote_https = await file.open.https("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
-const supabase_storage = await file.open.supabaseStorage("breadroll-test", "cities.csv");
+const remote_https = await file.open.https<CKD>("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
+const supabase_storage = await file.open.supabaseStorage<Cities>("breadroll-test", "cities.csv");
+
 // Open data source - without parsing numbers
-const cities = await csv.open.local("./test/data/cities.csv");
-const json = csv.open.json(demo);
+const cities = await csv.open.local<Cities>("./test/data/cities.csv");
+const json = csv.open.json<Cities>(demo);
+
+// Mock
+const above_sixty = df.filter("age", ">=", 60);
+const concat = df.concat(above_sixty);
 
 /**
  * Testing IO (Input/Output) of none empty file
@@ -91,6 +99,27 @@ describe("testing dataframe functionality", () => {
   test("setting parseNumber to false - does not parse numbers", () => {
     const notParsed = Object.values(cities.dtypes);
     expect(notParsed.includes("number")).toEqual(false);
+  });
+
+  test("get the shape of the given dataframe", () => {
+    expect(df.shape).toBeArrayOfSize(2);
+    expect(df.shape).toStrictEqual([df.count, 26]);
+  });
+
+  test("testing toNumber conversion", () => {
+    const cities_converted = cities.toNumber(["id", "state_id", "latitude", "longitude", "country_id"]);
+    const findNumberType = Object.values(cities_converted.dtypes);
+    expect(findNumberType.includes("number")).toEqual(true);
+  });
+
+  test("testing concatenation of dataframes", () => {
+    expect(concat.count).toBe(551);
+  });
+
+  test("testing out merging two dataframes", () => {
+    const mock_label = Object.keys({ ...df.value[0], ...cities.value[0] });
+    const merged = df.merge(cities);
+    expect(merged.labels).toEqual(mock_label);
   });
 });
 

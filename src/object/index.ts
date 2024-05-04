@@ -225,21 +225,13 @@ class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
    * @returns { Dataframe<K & B> }
    */
   merge<K extends Record<string, unknown> = T, B extends Record<string, unknown> = T>(dataframe: Dataframe<B>): Dataframe<K & B> {
-    if (this.count > dataframe.count) {
-      return new Dataframe<K & B>(
-        this.object.map((object, index) => {
-          const def = dataframe.value[0];
-          const columns = dataframe.value[index] ?? cloneThenNullify(def);
-          return { ...columns, ...(object as K & B) };
-        }),
-      );
-    }
+    const { smaller, bigger } = this.count < dataframe.count ? { smaller: this, bigger: dataframe } : { smaller: dataframe, bigger: this };
 
-    if (this.count < dataframe.count) {
+    if (smaller.count !== bigger.count) {
+      const ref = smaller.value[0];
       return new Dataframe<K & B>(
-        dataframe.value.map((object, index) => {
-          const def = this.object[0];
-          const columns = this.object[index] ?? cloneThenNullify(def);
+        bigger.value.map((object, index) => {
+          const columns = smaller.value[index] ?? cloneThenNullify(ref);
           return { ...columns, ...(object as K & B) };
         }),
       );

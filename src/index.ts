@@ -5,10 +5,9 @@ import NumericConstants from "./numeric_constants";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
 
 /**
- * breadroll 🥟 is a simple lightweight library for parsing csv, tsv,
- * and other delimited files, performing EDA (exploratory data analysis),
- * and data processing operations on multivariate datasets. Think pandas but written in
- * Typescript and developed on the [Bun](https://bun.sh) Runtime.
+ * breadroll 🥟 is a simple lightweight library for type-safe data processing
+ * and EDA (exploratory data analysis) on multivariate datasets. Think pandas
+ * but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
  */
 class Breadroll {
   private parser: Parser;
