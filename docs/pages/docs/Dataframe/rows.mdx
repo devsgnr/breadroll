@@ -16,10 +16,10 @@ Parameter
 
 Returns
 
-- `Dataframe`
+- `Dataframe<T>`
 
 ```typescript
-const first_four: Dataframe = df.rows({ start: 0, end: 4 }); // first 4 rows
+const first_four: Dataframe<T> = df.rows({ start: 0, end: 4 }); // first 4 rows
 ```
 
 ---
@@ -27,11 +27,13 @@ const first_four: Dataframe = df.rows({ start: 0, end: 4 }); // first 4 rows
 Let's say you want the dataframe to have the first 250 rows, making the value of `end`, `250` return the first 250 rows and omits the remaining, and intuitively changing the value of `end`, to `n` gives you `n` number of rows and omits the remaining and so on.
 
 ```typescript
-const first_250: Dataframe = df.rows({ end: 250 });
+const first_250: Dataframe<T> = df.rows({ end: 250 });
 ```
 
-<Callout type="info">Not providing the `start` and `end` value will by default returns the entire rows of the dataframe</Callout>
+<Callout type="info">
+  Not providing the `start` and `end` value will by default returns the entire rows of the dataframe
+</Callout>
 
 ```typescript
-const count: Dataframe = df.rows({});
+const count: Dataframe<T> = df.rows({});
 ```

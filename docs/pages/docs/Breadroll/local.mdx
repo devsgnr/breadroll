@@ -3,7 +3,7 @@ title: Local
 description: Opens the local data source, ie. the file on disk and return a Dataframe
 ---
 
-#### `Breadroll.open.local(...)`
+#### `Breadroll.open.local<T>(...)`
 
 This function opens the local data source, ie. the file on disk and return a Dataframe
 
@@ -13,9 +13,9 @@ Parameter
 
 Returns
 
-- `Promise<Dataframe>`
+- `Promise<Dataframe<T>>`
 
 ```typescript
 const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
-const df: Dataframe = await csv.open.local("./path/to/file.csv");
+const df: Dataframe<T> = await csv.open.local<T>("./path/to/file.csv");
 ```

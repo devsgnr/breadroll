@@ -1,0 +1,67 @@
+---
+title: About
+description: Learn about breadroll - Making data processing safe and delightful with TypeScript and Bun
+---
+
+import { Callout } from "nextra/components";
+
+<div className="mt-10">
+# About breadroll
+---
+
+### TL;DR
+
+breadroll (with a small **'b'**) is an intuitive lightweight library for type-safe data processing, designed with type-safety, developer experience and reduced runtime errors in mind, it is written in TypeScript and optimized for [Bun](https://bun.sh)'s runtime APIs
+
+<Callout type="warning">
+  <span className="text-sm">
+    breadroll is very new and is currently in active development and is not ready for use in production. As of `v0.5.0`
+    we have opened up breadroll for community contribution.
+  </span>
+</Callout>
+---
+
+### Why breadroll?
+
+For long Python alongside other newer languages have dominated and are still dominating the space in data related processes like data science, analysis, preprocessing, machine learning and more; witih libraries like `pandas` and more. The why behind breadroll are:
+
+- **Improved Developer Experience:** Utilizing TypeScript's static type checking there will be an increase in
+  developer productivity and better developer experience; where developers wouldn't have to worry if things will fall
+  off the rails in production.
+- **Reduced Runtime Errors:** One of the biggest selling point for breadroll is its **type-safety**. Making little mistakes like omitting or adding characters to a key or label can be the difference between success and a major incident. Let's see an example;
+
+  ```python filename="example.py" /aged/
+  selected = pd.select[['aged', 'al', 'rbcc', 'wbcc']]
+  ```
+
+  ```typescript filename="example.ts" /aged/
+  /*
+   * Type '"aged"' is not assignable to type 'keyof T'
+   */
+  const selected = df.select(["aged", "al", "rbcc", "wbcc"]);
+  ```
+
+- **Tooling:** Being a JavaScript developer, having to switch between different development environments and tooling can be a pain; breadroll aims to mitigate the need for setting up new tools just to work with data, being built in Typescript makes it easy to plug breadroll into your existing codebase.
+
+---
+
+### What breadroll is not!
+
+breadroll doesn't aim to change your existing data-pipelines written in more robust languages like Julia, Scala, Java, Kotlin and more, which offers more speed because of their compiled nature and closeness to machine.
+
+While we want to see breadroll doing some heavy lifting some day, breadroll is aimed at the;
+
+- indie-developers,
+- small team that primarily work with JavaScript & TypeScript
+- SaaS founder that has massive love for JavaScript & TypeScript
+- and more.
+
+---
+
+### When should we expect a stable release?
+
+At the moment; breadroll only has **one** core maintainer, and is aiming at building a community of people enthusiatic about the application of TypeScript in data analysis and processing.
+
+That being said, we (the breadroll community) want to get it right, we want to put in our efforts into building something that'll stand the test of time, we still have a long way to go and a lot of grounds to cover, but, we are optimistic about the future of breadroll, and we can't wait to get to `v1.0.0`
+
+</div>

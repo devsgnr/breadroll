@@ -7,4 +7,18 @@ description: While breadroll 🥟 uses the nomenclature Dataframe for the data s
 
 While breadroll 🥟 uses the nomenclature **Dataframe** for the data structure it works with, it is only similar to a dataframe in the API that is provided to the user, in truth it is an array of records (objects, key-value pair) given by `Array<Record<string, unknown>>{:ts}` - the key of `string` is the the header values from the parsed file, and the value of `unknown` basically holds the values, ie.every `Array<Record<string, unknown>>{:ts}` is a **"row"** in the dataframe.
 
-While the data in the dataframe are multivariate, they are **"homogenous"**, ie. all values of a column has the same type of data at any given point in time unless the data is modified or transformed using the convenience function provided. To explain better, for all `{ key: value }` pair in the array of object, `key` will have the same `value` across all `{ key : value }` pair in the array.
+While the data in the dataframe are multivariate, they are **"homogenous"**, ie. all values of a column has the same type of data at any given point in time unless the data is modified or transformed using the convenience function provided. To explain better, for all `{ key: value }` pair in the array of object, `key` will have the same `value` type across all `{ key : value }` pair in the array.
+
+### How?
+
+Well as mentioned above; a Dataframe has a default type of `Array<Record<string, unknown>>{:ts}`, to use custom types and open up developer experience features like auto-completion; you can pass the type to any of the four `Breadroll.open` methods, ie. `https`, `local`, `supabaseStorage`, and `json` eg. let's say you have a `type{:ts}` or an `interface{:ts}` called `Cities`, you can use like so;
+
+```typescript filename="example.ts"
+Breadroll.open.local<Cities>("../path/to/file");
+```
+
+Now that's one way to do it; now, let's say you have a huge payload from an API request ie. `Array<Record<string, unknown>>{:ts}`, then you can use the `Dataframe` constructor directly like so;
+
+```typescript filename="example.ts"
+new Dataframe<Cities>([{}, {}, ...]);
+```

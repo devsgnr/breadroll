@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-@import url("https://rsms.me/inter/inter.css");
+
+:root {
+  --font-sans: "Inter" !important;
+  --font-jetbrains-mono: "JetBrains Mono" !important;
+}
 
 html {
   font-family: "Inter" !important;
@@ -8,7 +12,9 @@ html {
     "calt" 1,
     "ss01" 1,
     "ss02" 1,
-    "cv11" 1,
+    "cv10" 1,
+    "cv11" 0,
+    "cv13" 1,
     "tnum" 1 !important;
 }
 

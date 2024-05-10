@@ -4,8 +4,8 @@
     "type": "page",
     "display": "hidden"
   },
-  "guides": {
-    "title": "Guides",
+  "about": {
+    "title": "About",
     "type": "page"
   },
   "docs": {

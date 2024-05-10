@@ -21,13 +21,13 @@ Returns
 The example below returns the first 4 columns, starting from index `0`
 
 ```typescript
-const count: Dataframe = df.cols({ start: 0, end: 4 });
+const count: Dataframe<T> = df.cols({ start: 0, end: 4 });
 ```
 
 The example below returns the specified columns starting from the second column and the next three columns
 
 ```typescript
-const count: Dataframe = df.cols({ start: 1, end: 4 });
+const count: Dataframe<T> = df.cols({ start: 1, end: 4 });
 ```
 
 ---
@@ -35,11 +35,13 @@ const count: Dataframe = df.cols({ start: 1, end: 4 });
 Let's say you want the dataframe to have none of the columns except the last column of the dataframe, making the value of `end`, `-1` returns the last column of the dataframe with the rest omitted, and intuitively, making the value of `end`, `-2` returns the lasts two columns and so on.
 
 ```typescript
-const count: Dataframe = df.cols({ end: -1 });
+const count: Dataframe<T> = df.cols({ end: -1 });
 ```
 
-<Callout type="info">Not providing the `start` and `end` value will by default returns the entire columns of the dataframe</Callout>
+<Callout type="info">
+  Not providing the `start` and `end` value will by default returns the entire columns of the dataframe
+</Callout>
 
 ```typescript
-const count: Dataframe = df.cols({});
+const count: Dataframe<T> = df.cols({});
 ```

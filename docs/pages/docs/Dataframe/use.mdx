@@ -17,7 +17,7 @@ Returns
 - `Dataframe`
 
 ```typescript
-const has_question_mark: Dataframe = df.use((obj) => {
+const has_question_mark: Dataframe<T> = df.use((obj) => {
   const filtered = obj.filter((object) => Object.values(object).some((value) => value === "?"));
   return new Dataframe(filtered);
 });
