@@ -14,11 +14,11 @@ While the data in the dataframe are multivariate, they are **"homogenous"**, ie.
 Well as mentioned above; a Dataframe has a default type of `Array<Record<string, unknown>>{:ts}`, to use custom types and open up developer experience features like auto-completion; you can pass the type to any of the four `Breadroll.open` methods, ie. `https`, `local`, `supabaseStorage`, and `json` eg. let's say you have a `type{:ts}` or an `interface{:ts}` called `Cities`, you can use like so;
 
 ```typescript filename="example.ts"
-Breadroll.open.local<Cities>("../path/to/file");
+Breadroll.open.local<Cities>("../path/to/file"); // Promise<Dataframe<Cities>>
 ```
 
 Now that's one way to do it; now, let's say you have a huge payload from an API request ie. `Array<Record<string, unknown>>{:ts}`, then you can use the `Dataframe` constructor directly like so;
 
 ```typescript filename="example.ts"
-new Dataframe<Cities>([{}, {}, ...]);
+new Dataframe<Cities>([{}, {}, ...]) // Dataframe<Cities>
 ```

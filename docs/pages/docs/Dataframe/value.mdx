@@ -9,8 +9,8 @@ This function exposes (ie. returns) an array of objects `Array<Record<string, un
 
 Returns
 
-- `Array<Record<string, unknown>>`
+- `Array<Record<string, unknown> | T>`
 
 ```typescript
-const values: Array<Record<string, unknown>> = df.value; // [{}, {}, {}, ...]
+const values: Array<Record<string, unknown> | T> = df.value; // [{}, {}, {}, ...]
 ```
