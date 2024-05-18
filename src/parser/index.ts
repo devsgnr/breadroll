@@ -19,12 +19,12 @@ class Parser {
   /**
    * This assigns the table header of the file to `this.keys` and
    * return the value as an array of string containing each key. Note:
-   * this is case insensitive, ie. it converts the headers to lowercase regardless
+   * this is case sensitive
    * @param { string } table
    * @returns { Array<string> }
    */
-  get_table_header(table: string, options: DataframeReadOptions): Array<string> {
-    const header = table.split(NEW_LINE, 1)[0].split(options.delimiter);
+  get_table_header(table: string, sep: string, options: DataframeReadOptions): Array<string> {
+    const header = table.split(NEW_LINE, 1)[0].split(sep);
     if (options.header) this.keys = header.map((header) => header.split(CARRIAGE_RETURN)[0].trim());
     if (!options.header && options.keys) this.keys = options.keys;
     if (!options.header && !options.keys) throw new Error("Header set to false and no keys provided");
@@ -55,9 +55,9 @@ class Parser {
    * @param { string } table
    * @returns { Dataframe }
    */
-  generate_object<T extends Record<string, unknown>>(table: string, options: DataframeReadOptions): Dataframe<T> {
+  generate_object<T extends Record<string, unknown>>(table: string, sep: string, options: DataframeReadOptions): Dataframe<T> {
     const row = table.split(NEW_LINE).splice(1);
-    this.object = row.map((line: string) => this.object_builder(line, options.delimiter, options));
+    this.object = row.map((line: string) => this.object_builder(line, sep, options));
     return new Dataframe<T>(this.object as T[]);
   }
 }

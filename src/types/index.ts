@@ -8,9 +8,9 @@ import { SupabaseClient } from "@supabase/supabase-js";
  * Breadroll.open - the type definition for the return value of the open getter
  */
 type BreadrollOpen = {
-  local: <T extends Record<string, unknown>>(filepath: string) => Promise<Dataframe<T>>;
-  https: <T extends Record<string, unknown>>(url: string, headers?: Headers) => Promise<Dataframe<T>>;
-  supabaseStorage: <T extends Record<string, unknown>>(bucketName: string, filepath: string) => Promise<Dataframe<T>>;
+  local: <T extends Record<string, unknown>>(filepath: string, sep: string) => Promise<Dataframe<T>>;
+  https: <T extends Record<string, unknown>>(url: string, sep: string, headers?: Headers) => Promise<Dataframe<T>>;
+  supabaseStorage: <T extends Record<string, unknown>>(bucketName: string, filepath: string, sep: string) => Promise<Dataframe<T>>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   json: <T extends Record<string, unknown>>(object: any) => Dataframe<T>;
 };
@@ -25,10 +25,6 @@ type DataframeReadOptions = {
    * file does not have a header
    */
   header: boolean;
-  /**
-   * Specific the delimiter in the file
-   */
-  delimiter: string;
   /**
    * When header is set to false then a array of string equal
    * to the number of columns in the dataset needs to be

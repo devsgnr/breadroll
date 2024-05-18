@@ -12,7 +12,7 @@ export type Cities = {
   wikiDataId: string;
 };
 
-export type CKD = {
+export type CKDNoParse = {
   id: string;
   age: string;
   bp: string;
@@ -32,6 +32,35 @@ export type CKD = {
   pcv: string;
   wbcc: string;
   rbcc: string;
+  htn: string;
+  dm: string;
+  cad: string;
+  appet: string;
+  pe: string;
+  ane: string;
+  class: string;
+};
+
+export type CKD = {
+  id: number;
+  age: number;
+  bp: number;
+  sg: number;
+  al: number;
+  su: number;
+  rbc: object;
+  pc: string;
+  pcc: string;
+  ba: string;
+  bgr: number;
+  bu: number;
+  sc: number;
+  sod: object;
+  pot: object;
+  hemo: number;
+  pcv: number;
+  wbcc: number;
+  rbcc: number;
   htn: string;
   dm: string;
   cad: string;

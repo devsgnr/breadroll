@@ -1,33 +1,22 @@
 import { describe, expect, test } from "bun:test";
 import Breadroll from "../src/index";
-import demo from "./data/demo.json";
 import assert from "assert";
-
-// Third Party Import
-import { createClient } from "@supabase/supabase-js";
 
 // Types
 import { CKD, Cities } from "./types";
 
-const url = String(Bun.env.SUPABASE_URL);
-const key = String(Bun.env.SUPABASE_KEY);
-const client = createClient(url, key);
+// Instance DF Class - Parse Numbers
+const instance = new Breadroll({ header: true });
+// Instance DF Class - Doesn't Parse Numbers
+const noparse = new Breadroll({ header: true, parseNumber: false });
 
-// Instanciate DF Class
-const file = new Breadroll({ header: true, delimiter: ",", supabase: client });
-// Do not parse numbers
-const csv = new Breadroll({ header: true, delimiter: ",", parseNumber: false });
+// Open Various Data Sources - Locally
+const df = await instance.open.local<CKD>("./test/data/test.csv", ",");
+const salary = await instance.open.local("./test/data/ds_salaries.csv", ",");
+const adult = await instance.open.local("./test/data/adult.csv", ",");
 
-// Open various data sources - local and remote sources
-const df = await file.open.local<CKD>("./test/data/test.csv");
-const salary = await file.open.local("./test/data/ds_salaries.csv");
-const adult = await file.open.local("./test/data/adult.csv");
-const remote_https = await file.open.https<CKD>("https://raw.githubusercontent.com/devsgnr/breadroll/main/test/data/test.csv");
-const supabase_storage = await file.open.supabaseStorage<Cities>("breadroll-test", "cities.csv");
-
-// Open data source - without parsing numbers
-const cities = await csv.open.local<Cities>("./test/data/cities.csv");
-const json = csv.open.json<Cities>(demo);
+// Open Data Source - Without Parsing Numbers
+const cities = await noparse.open.local<Cities>("./test/data/cities.csv", ",");
 
 // Mock
 const above_sixty = df.filter("age", ">=", 60);
@@ -36,20 +25,16 @@ const concat = df.concat(above_sixty);
 /**
  * Testing IO (Input/Output) of none empty file
  */
-describe("testing IO - mock test", () => {
+describe("Dataframe: General Test", () => {
   /**
    * Test that if file is not empty after read and parsing
    * that it shouldn't be empty
    */
-  test("if file is not empty, it should not be an empty array", () => {
+  test("Dataframe: Not Empty", () => {
     assert.notEqual([], df.value);
   });
 
-  /**
-   * Test that if file has headers ie. specified from `DFReadOptions.header`
-   * the keys list should not be empty
-   */
-  test("Labels should not be empty", () => {
+  test("Dataframe: Labels Present", () => {
     assert.notEqual([], df.labels);
   });
 
@@ -57,192 +42,97 @@ describe("testing IO - mock test", () => {
    * Test that getting the head of the file should return the first five
    * rows of the data frame
    */
-  test("Head count should be 5", () => {
+  test("Dataframe: Head Count Equals 5", () => {
     expect(df.head.count).toEqual(5);
-  });
-
-  /**
-   * Test JSON loading
-   */
-  test("JSON loads and returns a value", () => {
-    assert.notEqual([], json.value);
   });
 });
 
 /**
- * Testing Other Functionalities
+ * Testing Dataframe Functionalities
  */
 
-describe("testing dataframe functionality", () => {
-  /**
-   * Mock test - check filter features, on ckd dataset
-   * width filtered dataframe of class, equal to, notckd
-   */
-  test("get the number of class = notckd", () => {
+describe("Dataframe: Functionality Test", () => {
+  test("NOTCKD Patient Are 150", () => {
     expect(df.filter("class", "==", "notckd").count).toEqual(150);
   });
 
-  test("get the number of age >= 60", () => {
+  test("Patients That Are / Over 60", () => {
     expect(df.filter("age", ">=", 60).count).toEqual(150);
   });
 
-  test("select return the desired keys", () => {
+  test("Select Desired Columns", () => {
     const selected = df.select(["class", "age", "hemo", "sc", "al", "bp"]).labels;
     expect(selected).toEqual(["class", "age", "hemo", "sc", "al", "bp"]);
   });
 
-  test("applying an operation to a specific column", () => {
+  test("Apply Function Creates New Column", () => {
     const applied = df.apply({ key: "age", fn: (value) => value / 2 });
     expect(applied.labels.includes("age_new")).toEqual(true);
   });
 
-  test("setting parseNumber to false - does not parse numbers", () => {
+  test("Parse Number False - No Parsed Number", () => {
     const notParsed = Object.values(cities.dtypes);
     expect(notParsed.includes("number")).toEqual(false);
   });
 
-  test("get the shape of the given dataframe", () => {
+  test("Shape of Dataframe Equals [400, 26]", () => {
     expect(df.shape).toBeArrayOfSize(2);
     expect(df.shape).toStrictEqual([df.count, 26]);
   });
 
-  test("testing toNumber conversion", () => {
+  test("toNumber - Convert Specified Columns", () => {
     const cities_converted = cities.toNumber(["id", "state_id", "latitude", "longitude", "country_id"]);
     const findNumberType = Object.values(cities_converted.dtypes);
     expect(findNumberType.includes("number")).toEqual(true);
   });
 
-  test("testing concatenation of dataframes", () => {
+  test("Count After Concat Is Correct", () => {
     expect(concat.count).toBe(551);
   });
 
-  test("testing out merging two dataframes", () => {
+  test("Merging Two Dataframe - Mock Correct", () => {
     const mock_label = Object.keys({ ...df.value[0], ...cities.value[0] });
     const merged = df.merge(cities);
     expect(merged.labels).toEqual(mock_label);
   });
-});
 
-/**
- * Testing I/O Remote Data Source - HTTPS & Supabase Storage
- */
-
-describe("testing IO remote data source - https", () => {
-  /**
-   * Test that the remote source retrieve the remote data source
-   * via https and then converts to Dataframe and can read out values
-   */
-  test("get a remote data source", () => {
-    expect(remote_https.value).toBeArrayOfSize(400);
-  });
-
-  /**
-   * Test that you can select specific columns of interest in the dataframe
-   * after the dataframe has been returned
-   */
-  test("select specific columns from remote data source", () => {
-    const selected = remote_https.select(["age", "hemo"]);
-    expect(selected.labels).toEqual(["age", "hemo"]);
-  });
-
-  /**
-   * Test that the remote source "Supabase Storage" retrive that
-   * data and converts it
-   */
-  test("get a remote data source - supabase", () => {
-    expect(supabase_storage.value).toBeArrayOfSize(148062);
-  });
-
-  /**
-   * Test that you can select specific columns of interest in the dataframe
-   * after the dataframe has been returned from Supabase
-   */
-  test("select specific columns from remote data source - supabase", () => {
-    const selected = supabase_storage.select(["longitude", "latitude"]);
-    expect(selected.labels).toEqual(["longitude", "latitude"]);
-  });
-
-  /**
-   * Test that supabase should throw an error if the supabase client is
-   * not provided in the constructor
-   */
-  test("throw error when there's no client", () => {
-    expect(async () => {
-      await csv.open.supabaseStorage("breadroll-test", "cities.csv");
-    }).toThrow("No Supabase Client provided");
-  });
-});
-
-/**
- * Testing interger based indexing or selection for
- * Dataframe
- */
-
-describe("testing integer based indexing", () => {
-  /**
-   * Test to see if Dataframe.cols return the correct columns
-   * specified from the integer based indexing arguments
-   */
-  test("get the first 5 columns in the dataframe", () => {
+  test("Integer Indexing - First Five Rows", () => {
     const [start, end] = [0, 4];
-    const mock_label = remote_https.labels.splice(start, end);
-    const iloc = remote_https.cols({ start, end });
+    const mock_label = df.labels.splice(start, end);
+    const iloc = df.cols({ start, end });
     expect(iloc.labels).toEqual(mock_label);
   });
 
-  test("get 4 columns from the second index", () => {
+  test("Integer Indexing - Four Row From Second Row", () => {
     const [start, end] = [1, 4];
-    const mock_label = remote_https.labels.splice(start, end);
-    const iloc = remote_https.cols({ start, end });
+    const mock_label = df.labels.splice(start, end);
+    const iloc = df.cols({ start, end });
     expect(iloc.labels).toEqual(mock_label);
   });
 
-  /**
-   * Test to see if providing none of the values give the entire
-   * Dataframe columns as the return value
-   */
-  test("return the entire columns of the dataframe if both indices are not provided", () => {
-    const mock_label = remote_https.labels;
-    const iloc = remote_https.cols({});
+  test("Integer Indexing - All Column Returned With Empty Object", () => {
+    const mock_label = df.labels;
+    const iloc = df.cols({});
     expect(iloc.labels).toEqual(mock_label);
   });
 
-  /**
-   * Testing to see if the Dataframe.rows return the correct rows
-   * specified from the integer based indexing arguments
-   */
-  test("return the first 20 rows of the dataframe", () => {
-    const rows = remote_https.rows({ end: 20 });
+  test("Interger Indexing - First 20 Rows", () => {
+    const rows = df.rows({ end: 20 });
     expect(rows.count).toEqual(20);
   });
 
-  /**
-   * Test to see if providing none of the values give the entire
-   * rows of the Dataframe in return
-   */
-  test("return the entire rows of the dataframe", () => {
+  test("Integer Indexing - Return Entire Rows With Empty Object", () => {
     const rows = salary.rows({});
     expect(rows.count).toEqual(608);
   });
-});
 
-/**
- * Testing `matches` filter that uses RegExp
- */
-describe("testing matches filter with RegExp", () => {
-  /**
-   * This test makes case-insensitive matches
-   */
-  test("match all job_title with engineer - i", () => {
+  test("RegEx Filter - Match All 'job_title' With 'engineer'", () => {
     const re = new RegExp(/engineer/, "i");
     const filtered = salary.filter("job_title", "matches", re);
     assert.notEqual(filtered.value, []);
   });
 
-  /**
-   * This test with large dataset of 35k+ entries
-   */
-  test("match all occupation with manager - i, larger dataset of 35k+", () => {
+  test("RegEx Filter - Match All 'occupation' with 'manager'", () => {
     const re = new RegExp(/manager*/, "i");
     const filtered = adult.filter("occupation", "matches", re);
     assert.notEqual(filtered.value, []);

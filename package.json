@@ -54,7 +54,10 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build:pre-release": "bun test && bun run build.ts"
+    "test:ci": "bun test",
+    "test:local": "bun test ./test/bun.test.ts ./test/df.test.ts",
+    "build:pre-release": "bun test:local && bun run build.ts",
+    "build:stable-release": "bun test && bun run build.ts"
   },
   "type": "module",
   "types": "./dist/index.d.ts",

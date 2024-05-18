@@ -3,6 +3,7 @@ import Dataframe from "./object";
 import Parser from "./parser";
 import NumericConstants from "./numeric_constants";
 import { BreadrollOpen, DataframeReadOptions } from "./types";
+import { isEmpty } from "lodash";
 
 /**
  * breadroll 🥟 is a simple lightweight library for type-safe data processing
@@ -37,12 +38,12 @@ class Breadroll {
      * @param { string } filepath
      * @returns { Promise<Dataframe> }
      */
-    const local = async <T extends Record<string, unknown>>(filepath: string): Promise<Dataframe<T>> => {
+    const local = async <T extends Record<string, unknown>>(filepath: string, sep: string): Promise<Dataframe<T>> => {
       return this.io
         .read(filepath)
         .then((value) => {
-          this.parser.get_table_header(value, this.options);
-          this.object = this.parser.generate_object<T>(value, this.options);
+          this.parser.get_table_header(value, sep, this.options);
+          this.object = this.parser.generate_object<T>(value, sep, this.options);
           return this.object as Dataframe<T>;
         })
         .catch((err) => {
@@ -57,18 +58,17 @@ class Breadroll {
      * @param { Headers } headers
      * @returns { Promise<Dataframe> }
      */
-    const https = async <T extends Record<string, unknown>>(url: string, headers?: Headers): Promise<Dataframe<T>> => {
+    const https = async <T extends Record<string, unknown>>(url: string, sep: string, headers?: Headers): Promise<Dataframe<T>> => {
       const req: Request = new Request(url);
 
       return await fetch(req, { method: "GET", headers: headers })
         .then((response) => response.text())
         .then((value) => {
-          this.parser.get_table_header(value, this.options);
-          this.object = this.parser.generate_object(value, this.options);
+          this.parser.get_table_header(value, sep, this.options);
+          this.object = this.parser.generate_object(value, sep, this.options);
+
+          if (isEmpty(this.object.value)) throw new Error("Remote Resource: Not Found");
           return this.object as Dataframe<T>;
-        })
-        .catch((err) => {
-          throw new Error("Remote Resource: Not Found", { cause: err });
         });
     };
 
@@ -79,19 +79,18 @@ class Breadroll {
      * @param { string } filepath
      * @returns { Promise<Dataframe> }
      */
-    const supabaseStorage = async <T extends Record<string, unknown>>(bucketName: string, filepath: string): Promise<Dataframe<T>> => {
+    const supabaseStorage = async <T extends Record<string, unknown>>(bucketName: string, filepath: string, sep: string): Promise<Dataframe<T>> => {
       if (this.supabase) {
         return await this.supabase.storage
           .from(bucketName)
           .download(filepath)
           .then((response) => response.data?.text())
           .then((value) => {
-            this.parser.get_table_header(String(value), this.options);
-            this.object = this.parser.generate_object(String(value), this.options);
+            this.parser.get_table_header(String(value), sep, this.options);
+            this.object = this.parser.generate_object(String(value), sep, this.options);
+
+            if (isEmpty(this.object.value)) throw new Error("Supabase: File Error");
             return this.object as Dataframe<T>;
-          })
-          .catch((err) => {
-            throw new Error("Supabase: File Error", { cause: err });
           });
       } else throw new Error("No Supabase Client provided", { cause: {} });
     };
@@ -101,11 +100,10 @@ class Breadroll {
      * read and converts the JSON to a Dataframe, normally the JSON object
      * is a `Record<string, never>` | `{}` converted to fit the requirements
      * for Array<Record<string, unknown>>
-     * @param { any } object
+     * @param { Array<Record<string, unknown>> } object
      * @returns { Dataframe }
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const json = <T extends Record<string, unknown>>(object: any): Dataframe<T> => {
+    const json = <T extends Record<string, unknown>>(object: Array<Record<string, unknown>>): Dataframe<T> => {
       return new Dataframe<T>(object as Array<T>);
     };
 
