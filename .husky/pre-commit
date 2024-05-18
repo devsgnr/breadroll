@@ -2,5 +2,10 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 bunx lint-staged
+echo "Removing current ../dist"
+rm -rf dist
+echo "Building Source"
+bun build:pre-release
+echo "Build Complete"
 bun test:local
 cd docs && bun run build && cd ..

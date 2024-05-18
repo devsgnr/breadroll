@@ -16,13 +16,13 @@ We basically write tests for a few aspects of breadroll, the first is the `Bun` 
 To run these test, we run the following command:
 
 ```bash
-bun test
+bun test:local
 ```
 
 or run tests in watch mode, by adding `--watch{:bash}` flag; find out more [here](https://bun.sh/docs/cli/test#watch-mode)
 
 ```bash
-bun test --watch
+bun test:local --watch
 ```
 
 Just like Jest, Bun automatically knowns exactly where to go and look for the tests, as it matches all files that test files and runs them accordingly, you can read more about it [here](https://bun.sh/docs/cli/test#run-tests)

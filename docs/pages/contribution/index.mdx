@@ -53,6 +53,16 @@ To get assigned to feature requests, bug, improvements and more, you need to tag
 
 **Note:** When submitting your pull request, we highly recommend that you write test case(s) that accompanies the pull request you are submitting
 
+#### Pre-commit Hooks
+
+For breadroll we utilize [Husky](https://typicode.github.io/husky/) to perform various pre-commit processes the likes of; linting, testing, building, testing builds, building docs locally. Before finally pushing code to GitHub.
+
+If that seems like too much, then Husky provides an easy way to skip the pre-commit hooks and commit code, but using the `-n{:bash}` flag, read more [here](https://typicode.github.io/husky/how-to.html#skipping-git-hooks)
+
+```bash
+git commit -m "..." -n
+```
+
 #### Branch management
 
 Every pull request points to the `main` branch and most be the compatible with the latest stable released version of breadroll. Pull requests that point to the `main` branch **must not have breaking changes**, issues with breaking changes will be assessed by the core team and will signify the branch it needs to point to; hence, any code improvement that points to `main` should be ready for release as a minor version at any point in time.

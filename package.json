@@ -55,7 +55,7 @@
   "scripts": {
     "prepare": "husky install",
     "test:ci": "bun test",
-    "test:local": "bun test ./test/bun.test.ts ./test/df.test.ts",
+    "test:local": "bun test ./test/bun.test.ts ./test/df.test.ts ./test/build.test.js",
     "build:pre-release": "bun test:local && bun run build.ts",
     "build:stable-release": "bun test && bun run build.ts"
   },
