@@ -1,0 +1,62 @@
+---
+title: Setup the project
+description: Guide on how to setup breadroll locally
+---
+
+## Setup the project
+
+### Requirements
+
+Only one tool is required:
+
+- Install [Bun](https://bun.sh) >= 1.0.22
+
+  Unix (Mac & Linux)
+
+  ```bash copy
+  curl -fsSL https://bun.sh/install | bash
+  ```
+
+  Windows
+
+  ```powershell copy
+  > powershell -c "irm bun.sh/install.ps1 | iex"
+  ```
+
+Other tools that are used are:
+
+- Prettier
+- ESlint
+
+for code styling and linting, installation of extension for these are different amongst code editors; but if you use Visual Studio Code (VS Code), then we recommend installing the following extensions (but you're free to work with tools that works for you):
+
+- [ESLint by Microsft](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier - Code Formatter by Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+---
+
+### Installing dependencies
+
+After installing Bun and other tooling, installing core-dependencies and dev-dependencies is as simple as running:
+
+```bash
+bun install
+```
+
+Next, setup the Github Hooks, for our pre-commit script by running:
+
+```bash
+bun prepare
+```
+
+After all dev-dependencies and core dependencies have been installed, you're good to go. **Start writing the future of breadroll**
+
+---
+
+### Manual Testing
+
+If you want to perform any manual testing by standing as the end user; then create a file `demo.ts` in the project `root`, the file is already added to the `.gitignore` file and will not be committed. After creating this file and adding your code snippet. You can then run this command in the project `root`;
+
+```bash
+bun run demo.ts
+```

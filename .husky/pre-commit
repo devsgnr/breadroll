@@ -3,3 +3,4 @@
 
 bunx lint-staged
 bun test
+cd docs && bun run build && cd ..

@@ -12,6 +12,10 @@
     "title": "Docs",
     "type": "page"
   },
+  "contribution": {
+    "title": "Contribution",
+    "type": "page"
+  },
   "changelog": {
     "title": "Changelog",
     "type": "page"

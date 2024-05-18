@@ -28,7 +28,7 @@ breadroll 🥟 is a simple lightweight  toolkit for parsing csv, tsv, and other 
 
 1. <a href="https://breadrolljs.vercel.app/docs" target="_blank">Introduction</a>
 2. <a href="https://breadrolljs.vercel.app/docs/Breadroll" target="_blank">API Reference</a>
-3. <a href="https://breadrolljs.vercel.app/changelog/breadroll-v0.1.0" target="_blank">Changelog</a>
+3. <a href="https://breadrolljs.vercel.app/changelog" target="_blank">Changelog</a>
 
 ---
 
@@ -68,15 +68,15 @@ const csv = new Breadroll({ header: true, delimiter: "," });
 Example: From one instance example above, you can open multiple `csv` files
 
 ```typescript
-const df = await csv.open.local<Type>("./data/ds_salaries.csv");
+const df = await csv.open.local<T>("./data/ds_salaries.csv");
 ```
 
 ### **Remote Data Sources**
 breadroll makes it easy to work with remote data sources with current support for HTTPS and Supabase Storage. With other remote data sources on the roadmap.
 
 ```typescript
-const df = await csv.open.https<Type>("https://.../.../filename.csv");
-const df = await csv.open.supabaseStorage<Type>("bucketName", "filepath");
+const df = await csv.open.https<T>("https://.../.../filename.csv");
+const df = await csv.open.supabaseStorage<T>("bucketName", "filepath");
 ```
 
 ### **Filtering**
@@ -106,4 +106,4 @@ df.count
 ```
 
 ---
-This project running on bun v1.0.22. [Bun.js](https://bun.sh) is a fast all-in-one JavaScript runtime.
+This project running on bun >=v1.0.22. [Bun.js](https://bun.sh) is a fast all-in-one JavaScript runtime.

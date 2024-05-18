@@ -1,0 +1,25 @@
+---
+title: Docs
+description: Getting started with contributing to breadroll documentation
+---
+
+## Documentation
+
+breadroll is documented using [Nextra](https://nextra.site). You can find the documentation source code at `/docs` in the project root directory. The documentation runs on MDX
+
+To start contributing to the documentation, First navigate to `/docs` and start the development server by running:
+
+```bash
+bun dev
+```
+
+Edit the markdown (.mdx) files and automatically see changes in the browser. Other commands are for building and previewing the site;
+
+```bash
+bun build
+bun start
+```
+
+### Pre-commit Build
+
+It is **not** neccessary for you to run these commands manually; only the `bun build{:bash}` command is ran during the pre-commit stage, to make sure the documentation build without any errors. Again we utitlize [Husky](https://typicode.github.io/husky/) for this step.

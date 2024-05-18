@@ -1,0 +1,60 @@
+---
+title: Overview
+description: Contributions are always welcome, no matter how large or small!
+---
+
+import { Callout } from "nextra/components";
+
+## Contribution Guide
+
+Contributions are always welcome, no matter how large or small! Here are the general guidelines on how you can get involved in the development of breadroll.
+
+<Callout type="warning">
+  <span className="text-sm">
+    breadroll is very early stage; which means going forward most of these guidelines might change; as the project grows
+    there might be changes to make the development processes more streamlined.
+  </span>
+</Callout>
+
+---
+
+### Open development
+
+All development happens directly on [GitHub](https://github.com/devsgnr/breadroll). Both core team members and external contributors (via forks) send pull requests which go through the same review process.
+
+---
+
+### Reporting a bug
+
+If you want to report a bug, please make sure you search issues with the prefix `[bug]` and the GitHub tag `bug`, this helps prevent duplicating bug reports and also helps you provide more context to the existing issue and also tracking the progress of the issue.
+
+To create a bug report; create a new issue with prefix `[bug]` and add the GitHub tag of `bug`, please then provide the following
+
+1. Platfrom - OS (including version) / Bun Version
+2. Code Snippet / Link to a REPL
+3. Use cases (optional)
+
+---
+
+### Requesting a feature
+
+If you want to request a feature, please make sure you search issues with the prefix `[feature_request]` and the GitHub tag `feature`, this helps prevent duplicating feature requests and helps you in tracking the progress of the issue. Please be sure to provide the following when creating a feature request that isn't present:
+
+1. Description
+2. Use Cases
+3. Code Snippet (Proposed Implementation)
+4. Indication of breaking changes
+
+---
+
+### Pull requests
+
+To get assigned to feature requests, bug, improvements and more, you need to tag a member of the core team like so; **"Hey `@core-team-member`, I'd like to be assigned to this issue"**, the tagged core team member will proceed to make their assessments and assign you to the issue, the tagged core team member now becomes your contact person on everything, including being the primary reviewer of your pull request.
+
+**Note:** When submitting your pull request, we highly recommend that you write test case(s) that accompanies the pull request you are submitting
+
+#### Branch management
+
+Every pull request points to the `main` branch and most be the compatible with the latest stable released version of breadroll. Pull requests that point to the `main` branch **must not have breaking changes**, issues with breaking changes will be assessed by the core team and will signify the branch it needs to point to; hence, any code improvement that points to `main` should be ready for release as a minor version at any point in time.
+
+Before submitting your pull request, please ensure that all test cases are passing locally.
