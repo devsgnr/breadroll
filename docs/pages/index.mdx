@@ -54,8 +54,8 @@ import Image from "next/image";
 ```ts filename="example.ts" copy
 import Breadroll from "breadroll";
 
-const csv = new Breadroll({ header: true, delimiter: "," });
-const df = await csv.open.local<T>("./test/data/cities.csv");
+const csv = new Breadroll({ header: true });
+const df = await csv.open.local<T>("./test/data/cities.csv", ",");
 
 const selected = df.select(["name", "country_code", "country_name", "latitude", "longitude"]);
 console.table(selected.value);

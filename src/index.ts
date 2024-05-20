@@ -6,9 +6,9 @@ import { BreadrollOpen, DataframeReadOptions } from "./types";
 import { isEmpty } from "lodash";
 
 /**
- * breadroll 🥟 is a simple lightweight library for type-safe data processing
- * and EDA (exploratory data analysis) on multivariate datasets. Think pandas
- * but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
+ * breadroll 🥟 is an intuitive lightweight library for type-safe data processing,
+ * designed with type-safety, developer experience and reduced runtime errors in mind. Think pandas
+ * but written in Typescript and optimized for the [Bun](https://bun.sh) Runtime.
  */
 class Breadroll {
   private parser: Parser;

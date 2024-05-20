@@ -23,11 +23,9 @@ breadroll (with a small **'b'**) is an intuitive lightweight library for type-sa
 
 ### Why breadroll?
 
-For long Python alongside other newer languages have dominated and are still dominating the space in data related processes like data science, analysis, preprocessing, machine learning and more; witih libraries like `pandas` and more. The why behind breadroll are:
+For long Python alongside other newer languages have dominated and are still dominating the space in data related processes like data science, analysis, preprocessing, machine learning, etc; witih libraries like `pandas`, `polars`, and more. **So, why develop breadroll?**
 
-- **Improved Developer Experience:** Utilizing TypeScript's static type checking there will be an increase in
-  developer productivity and better developer experience; where developers wouldn't have to worry if things will fall
-  off the rails in production.
+- **Improved Developer Experience:** Utilizing TypeScript's static type checking increases developer productivity and developer experience; where developers wouldn't have to worry if things will fall off the rails in production.
 - **Reduced Runtime Errors:** One of the biggest selling point for breadroll is its **type-safety**. Making little mistakes like omitting or adding characters to a key or label can be the difference between success and a major incident. Let's see an example;
 
   ```python filename="example.py" /aged/
@@ -38,10 +36,10 @@ For long Python alongside other newer languages have dominated and are still dom
   /*
    * Type '"aged"' is not assignable to type 'keyof T'
    */
-  const selected = df.select(["aged", "al", "rbcc", "wbcc"]);
+  const selected: Dataframe<T> = df.select(["aged", "al", "rbcc", "wbcc"]);
   ```
 
-- **Tooling:** Being a JavaScript developer, having to switch between different development environments and tooling can be a pain; breadroll aims to mitigate the need for setting up new tools just to work with data, being built in Typescript makes it easy to plug breadroll into your existing codebase.
+- **Tooling:** Being a JavaScript developer, having to switch between different development environments and tooling can be a pain; breadroll aims to mitigate the need for setting up new tools just to work with data, being built in TypeScript makes it easy to plug breadroll into your existing codebase & tooling.
 
 ---
 
@@ -49,7 +47,7 @@ For long Python alongside other newer languages have dominated and are still dom
 
 breadroll doesn't aim to change your existing data-pipelines written in more robust languages like Julia, Scala, Java, Kotlin and more, which offers more speed because of their compiled nature and closeness to machine.
 
-While we want to see breadroll doing some heavy lifting some day, breadroll is aimed at the;
+While we want to see breadroll doing some heavy lifting some day, for now, breadroll is aimed at the;
 
 - indie-developers,
 - small team that primarily work with JavaScript & TypeScript

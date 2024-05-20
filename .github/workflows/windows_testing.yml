@@ -1,4 +1,4 @@
-name: macos-latest
+name: windows-latest
 on:  
   push:
     branches:
@@ -10,7 +10,7 @@ on:
 jobs:
   test-suite-job:
     name: breadroll Test Suite
-    runs-on: macos-latest
+    runs-on: windows-latest
     steps:
       # ...
       - uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
       - run: bun test:ci
   build-test-job:
     name: breadroll Build Test
-    runs-on: macos-latest
+    runs-on: windows-latest
     steps:
       # ...
       - uses: actions/checkout@v3
@@ -45,4 +45,4 @@ jobs:
 
       # run any `bun` or `bunx` command
       - run: bun install
-      - run: bun build:unix
+      - run: bun build:windows
