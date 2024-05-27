@@ -17,7 +17,6 @@ Returns
 
 ```typescript
 import data from "/path/to/file.json";
-const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
 
 const df: Dataframe<T> = csv.open.json<T>(data);
 ```

@@ -62,13 +62,13 @@ breadroll provides an easy to use API that gets you from zero to data processing
 ```typescript
 import Breadroll, { Dataframe } from "breadroll";
 
-const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+const csv: Breadroll = new Breadroll({ header: true });
 ```
 
 Example: From one instance example above, you can open multiple `csv` files
 
 ```typescript
-const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
+const df: Dataframe<T> = await csv.open.local("./data/ds_salaries.csv", ",");
 ```
 
 ### Remote Data Sources
@@ -76,8 +76,8 @@ const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 breadroll makes it easy to work with remote data sources with current support for HTTPS and Supabase Storage. With other remote data sources on the roadmap.
 
 ```typescript
-const df: Dataframe = await csv.open.https("https://.../.../filename.csv");
-const df: Dataframe = await csv.open.supabaseStorage("bucketName", "filepath");
+const df: Dataframe<T> = await csv.open.https("https://.../.../filename.csv", ",");
+const df: Dataframe<T> = await csv.open.supabaseStorage("bucketName", "filepath", ",");
 ```
 
 ### Filtering

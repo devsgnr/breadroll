@@ -29,6 +29,7 @@ breadroll 🥟 is a simple lightweight  toolkit for parsing csv, tsv, and other 
 1. <a href="https://breadrolljs.vercel.app/docs" target="_blank">Introduction</a>
 2. <a href="https://breadrolljs.vercel.app/docs/Breadroll" target="_blank">API Reference</a>
 3. <a href="https://breadrolljs.vercel.app/changelog" target="_blank">Changelog</a>
+3. <a href="https://breadrolljs.vercel.app/contribution" target="_blank">Contribution Guide</a>
 
 ---
 
@@ -57,52 +58,61 @@ bun add breadroll
 ```
 ---
 
-### **Easy API**
+### Easy API
+
 breadroll provides an easy to use API that gets you from zero to data processing in no time, with lazy loading of these delimited files via Bun's File I/O `Bun.file()`, the file parsed based on the `DataframeReadOptions`, and convert into a `Dataframe`, and easily read out the content of the Dataframe using `.value`.
 
 ```typescript
 import Breadroll, { Dataframe } from "breadroll";
-const csv = new Breadroll({ header: true, delimiter: "," });
+
+const csv: Breadroll = new Breadroll({ header: true });
 ```
 
 Example: From one instance example above, you can open multiple `csv` files
 
 ```typescript
-const df = await csv.open.local<T>("./data/ds_salaries.csv");
+const df: Dataframe<T> = await csv.open.local("./data/ds_salaries.csv", ",");
 ```
 
-### **Remote Data Sources**
+### Remote Data Sources
+
 breadroll makes it easy to work with remote data sources with current support for HTTPS and Supabase Storage. With other remote data sources on the roadmap.
 
 ```typescript
-const df = await csv.open.https<T>("https://.../.../filename.csv");
-const df = await csv.open.supabaseStorage<T>("bucketName", "filepath");
+const df: Dataframe<T> = await csv.open.https("https://.../.../filename.csv", ",");
+const df: Dataframe<T> = await csv.open.supabaseStorage("bucketName", "filepath", ",");
 ```
 
-### **Filtering**
+### Filtering
+
 Peform complex filtering; with various filters including range filters like `is between` that can be achieved using an optional function parameter `limit` which is the upper limit. These range filter are only effective with numbers (integers, floating-point).
+
 ```typescript
 df.filter("age", "is between", 30, 40);
 ```
+
 Perform even more complex filtering with multiple / chained filter, you can chain the filter ie. filtering the previously filtered `Dataframe`, the chained filter can be as long as you need them to be.
+
 ```typescript
-df.filter("age", "is between", 30, 40)
-  .filter("salary", ">", 70000)
-  .filter("work_year", "==", 2020);
+df.filter("age", "is between", 30, 40).filter("salary", ">", 70000).filter("work_year", "==", 2020);
 ```
 
-### **Data Transformation**
-Perform whatever transformation you'd like to perform on the value of a specified column, from simple transformation like `value + 2`, to complex mathematical transformations that can be paired with the in-built numeric constant object
+### Data Transformation
+
+Perform whatever transformation you'd like to perform on the value of a specified column, from simple transformation like `value + 2`, to complex mathematical transformations that can be paired with the in-built [numeric constant object](/docs/NumericConstants/math)
+
 ```typescript
 df.apply({ key: "salary", fn: (v) => v / (40 * 4), newkey: "per_hour" });
 ```
 
-### **A Little Math**
+### A Little Math
+
 Get a single number that accurately represents the underlying data with the many provided aggregation functions, the likes of average (mean), max, min, sum, count, etc. with more in development
+
 ```typescript
-df.sum("capital_gain")
-df.average("capital_gain")
-df.count
+df.sum("capital_gain");
+df.average("capital_gain");
+df.count;
 ```
 
 ---

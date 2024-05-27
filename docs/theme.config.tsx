@@ -47,8 +47,10 @@ const config: DocsThemeConfig = {
         description: frontMatter.description ?? "breadroll - Type safe processing in TypeScript, built for Bun",
         images: [
           {
-            url: "https://breadrolljs.vercel.app/png/social-card.png",
-            alt: "breadroll - Type safe processing in TypeScript, built for Bun",
+            url: frontMatter.og
+              ? `https://breadrolljs.vercel.app/${frontMatter.og}`
+              : "https://breadrolljs.vercel.app/png/social-card.png",
+            alt: frontMatter.description ?? "breadroll - Type safe processing in TypeScript, built for Bun",
             width: 800,
             height: 600,
             type: "image/png",

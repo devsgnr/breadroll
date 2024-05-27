@@ -1,13 +1,39 @@
 ---
 title: Changelog
-description: Improvements to the Breadroll and the Dataframe API, Introduction of a new remote data source, A snazzy new way to perform data transformation, Introuducing NumericConstants - a collection of mathematical and physical constants and more. breadroll hit 35 🌠 stars on GitHub - help breadroll rise higher, drop a star.
+description: breadroll is now in public beta. We are super excited to see breadroll in the wild and even more excited to see contribution from the future breadroll community. So many thing are packed into the new breadroll
+og: "png/breadroll-0.5.0.png"
 ---
 
-![](/png/breadroll-0.4.0.png)
+### 0.5.0
+
+<small className="mb-5 block">May 22, 2024</small>
+
+![](/png/breadroll-0.5.0.png)
+
+breadroll is now in **public beta**. We are super excited to see breadroll in the wild and even more excited to see contribution from the future breadroll community. So many thing are packed into the new breadroll. We have leveraged TypeScript's static typing to prevent data-related runtime errors, improved developer experience, improved API design, and added a few more powerful methods.
+
+- A brand new parser experience utilizing [mafintosh/csv-parser](https://github.com/mafintosh/csv-parser) via [sindresorhus/neat-csv](https://github.com/sindresorhus/neat-csv)
+- Now breadroll Dataframes have types; assign types by using the `.open` methods like so; `Breadroll.open.local<T>()` or directly like so; `new Dataframe<T>()`
+- We added more methods to the Dataframe class
+  - `.concat`
+  - `.merge`
+  - `.shape`
+  - `.tail`
+  - `.toNumber`
+- We modified the `Breadroll.open` methods to have a dedicated seperator or delimiter function parameter, this way we reduce the number of instances need to open multiple file with different formats; eg. `Breadroll.open.local<T>("./path/to/file.csv", ",")`.
+
+  This simply means we've moved the delimiter from `Breadroll.DataframeReadOptions` to each individual method.
+
+- breadroll being in public beta means you get to build the future of breadroll, want to fix a bug, request a feature, improve testing; now is the time - take a quick glance on how to [get started with contributing](/contribution) to breadroll
+- 63 🌠 stars on GitHub, thank you so much for the support - help breadroll rise even higher, drop a star.
+
+---
 
 ### 0.4.0
 
-<small className="my-5 block">February 14, 2024</small>
+<small className="mb-5 block">February 14, 2024</small>
+
+![](/png/breadroll-0.4.0.png)
 
 In breadroll's new version **0.4.0** a lot of new shiny features are introduced, Here are the cool new features
 

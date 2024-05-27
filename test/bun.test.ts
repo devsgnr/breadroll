@@ -27,20 +27,25 @@ describe("Testing File-system Operation: Opening Files", () => {
   test("Open a File Locally: CSV", async () => {
     const dataframe = await instance.open.local<CKD>("./test/data/test.csv", ",");
     expect(dataframe).toBeInstanceOf(Dataframe<CKD>);
+    expect(dataframe.value.length).toBeGreaterThan(0);
   });
 
   test("Open a File Locally: TSV", async () => {
     const dataframe = await instance.open.local<CKD>("./test/data/test.tsv", "\t");
     expect(dataframe).toBeInstanceOf(Dataframe<CKD>);
+    expect(dataframe.value.length).toBeGreaterThan(0);
   });
 
   test("Open a File from Remote Source: CSV", async () => {
     const dataframe = await instance.open.https<CKD>(URL, ",");
     expect(dataframe).toBeInstanceOf(Dataframe<CKD>);
+    expect(dataframe.value.length).toBeGreaterThan(0);
   });
 
   test("Open a File: JSON", () => {
-    expect(instance.open.json<Cities>(demo)).toBeInstanceOf(Dataframe<Cities>);
+    const dataframe = instance.open.json<Cities>(demo);
+    expect(dataframe).toBeInstanceOf(Dataframe<Cities>);
+    expect(dataframe.value.length).toBeGreaterThan(0);
   });
 
   test("Throw Expection: File Not Found", () => {

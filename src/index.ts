@@ -41,9 +41,8 @@ class Breadroll {
     const local = async <T extends Record<string, unknown>>(filepath: string, sep: string): Promise<Dataframe<T>> => {
       return this.io
         .read(filepath)
-        .then((value) => {
-          this.parser.get_table_header(value, sep, this.options);
-          this.object = this.parser.generate_object<T>(value, sep, this.options);
+        .then(async (str) => {
+          this.object = await this.parser.generate_object(str, sep, this.options);
           return this.object as Dataframe<T>;
         })
         .catch((err) => {
@@ -63,9 +62,8 @@ class Breadroll {
 
       return await fetch(req, { method: "GET", headers: headers })
         .then((response) => response.text())
-        .then((value) => {
-          this.parser.get_table_header(value, sep, this.options);
-          this.object = this.parser.generate_object(value, sep, this.options);
+        .then(async (str) => {
+          this.object = await this.parser.generate_object(str, sep, this.options);
 
           if (isEmpty(this.object.value)) throw new Error("Remote Resource: Not Found");
           return this.object as Dataframe<T>;
@@ -85,9 +83,8 @@ class Breadroll {
           .from(bucketName)
           .download(filepath)
           .then((response) => response.data?.text())
-          .then((value) => {
-            this.parser.get_table_header(String(value), sep, this.options);
-            this.object = this.parser.generate_object(String(value), sep, this.options);
+          .then(async (str) => {
+            this.object = await this.parser.generate_object(String(str), sep, this.options);
 
             if (isEmpty(this.object.value)) throw new Error("Supabase: File Error");
             return this.object as Dataframe<T>;

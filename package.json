@@ -66,6 +66,8 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
-    "lodash": "^4.17.21"
+    "csv-parser": "^3.0.0",
+    "lodash": "^4.17.21",
+    "neat-csv": "^7.0.0"
   }
 }
