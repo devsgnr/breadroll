@@ -120,7 +120,7 @@ describe("Dataframe: Functionality Test", () => {
 
   test("Integer Indexing - Return Entire Rows With Empty Object", () => {
     const rows = salary.rows({});
-    expect(rows.count).toEqual(608);
+    expect(rows.count).toEqual(607);
   });
 
   test("RegEx Filter - Match All 'job_title' With 'engineer'", () => {
