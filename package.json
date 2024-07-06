@@ -59,7 +59,7 @@
     "test:local": "bun test ./test/bun.test.ts ./test/df.test.ts",
     "build:pre-build": "bun test:local && bun run build.ts",
     "build:unix": "rm -rf dist && bun run build.ts && bun test ./test/build.test.js",
-    "build:windows": "bunx rimraf dist && bun run build.ts && bun test ./test/build.test.js",
+    "build:windows": "bun run build.ts && bun test ./test/build.test.js",
     "build:stable": "bun run build.ts && bun test:ci"
   },
   "type": "module",
