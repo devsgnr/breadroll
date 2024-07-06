@@ -10,6 +10,7 @@
 ![npm](https://img.shields.io/npm/v/breadroll)
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/testing.yml/badge.svg)
 ![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/macos_testing.yml/badge.svg)
+![breadroll test status](https://github.com/devsgnr/breadroll/actions/workflows/windows_testing.yml/badge.svg)
 ![GitHub Stars](https://img.shields.io/github/stars/devsgnr/breadroll)
 
 </div>
