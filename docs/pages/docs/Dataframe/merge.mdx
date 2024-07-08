@@ -1,0 +1,33 @@
+---
+title: .merge
+description: Adds both columns and rows to the dataframe, ie. it adds new labels to the dataframe and if one dataframe is larger than the other, then it adds in those rows with empty values
+---
+
+import { Callout } from "nextra/components";
+
+#### `Dataframe.merge(...)`
+
+This function adds both columns and rows to the dataframe, ie. it adds new labels to the dataframe and if one dataframe is larger than the other, then it adds in those rows with empty values ie. `null`
+
+<Callout type="info">
+  This function **merges** two different dataframe together, ie. dataframe with different type or labels, assuming the
+  first dataframe has a type `K` and the second a type of `B`
+</Callout>
+
+Parameter
+
+- `Dataframe` - of type `B`, where `B` is your type
+
+Returns
+
+- `Dataframe<K & B>`
+
+The example below merges two dataframe with the different type; where `df` and `new_df` are dataframes of type `K` & `B`
+
+```typescript
+const concat: Dataframe<K & B> = df.merge(new_df);
+```
+
+<Callout type="info">
+  The merge function implicit determines the type of `K` and `B` if it has been passed to the `Breadroll.open` functions, but you can explicitly provide the types to the merge function like so `df.merge<A, B>(new_df)` where `A` is the type of `df` and `B` is the type of `new_df`
+</Callout>

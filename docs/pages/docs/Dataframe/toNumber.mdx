@@ -1,0 +1,24 @@
+---
+title: .toNumber
+description: Converts all the selected column values into number
+---
+
+import { Callout } from "nextra/components";
+
+#### `Dataframe.toNumber(...)`
+
+This function converts all the selected column values into number
+
+Parameter
+
+- `Array<string>` - which are the column labels
+
+Returns
+
+- `Dataframe<T>`
+
+The example below converts columns in a dataframe into numbers
+
+```typescript
+const concat: Dataframe<T> = df.toNumber(["age", "id", "bp"]);
+```

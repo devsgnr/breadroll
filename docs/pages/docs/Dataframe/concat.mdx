@@ -1,0 +1,26 @@
+---
+title: .concat
+description: Adds more rows to the dataframe, ie. pushes more rows at the end of the dataframe.
+---
+
+import { Callout } from "nextra/components";
+
+#### `Dataframe.concat(...)`
+
+This function adds more rows to the dataframe, ie. pushes more rows at the end of the dataframe.
+
+<Callout type="info">**Both dataframes must have the same labels, ie. dataframe must have the same type** `T`</Callout>
+
+Parameter
+
+- `Dataframe` - of the same type `T`, where `T` is your type
+
+Returns
+
+- `Dataframe` - of type `T`
+
+The example below concatenates two dataframe with the same type; where `df` and `new_df` are both dataframes of type `T`
+
+```typescript
+const concat: Dataframe<T> = df.concat(new_df);
+```

@@ -1,13 +1,16 @@
 import IO from "../io";
+import { defaultparse } from "../parser/utils";
 import { IOSave, Condition, FilterType, Indexer, Apply } from "../types";
 import Filters from "./filters";
+import { isEqual } from "lodash";
+import { cloneThenNullify } from "./utils";
 
-class Dataframe {
-  private object: Array<Record<string, unknown>>;
+class Dataframe<T extends Record<string, unknown> = Record<string, unknown>> {
+  private object: Array<T>;
   private filters: FilterType;
   private io: IO;
 
-  constructor(object: Array<Record<string, unknown>>) {
+  constructor(object: Array<T>) {
     this.object = object;
     this.filters = Object({ ...Filters });
     this.io = new IO();
@@ -16,6 +19,7 @@ class Dataframe {
   /**
    * This function retuns the count of occurance of a dataframe's key's
    * value
+   *
    * @returns {number}
    */
   get count(): number {
@@ -25,41 +29,71 @@ class Dataframe {
   /**
    * This function gets and return all the keys from within the
    * oject
+   *
    * @returns { Array<string> }
    */
   get labels(): Array<string> {
-    return Object.keys(this.object[0]);
+    return Object.keys(this.object[0] as object);
   }
 
   /**
-   * This function returns the first five rows of the data frame
+   * This function returns the first five rows of the dataframe
+   *
+   * @returns { Dataframe }
    */
-  get head(): Dataframe {
-    return new Dataframe(this.object.splice(0, 5));
+  get head(): Dataframe<T> {
+    return new Dataframe<T>(this.object.splice(0, 5));
+  }
+
+  /**
+   * This function returns the last five rows of the dataframe
+   *
+   * @returns { Dataframe }
+   */
+  get tail(): Dataframe<T> {
+    return new Dataframe(this.object.splice(-5));
+  }
+
+  /**
+   * This function returns the shape of the dataframe, ie
+   * [rows, columns]
+   *
+   * @returns { Array<number> }
+   */
+  get shape(): Array<number> {
+    const cols = this.labels.length;
+    const rows = this.object.length;
+    return [rows, cols];
   }
 
   /**
    * This function return all the objects in the array where some
    * properties are eqaul to null
+   *
+   * @returns { Dataframe }
    */
-  get isNull(): Dataframe {
-    return new Dataframe(this.object.filter((object) => Object.values(object).some((value) => !value)));
+  get isNull(): Dataframe<T> {
+    return new Dataframe<T>(this.object.filter((object) => Object.values(object).some((value) => !value)));
   }
 
   /**
    * This function return all the objects in the array where every object
    * property is not eqaul to `null`
+   *
+   * @returns { Dataframe }
    */
-  get notNull(): Dataframe {
-    return new Dataframe(this.object.filter((object) => Object.values(object).every((value) => value)));
+  get notNull(): Dataframe<T> {
+    return new Dataframe<T>(this.object.filter((object) => Object.values(object).every((value) => value)));
   }
 
   /**
    * This function return the data types of each column
    * in the dataframe in a { key: value } pair
+   *
+   * @returns { Record<string, string> }
    */
-  get dtypes(): Record<string, unknown> {
-    let types: Record<string, unknown> = {};
+  get dtypes(): Record<string, string> {
+    let types: Record<string, string> = {};
     Object.values(this.object[0]).map((value, index) => {
       types = { ...types, ...{ [Object.keys(this.object[0])[index]]: typeof value } };
     });
@@ -76,8 +110,8 @@ class Dataframe {
    * @param { unknown } limit optional
    * @returns { Dataframe }
    */
-  filter(key: string, filter: Condition, value: unknown, limit?: unknown): Dataframe {
-    return this.filters[filter](this.object, key, value, limit);
+  filter(key: keyof T, filter: Condition, value: unknown, limit?: unknown): Dataframe<T> {
+    return this.filters[filter](this.object, key as string, value, limit) as Dataframe<T>;
   }
 
   /**
@@ -86,12 +120,14 @@ class Dataframe {
    * @param { Array<string> } keys
    * @returns { Dataframe }
    */
-  select(keys: Array<string>): Dataframe {
-    return new Dataframe(
-      this.object.map((obj: Record<string, unknown>) => {
-        return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
-      }),
-    );
+  select(keys: Array<keyof T>): Dataframe<T> {
+    if (keys.length > 0) {
+      return new Dataframe<T>(
+        this.object.map((obj: Record<string, unknown>) => {
+          return keys.reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr as string] = obj[curr as string]), acc), {});
+        }) as T[],
+      );
+    } else return new Dataframe(this.object);
   }
 
   /**
@@ -101,7 +137,7 @@ class Dataframe {
    * @param { Indexer } args
    * @returns { Dataframe }
    */
-  cols(args: Indexer): Dataframe {
+  cols(args: Indexer): Dataframe<T> {
     const start: number = args.start ? args.start : 0;
     const end: number = args.end ? args.end : this.object.length;
 
@@ -110,10 +146,10 @@ class Dataframe {
       else return this.labels.splice(start, end);
     };
 
-    return new Dataframe(
+    return new Dataframe<T>(
       this.object.map((obj: Record<string, unknown>) => {
         return keys().reduce((acc: Record<string, unknown>, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {});
-      }),
+      }) as T[],
     );
   }
 
@@ -124,7 +160,7 @@ class Dataframe {
    * @param { Indexer } args
    * @returns { Dataframe }
    */
-  rows(args: Indexer): Dataframe {
+  rows(args: Indexer): Dataframe<T> {
     const start: number = args.start ? args.start : 0;
     const end: number = args.end ? args.end : this.object.length;
 
@@ -137,10 +173,10 @@ class Dataframe {
    * @param { Apply } Apply
    * @returns { Dataframe }
    */
-  apply({ key, fn, inplace = false, newkey }: Apply): Dataframe {
-    return new Dataframe(
+  apply({ key, fn, inplace = false, newkey }: Apply<T>): Dataframe<T> {
+    return new Dataframe<T>(
       this.object.map((value) => {
-        if (!inplace && !newkey) return { ...value, ...{ [`${key}_1`]: fn(value[key]) } };
+        if (!inplace && !newkey) return { ...value, ...{ [`${key as string}_new`]: fn(value[key]) } };
         if (!inplace && newkey) return { ...value, ...{ [newkey]: fn(value[key]) } };
         return { ...value, ...{ [key]: fn(value[key]) } };
       }),
@@ -148,11 +184,73 @@ class Dataframe {
   }
 
   /**
-   * This function exposes the array of objects before or after
-   * filter has been applied to it
-   * @returns { Array<Record<string, unknown>> }
+   * This function converts all values of the specified columns into a
+   * number
+   * @param { Array<string> } keys
+   * @returns { Dataframe }
    */
-  get value(): Array<Record<string, unknown>> {
+  toNumber(keys: Array<keyof T>): Dataframe<T> {
+    if (keys.length === 0) {
+      return new Dataframe<T>(this.object);
+    } else {
+      const key = keys[keys.length - 1];
+      const newFrame = this.object.map((obj) => ({ ...obj, [key]: defaultparse(obj[key] as string) }));
+      return new Dataframe<T>(newFrame).toNumber(keys.slice(0, -1));
+    }
+  }
+
+  /**
+   * This function adds more rows to the dataframe, ie.
+   * pushes more rows at the end of the dataframe.
+   *
+   * __Note: Both dataframes must have the same labels__
+   *
+   * @param { Dataframe } dataframe
+   * @returns { Dataframe }
+   */
+  concat(dataframe: Dataframe<T>): Dataframe<T> {
+    if (!isEqual(this.labels, dataframe.labels)) {
+      throw new Error("Label Mismatch - Cannot concatanate");
+    }
+    return new Dataframe<T>([...this.object, ...dataframe.value]);
+  }
+
+  /**
+   * This function adds both columns and rows to the dataframe,
+   * ie. it adds new labels to the dataframe and if one dataframe
+   * is larger than the other, then it adds in those rows with empty
+   * values
+   *
+   * @param { Dataframe<B> } dataframe
+   * @returns { Dataframe<K & B> }
+   */
+  merge<K extends Record<string, unknown> = T, B extends Record<string, unknown> = T>(dataframe: Dataframe<B>): Dataframe<K & B> {
+    const { smaller, bigger } = this.count < dataframe.count ? { smaller: this, bigger: dataframe } : { smaller: dataframe, bigger: this };
+
+    if (smaller.count !== bigger.count) {
+      const ref = smaller.value[0];
+      return new Dataframe<K & B>(
+        bigger.value.map((object, index) => {
+          const columns = smaller.value[index] ?? cloneThenNullify(ref);
+          return { ...columns, ...(object as K & B) };
+        }),
+      );
+    }
+
+    return new Dataframe<K & B>(
+      this.object.map((object, index) => {
+        return { ...(object as K & B), ...dataframe.value[index] };
+      }),
+    );
+  }
+
+  /**
+   * This function exposes the array of objects within
+   * the Dataframe
+   *
+   * @returns { Array<T> }
+   */
+  get value(): Array<T> {
     return this.object;
   }
 
@@ -163,8 +261,8 @@ class Dataframe {
    * @param { string } key
    * @returns { number }
    */
-  sum(key: string): number {
-    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0);
+  sum(key: keyof T): number {
+    return this.object.reduce((acc, curr) => acc + Number(curr[key]), 0);
   }
 
   /**
@@ -174,8 +272,8 @@ class Dataframe {
    * @param { string } key
    * @returns { number }
    */
-  average(key: string): number {
-    return this.object.reduce((acc, curr) => acc + <number>curr[key], 0) / this.object.length;
+  average(key: keyof T): number {
+    return this.object.reduce((acc, curr) => acc + Number(curr[key]), 0) / this.object.length;
   }
 
   /**
@@ -185,8 +283,8 @@ class Dataframe {
    * @param { string } key
    * @returns { number }
    */
-  max(key: string): number {
-    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+  max(key: keyof T): number {
+    const arr = this.object.map((obj) => Number(obj[key])) as Array<number>;
     return Math.max(...arr);
   }
 
@@ -197,8 +295,8 @@ class Dataframe {
    * @param { string } key
    * @returns { number }
    */
-  min(key: string): number {
-    const arr = this.object.map((obj) => obj[key]) as Array<number>;
+  min(key: keyof T): number {
+    const arr = this.object.map((obj) => Number(obj[key])) as Array<number>;
     return Math.min(...arr);
   }
 
@@ -209,7 +307,7 @@ class Dataframe {
    * @param { function } callback
    * @returns { Dataframe }
    */
-  use(callback: (object: Array<Record<string, unknown>>) => Dataframe): Dataframe {
+  use(callback: (object: Array<T>) => Dataframe<T>): Dataframe<T> {
     return callback(this.object);
   }
 

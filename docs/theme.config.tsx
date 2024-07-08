@@ -10,29 +10,47 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: "https://github.com/devsgnr/breadroll/tree/main/docs",
   darkMode: true,
   banner: {
-    key: "breadroll-0.4-release",
+    key: "breadroll-0.5-release",
     dismissible: false,
-    text: <a href="/changelog/breadroll-v0.4.0">🎉 breadroll 0.4.0 is released. Read more →</a>,
+    text: (
+      <a href="/changelog">
+        🎉 breadroll 0.5.0 is released. <b>We're in public beta</b> →
+      </a>
+    ),
   },
   head: (
     <>
       <meta name="twitter:site" content="@breadrolljs" />
     </>
   ),
+  footer: {
+    text: (
+      <div className="flex flex-col gap-y-2">
+        <div>Released under the MIT License</div>
+        <div>
+          <small>&copy; {new Date().getFullYear()} breadroll</small>
+        </div>
+      </div>
+    ),
+  },
   useNextSeoProps() {
     const { frontMatter } = useConfig();
 
     return {
-      titleTemplate: frontMatter.title ? "%s - breadroll" : "breadroll - Data processing in Javascript, built on Bun",
-      description: frontMatter.description ?? "breadroll - Data processing in Javascript",
+      titleTemplate: frontMatter.title
+        ? "%s - breadroll"
+        : "breadroll - Type safe processing in TypeScript, built for Bun",
+      description: frontMatter.description ?? "breadroll - Type safe processing in TypeScript, built for Bun",
       openGraph: {
         siteName: "breadroll",
-        title: frontMatter.title ?? "breadroll - Data processing in Javascript",
-        description: frontMatter.description ?? "breadroll - Data processing in Javascript",
+        title: frontMatter.title ?? "breadroll - Type safe processing in TypeScript, built for Bun",
+        description: frontMatter.description ?? "breadroll - Type safe processing in TypeScript, built for Bun",
         images: [
           {
-            url: "https://breadrolljs.vercel.app/png/social-card.png",
-            alt: "breadroll - Data processing in Javascript",
+            url: frontMatter.og
+              ? `https://breadrolljs.vercel.app/${frontMatter.og}`
+              : "https://breadrolljs.vercel.app/png/social-card.png",
+            alt: frontMatter.description ?? "breadroll - Type safe processing in TypeScript, built for Bun",
             width: 800,
             height: 600,
             type: "image/png",

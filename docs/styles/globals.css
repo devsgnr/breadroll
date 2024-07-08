@@ -1,15 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-@import url("https://rsms.me/inter/inter.css");
-
 html {
-  font-family: "Inter" !important;
   font-feature-settings:
     "rlig" 1,
     "calt" 1,
     "ss01" 1,
-    "ss02" 1,
-    "cv11" 1,
-    "tnum" 1 !important;
+    "ss06" 1 !important;
 }
 
 code {
@@ -17,7 +11,6 @@ code {
     "rlig" 0,
     "calt" 0 !important;
   font-variant-ligatures: none !important;
-  font-family: "JetBrains Mono" !important;
 }
 
 /* Tailwind CSS */

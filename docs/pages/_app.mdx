@@ -1,0 +1,10 @@
+import "@/styles/globals.css";
+import { GeistSans, JetBrainsMono } from "../font";
+
+export default function App({ Component, pageProps }) {
+  return (
+    <main className={`font-sans ${GeistSans.variable} ${JetBrainsMono.variable}`}>
+      <Component {...pageProps} />
+    </main>
+  );
+}

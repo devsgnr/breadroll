@@ -2,4 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 bunx lint-staged
-bun test
+echo "Building Source - Locally"
+bun build:pre-build
+cd docs && bun run build && cd ..

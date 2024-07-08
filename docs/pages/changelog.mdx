@@ -1,0 +1,172 @@
+---
+title: Changelog
+description: breadroll is now in public beta. We are super excited to see breadroll in the wild and even more excited to see contribution from the future breadroll community. So many thing are packed into the new breadroll
+og: "png/breadroll-0.5.0.png"
+---
+
+### 0.5.0
+
+<small className="mb-5 block">May 22, 2024</small>
+
+![](/png/breadroll-0.5.0.png)
+
+breadroll is now in **public beta**. We are super excited to see breadroll in the wild and even more excited to see contribution from the future breadroll community. So many thing are packed into the new breadroll. We have leveraged TypeScript's static typing to prevent data-related runtime errors, improved developer experience, improved API design, and added a few more powerful methods.
+
+- A brand new parser experience utilizing [mafintosh/csv-parser](https://github.com/mafintosh/csv-parser) via [sindresorhus/neat-csv](https://github.com/sindresorhus/neat-csv) see the former for the default behavior of the parser.
+- Now breadroll Dataframes have types; assign types by using the `.open` methods like so; `Breadroll.open.local<T>()` or directly like so; `new Dataframe<T>()`
+- We added more methods to the Dataframe class
+  - `.concat`
+  - `.merge`
+  - `.shape`
+  - `.tail`
+  - `.toNumber`
+- We modified the `Breadroll.open` methods to have a dedicated seperator or delimiter function parameter, this way we reduce the number of instances need to open multiple file with different formats; eg. `Breadroll.open.local<T>("./path/to/file.csv", ",")`.
+
+  This simply means we've moved the delimiter from `Breadroll.DataframeReadOptions` to each individual method.
+
+- breadroll being in public beta means you get to build the future of breadroll, want to fix a bug, request a feature, improve testing; now is the time - take a quick glance on how to [get started with contributing](/contribution) to breadroll
+- 67 🌠 stars on GitHub, thank you so much for the support - help breadroll rise even higher, drop a star.
+
+---
+
+### 0.4.0
+
+<small className="mb-5 block">February 14, 2024</small>
+
+![](/png/breadroll-0.4.0.png)
+
+In breadroll's new version **0.4.0** a lot of new shiny features are introduced, Here are the cool new features
+
+- Improvements to the `Breadroll` and the `Dataframe` API
+- Introduction of a new remote data source
+- Changed filter keywords in favor of symbols over length words
+- A snazzy new way to perform data transformation
+- Introuducing `NumericConstants` - a collection of mathematical and physical constants
+- breadroll hit 35 🌠 stars on GitHub - help breadroll rise higher, drop a 🌠 star.
+
+**API Improvements**
+
+The `Breadroll` & `Dataframe` APIs got a little face lift, with two major addition to the `Breadroll` API and a few more others to the `Dataframe` API;
+
+- `DataframeReadOptions?.parseNumber: boolean` - This is an optional property that allows you to opt out of parsing numbers defaults to `true`, when set to `false` all values are returned as strings
+- `DataframeReadOptions?.supabase: SupabaseClient` - This is an optional property takes in the Supabase client created via `createClient(..., ...)`, this property enables `Breadroll.open.supabaseStorage` method.
+- By default headers (labels) were being converted to lower-case, now headers (labels) maintain case-sensitivity
+- `Dataframe.apply({...}: Apply)` - This function allows you to perform data transformation on a specified column of the dataframe
+
+**New Remote Data Source 🚀 - Supabase**
+
+- `Breadroll.open.supabaseStorage(bucketName: string, filepath: string)` - This function takes in the bucket name and filepath of the file, downloads the file, parses the files and retuns a Dataframe
+
+**Symbol-based Filter Keywords**
+
+The use of symbols as keyword ensurces less verbosity; most of the filter keywords have been replaced with symbols; `"eqauls"` is now `"=="` see the full changes [here](/docs/Dataframe/filter/)
+
+**Numeric Constants**
+
+In addition to having the ability to perform data transformation using `Dataframe.apply({...})`, the numeric constant object provides mathematical (`math`) and physical (`physical`) constants. These two can be nicely paired to make cool data transformation, most especially with scientific datasets.
+
+These values are double-precision 64-bit binary format IEEE 754 value, which have ±15 decimal digits of precision. The `physical` constant are provided in their standard SI units
+
+---
+
+### 0.3.7-alpha
+
+<small>January 31st, 2024</small>
+
+In breadroll's new version **0.3.7-alpha** two new features are introduced, Here are the cool new features
+
+- Regex filter using `"matches"` keyword
+- Integer-based indexing / selection
+
+**Regex filter**
+
+Introducing Regex filter with the keyword `"matches"` for performing complex queries like matching certain patterns in a `String`, this uses the `matches` keyword and takes in a [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp). We recommend using this filter when a trade off on time is acceptable, see [here](/docs/Dataframe/filter#regex-filter) for a more detailed explanation.
+
+```typescript
+const filtered = selected_cols.filter("job_title", "matches", /engineer/i);
+```
+
+**Integer-based indexing / selection**
+
+`Dataframe.rows({start?: number, end?: number}: Indexer): Dataframe` Returns a specific number of rows of the dataframe, this function takes an object with either the start or the end index and return the dataframe with the specified number of rows - check it out [here](/reference/Dataframe/rows/)
+
+```typescript
+const count: Dataframe = df.rows({ start: 0, end: 4 });
+```
+
+`Dataframe.cols({start?: number, end?: number}: Indexer): Dataframe` Returns specific columns of the dataframe strictly using interger based indexing similar to panda's `iloc` - check it out [here](/reference/Dataframe/cols/)
+
+```typescript
+const count: Dataframe = df.cols({ start: 0, end: 4 });
+```
+
+---
+
+### 0.3.6-alpha
+
+<small>January 25th, 2024</small>
+
+`Breadroll.open.https(url: string, headers?: Headers): Promise<Dataframe>` This function fetches and return a file via a URL over https, with a default `GET` method, with optional provision for custom headers
+
+---
+
+### 0.3.1
+
+<small>January 20th, 2024</small>
+
+`Dataframe.select(keys: Array<string>): Dataframe` This function return a new Dataframe with only the desired rows, ie. rows with the specified labels
+
+---
+
+### 0.3.0
+
+<small>January 19th, 2024</small>
+
+`Dataframe.to_blob(filetype: "csv" | "tsv"): Blob` This function converts the current dataframe into a Blob of MIME filetype `"csv" | "tsv"`
+
+`Dataframe.save`
+
+- `.json(filepath: string)`: This function saves `Dataframe` as a JSON files ie. for example `Dataframe.save.json(filepath: string)`.
+- `.csv(filepath: string)`: This function saves `Dataframe` as a CSV files ie. for example `Dataframe.save.csv(filepath: string)`.
+- `.tsv(filepath: string)`: This function saves `Dataframe` as a TSV files ie. for example `Dataframe.save.tsv(filepath: string)`.
+
+---
+
+### 0.2.0
+
+<small>Sept 15th, 2023</small>
+
+`Dataframe.min(key: string): number` This function returns the minimum value of all the values of the specified column ie. key. Note, the values are coerse into a number type
+
+`Dataframe.max(key: string): number` This function returns the maximum value of all the values of the specified column ie. key. Note, the values are coerse into a number type
+
+`Dataframe.sum(key: string): number` This function returns the sum of all the values of the specified column ie. key. Note, the values are coerse into a number type
+
+`Dataframe.average(key: string): number` This function returns the average of all the values of the specified column ie. key. Note, the values are coerse into a number type
+
+---
+
+### 0.1.3
+
+<small>Aug 27th, 2023</small>
+
+`Dataframe.use(callback: (dataframe: Array<Record<string, unknown>>) => Dataframe): Dataframe` it provides access to the object ie. it kinda ejects from the base class allowing user to perform their own custom operation on a the current dataframe version, eg. after running `Dataframe.filter`
+
+Added more filters, `greater than or equal to`, `less than or equal to`, `is between`
+
+Tweaked `Dataframe.filter` to take a fourth and optional argument `limit` for range filters like `is between`
+
+---
+
+### 0.1.0
+
+<small>Aug 19th, 2023</small>
+
+- `Dataframe.head: Dataframe` returns the first five rows of the dataframe
+- `Dataframe.labels: Array<string>` returns the labels of the dataframe
+- `Dataframe.filter(key: string, filter: Condition, value: unknown)` - filters the rows in `Dataframe` and returns `Dataframe(dataframe)`
+- `Dataframe.value` - exposes the `Dataframe`'s dataframe as `Array<Record<string, unknown>>`
+- `Dataframe.count` - returns the count of rows in the dataframe or dataframe object
+- `Dataframe.isNull` - returns all the rows that have some properties equal to `null`
+- `Dataframe.notNull` - returns all the rows that have every property equal to `!null`
+- `Dataframe.dtypes` - returns all the data types of all the columns in the dataframe

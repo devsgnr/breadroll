@@ -3,7 +3,7 @@ title: Supabase Storage
 description: Takes in the bucket name and filepath of the file, downloads the file, parses the files and retuns a Dataframe
 ---
 
-#### `Breadroll.open.supabaseStorage(...)`
+#### `Breadroll.open.supabaseStorage<T>(...)`
 
 This function takes in the bucket name and filepath of the file, downloads the file, parses the files and retuns a Dataframe
 
@@ -11,11 +11,12 @@ Parameter
 
 - `bucketName: string` - the Supabase bucket name.
 - `filepath: string` - the specific file name in the specified bucket
+- `sep: string` - the delimeter or seperator
 
 Returns
 
-- `Promise<Dataframe>`
+- `Promise<Dataframe<T>>`
 
 ```typescript
-const df: Dataframe = await csv.open.supabseStorage("bucketName", "filepath");
+const df: Dataframe<T> = await csv.open.supabseStorage<T>("bucketName", "filepath", ",");
 ```

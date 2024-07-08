@@ -31,10 +31,10 @@ Parameters
 
 Returns
 
-- `Dataframe`
+- `Dataframe<T>`
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", ">", 70000);
+const filtered: Dataframe<T> = df.filter("salary", ">", 70000);
 ```
 
 #### Multiple / Chained Filter
@@ -42,7 +42,7 @@ const filtered: Dataframe = df.filter("salary", ">", 70000);
 You can chain the filter ie. filtering the previously filtered `Dataframe`, the chained filter can be as long as you need them to be;
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", ">", 70000).filter("work_year", "==", 2020);
+const filtered: Dataframe<T> = df.filter("salary", ">", 70000).filter("work_year", "==", 2020);
 ```
 
 #### Range Filters
@@ -50,7 +50,7 @@ const filtered: Dataframe = df.filter("salary", ">", 70000).filter("work_year", 
 Range filters filter numerical values in the Dataframe that fall between a certain range (lower limit and upper limit);
 
 ```typescript
-const filtered: Dataframe = df.filter("salary", "is between", 70000, 100000);
+const filtered: Dataframe<T> = df.filter("salary", "is between", 70000, 100000);
 ```
 
 #### Regex Filter
@@ -58,9 +58,11 @@ const filtered: Dataframe = df.filter("salary", "is between", 70000, 100000);
 Regex filter uses regular expression to perform complex queries like matching certain patterns in a `String`, this uses the `matches` keyword and takes in a [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) as the value for the `value` paramter of the `.filter(...)` function.
 
 <Callout type="warning">
-  Please using this Regex filter is a big trade off on time, performing a query with a simple regex like `/engineer/i` on a dataset of almost 35,000+ rows take `~7.9ms` to `~10ms`,
-  and performing a query with a regex like `/(a*)*b/` on the same dataset can take `~100ms`, as we see a `asymptotic` time complexity, it searches `n` characters of `n` rows, ie.
-  time grows with growth in search space. We recommend you use `"E"` or `"=="`, and only use the RegEx when time is not a factor.
+  Please using this Regex filter is a big trade off on time, performing a query with a simple regex like `/engineer/i`
+  on a dataset of almost 35,000+ rows take `~7.9ms` to `~10ms`, and performing a query with a regex like `/(a*)*b/` on
+  the same dataset can take `~100ms`, as we see a `asymptotic` time complexity, it searches `n` characters of `n` rows,
+  ie. time grows with growth in search space. We recommend you use `"E"` or `"=="`, and only use the RegEx when time is
+  not a factor.
 </Callout>
 
 There are two ways to work with the "matches" regex filter

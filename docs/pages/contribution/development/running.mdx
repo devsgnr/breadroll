@@ -1,0 +1,26 @@
+---
+title: Running & Building
+description: Guide on how to run and build breadroll locally
+---
+
+## Running & Building
+
+After going through the steps in [setting up](/contribution/development/setup) the project, there are some important things that you need to be aware of;
+
+---
+
+### Important commands
+
+- `bun test:local{:bash}` - Runs the complete local test(s)
+- `bun test:ci{:bash}` - Runs the complete test suite(s) in GitHub Workflow runners
+- `bun run demo.ts{:bash}` - Runs the `demo.ts` file for manual testing
+- `bun prepare{:bash}` - Install husky
+- `bun build:unix{:bash}` - Builds source and tests build on Github Workflows `ubuntu & macos-latest` runner
+- `bun build:windows{:bash}` - Builds source and tests build on Github Workflows `windows-latest` runner
+- `bun build:stable{:bash}` - Builds sources, tests build using `bun test:ci{:bash}` and publishes distribution
+
+---
+
+### Building
+
+breadroll is built and optimized for the Bun runtime, and hence we use the `Bun.build(){:typescript}` JavaScript API to build and bundle breadroll. This means that all source targets Bun and are prefixed with the `// @bun` pragma which removes the need for re-transpilation, reduces startup time and improves performance. You can read more [here](https://bun.sh/docs/bundler#target).

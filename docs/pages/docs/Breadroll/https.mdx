@@ -3,19 +3,20 @@ title: HTTPS
 description: Fetches and return a file via a URL over https, with a default GET method, with optional provision for custom headers
 ---
 
-#### `Breadroll.open.https(...)`
+#### `Breadroll.open.https<T>(...)`
 
 This function fetches and return a file via a URL over https, with a default `GET` method, with optional provision for custom headers
 
 Parameter
 
 - `url: string` - the remote location of the file.
+- `sep: string` - the delimeter or seperator
 - `header?:` [`Headers`](https://developer.mozilla.org/en-US/docs/Web/API/Headers) - add custom headers to the HTTP request
 
 Returns
 
-- `Promise<Dataframe>`
+- `Promise<Dataframe<T>>`
 
 ```typescript
-const df: Dataframe = await csv.open.https("https://.../.../file.csv");
+const df: Dataframe<T> = await csv.open.https<T>("https://.../.../file.csv", ",");
 ```

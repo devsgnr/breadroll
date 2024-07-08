@@ -4,12 +4,16 @@
     "type": "page",
     "display": "hidden"
   },
-  "guides": {
-    "title": "Guides",
+  "about": {
+    "title": "About",
     "type": "page"
   },
   "docs": {
     "title": "Docs",
+    "type": "page"
+  },
+  "contribution": {
+    "title": "Contribution",
     "type": "page"
   },
   "changelog": {

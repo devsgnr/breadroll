@@ -3,6 +3,8 @@ title: .select
 description: Returns a new dataframe with only the desired columns, ie. columns with the specified labels
 ---
 
+import { Callout } from "nextra/components";
+
 #### `Dataframe.select(...)`
 
 This function return a new Dataframe with only the desired columns, ie. columns with the specified labels
@@ -13,8 +15,14 @@ Parameters
 
 Returns
 
-- `Dataframe`
+- `Dataframe<T>`
 
 ```typescript
-const selected: Dataframe = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
+const selected: Dataframe<T> = df.select(["job_title", "salary", "salary_currency", "salary_in_usd"]);
+```
+
+<Callout type="info">Providing an empty array will by default returns the entire columns of the dataframe</Callout>
+
+```typescript
+const selected: Dataframe<T> = df.select([]);
 ```

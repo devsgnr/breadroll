@@ -1,0 +1,26 @@
+---
+title: Testing
+description: Guide on how to run the breadroll test suite locally
+---
+
+## Testing
+
+We write and test our code with Bun, and for testing we use the built-in `bun:test` test runner, with its Jest-like API, if you've even written a test with Jest then you're good to go with `bun:test`. Find out more about `bun:test` [here](https://bun.sh/docs/cli/test)
+
+---
+
+### Running Test suite
+
+We basically write tests for a few aspects of breadroll, the first is the `Bun` specific tests which includes reading and writing to the file-system and the second is purely JavaScript specific tests which includes `Dataframe` functionalities.
+
+To run these test, we run the following command:
+
+```bash
+bun test:local
+```
+
+Just like Jest, Bun automatically knowns exactly where to go and look for the tests, as it matches all test files and runs them accordingly, you can read more about it [here](https://bun.sh/docs/cli/test#run-tests)
+
+### Pre-commit Testing
+
+We utilize [Husky](https://typicode.github.io/husky/) to perform a pre-commit hook that runs the entire test suite, this is done to ensure a final level of confirmation that everything is working well, before pushing to GitHub.

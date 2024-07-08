@@ -1,41 +1,49 @@
 ---
-description: breadroll 🥟 is a simple lightweight library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets.
+description: Say hello to the simple lightweight library for type-safe data processing written in TypeScript, optimized for Bun, providing amazing DX and reducing runtime errors.
 ---
 
 import { Callout } from "nextra/components";
-import { Zap, Cpu, Rss, Leaf, ArrowRight } from "lucide-react";
+import { Zap, Cpu, Smile, Leaf, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 <div className="flex flex-col justify-center items-center">
   <h1 className="text-[min(4.375rem,max(8vw,2.5rem))] text-center text-black dark:text-white font-bold leading-[1.2] tracking-[-0.04em] mt-12 mb-6">
-    <span>Make data processing a delight with Typescript & Bun</span>
+    <span>Making data processing safe and delightful with TypeScript</span>
   </h1>
-  <p className="text-center mt-1 mb-8">
-    Push Javascript further? Yes, Say hello to **breadroll 🥟** the simple lightweight library for data processing,
-    powered by Bun.
-  </p>
-  <Link className="py-3 px-8 bg-[#FF6B61] text-white rounded-full shadow-inner" href="/docs">
-    Get Started →
-  </Link>
+  <span className="text-center mt-1 mb-8">
+    Say hello to the simple lightweight library for type-safe data processing written in TypeScript, optimized for Bun,
+    providing amazing DX and reducing runtime errors.
+  </span>
+  <div className="flex flex-wrap justify-center items-center gap-7">
+    <Link className="py-3 px-8 bg-[#FF6B61] text-white rounded-full shadow-inner" href="/docs">
+      Get Started →
+    </Link>
+    <Link
+      className="py-3 px-8 bg-transparent text-[#FF6B61] border-2 border-[#FF6B61] rounded-full"
+      href="/docs/Dataframe"
+    >
+      How It Works →
+    </Link>
+  </div>
 </div>
 
 <div className="flex flex-wrap justify-center items-center gap-7 my-14 font-semibold">
   <span className="flex gap-1 items-center">
     <Zap />
-    <p>Lightweight</p>
+    <span>Lightweight</span>
   </span>
   <span className="flex gap-1 items-center">
-    <Rss />
-    <p>Remote Data Sources</p>
+    <Smile />
+    <span>A+ Developer Experience</span>
   </span>
   <span className="flex gap-1 items-center">
     <Leaf />
-    <p>Flexible</p>
+    <span>Flexible</span>
   </span>
   <span className="flex gap-1 items-center">
     <Cpu />
-    <p>Powered by Bun</p>
+    <span>Optimized for Bun</span>
   </span>
 </div>
 
@@ -46,14 +54,18 @@ import Image from "next/image";
 ```ts filename="example.ts" copy
 import Breadroll from "breadroll";
 
-const csv = new Breadroll({ header: true, delimiter: "," });
-const df = await csv.open.local("./test/data/cities.csv");
+const csv = new Breadroll({ header: true });
+const df = await csv.open.local<T>("./test/data/cities.csv", ",");
 
 const selected = df.select(["name", "country_code", "country_name", "latitude", "longitude"]);
 console.table(selected.value);
 ```
 
-In this example, the `Breadroll` instance accepts its options object `DataframeReadOptions`, we now move on to open a file from disk using `.open.local(...)`, then select a few columns from the dataframe, retrieve the value and then print out the value using `console.table(...)`. The resulting output to the console, will be also follows;
+<Callout>
+  In this example, the `Breadroll` instance accepts its options object `DataframeReadOptions`, we now move on to open a
+  file from disk using `.open.local(...)`, then select a few columns from the dataframe, retrieve the value and then
+  print out the value using `console.table(...)`. The resulting output to the console, will be also follows;
+</Callout>
 
 ```txt
 |     | name      | country_code | country_name | latitude | longitude |
@@ -72,16 +84,14 @@ In this example, the `Breadroll` instance accepts its options object `DataframeR
 
 ## Features
 
-With just a few lines of code you can start performing data processing within your Javascript code, like a pro data-mage, with this feature coming straight out-of-the-box
+With just a few lines of code you can start performing data processing within your TypeScript/JavaScript code, like a **pro data-mage**, with this feature coming straight out-of-the-box
 
 - **Async File Loading** - Optimistically load files from disk, via Bun's `File` API
 - **Lightweight** - trying to keep it as light as possible
-- **Flexible** and **unopinionated** - maintain control while [intergrating](/docs/Breadroll) your tools into breadroll
-- **Remote Data Source** - comes with remote data sources loved by Javascript developers
+- **Flexible** and **unopinionated** - maintain control while [intergrating](/docs/Breadroll) your favorite tools into breadroll
+- **Remote Data Source** - comes with remote data sources loved by JavaScript developers
 - **Data transformation** - convenience functions that allows you to perform complex data transformations
 - **Supported Format** - CSV, TSV, JSON, and more coming soon
-
-and more coming soon.
 
 </div>
 
@@ -89,7 +99,7 @@ and more coming soon.
 
 ## Follow
 
-This package was developed and is actively maintained by [@devsgnr](https://x.com/devsgnr_), follow [@breadrolljs](https://x.com/breadrolljs) for future feature releases and updates
+This package is being developed and actively maintained by [@devsgnr](https://x.com/devsgnr_), follow [@breadrolljs](https://x.com/breadrolljs) for future feature releases and updates
 
 <div className="flex flex-wrap gap-1 my-6">
   <img src="https://badgen.net/github/stars/devsgnr/breadroll?icon=github" className="h-[26px]" />

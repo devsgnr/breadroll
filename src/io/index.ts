@@ -15,7 +15,7 @@ class IO {
         return value;
       })
       .catch((err) => {
-        throw new Error(err);
+        throw new Error("File Not Found", { cause: err });
       });
   }
 
@@ -32,7 +32,7 @@ class IO {
           return value;
         })
         .catch((err) => {
-          throw new Error(err);
+          throw new Error("Could not save file as JSON", { cause: err });
         });
     };
 
@@ -42,7 +42,7 @@ class IO {
           return value;
         })
         .catch((err) => {
-          throw new Error(err);
+          throw new Error("Could not save file as CSV", { cause: err });
         });
     };
 
@@ -52,7 +52,7 @@ class IO {
           return value;
         })
         .catch((err) => {
-          throw new Error(err);
+          throw new Error("Could not save file as TSV", { cause: err });
         });
     };
 

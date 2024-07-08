@@ -1,11 +1,11 @@
 ---
 title: Introduction
-description: breadroll 🥟 is a simple lightweight library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets.
+description: breadroll 🥟 (with a small **'b'**) is an intuitive lightweight library for type-safe data processing, designed with type-safety, developer experience and reduced runtime errors in mind, it is written in TypeScript and optimized for Bun's runtime APIs.
 ---
 
 ## breadroll
 
-breadroll 🥟 is a simple lightweight library for parsing csv, tsv, and other delimited files, performing EDA (exploratory data analysis), and data processing operations on multivariate datasets. Think pandas but written in Typescript and developed on the [Bun](https://bun.sh) Runtime.
+breadroll 🥟 (with a small **'b'**) is an intuitive lightweight library for type-safe data processing, designed with type-safety, developer experience and reduced runtime errors in mind, it is written in TypeScript and optimized for [Bun](https://bun.sh)'s runtime APIs.
 
 - ⚡ **Fast**: breadroll is built on Bun, the all-in-one Javascript runtime built for speed
 - 📁 **File I/O**: Support for various data sources - **Local, HTTPS, & Supabase Storage**
@@ -27,8 +27,16 @@ System Requirements:
 
 Breadroll is built on and optimized for Bun.js. You can install Bun by running the following
 
-```bash
-curl https://bun.sh/install | bash
+Unix (Mac & Linux)
+
+```bash copy
+curl -fsSL https://bun.sh/install | bash
+```
+
+Windows
+
+```powershell copy
+> powershell -c "irm bun.sh/install.ps1 | iex"
 ```
 
 create a new Bun project by running
@@ -37,7 +45,7 @@ create a new Bun project by running
 bun init
 ```
 
-then you can now install **Breadroll** using
+then you can now install **breadroll** using
 
 ```bash
 bun add breadroll
@@ -54,13 +62,13 @@ breadroll provides an easy to use API that gets you from zero to data processing
 ```typescript
 import Breadroll, { Dataframe } from "breadroll";
 
-const csv: Breadroll = new Breadroll({ header: true, delimiter: "," });
+const csv: Breadroll = new Breadroll({ header: true });
 ```
 
 Example: From one instance example above, you can open multiple `csv` files
 
 ```typescript
-const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
+const df: Dataframe<T> = await csv.open.local("./data/ds_salaries.csv", ",");
 ```
 
 ### Remote Data Sources
@@ -68,8 +76,8 @@ const df: Dataframe = await csv.open.local("./data/ds_salaries.csv");
 breadroll makes it easy to work with remote data sources with current support for HTTPS and Supabase Storage. With other remote data sources on the roadmap.
 
 ```typescript
-const df: Dataframe = await csv.open.https("https://.../.../filename.csv");
-const df: Dataframe = await csv.open.supabaseStorage("bucketName", "filepath");
+const df: Dataframe<T> = await csv.open.https("https://.../.../filename.csv", ",");
+const df: Dataframe<T> = await csv.open.supabaseStorage("bucketName", "filepath", ",");
 ```
 
 ### Filtering
