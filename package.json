@@ -1,6 +1,6 @@
 {
   "name": "breadroll",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "breadroll 🥟 is an intuitive lightweight library for type-safe data processing, designed with type-safety, developer experience and reduced runtime errors in mind",
   "author": {
     "name": "devsgnr",
