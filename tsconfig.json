@@ -1,8 +1,10 @@
 {
+  "files": ["src/index.ts"],
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "esnext",
     "target": "esnext",
+    "outDir": "./dist",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "allowImportingTsExtensions": true,
@@ -13,7 +15,9 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "noEmit": true,
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "types": [
       "bun-types" // add Bun global
     ]

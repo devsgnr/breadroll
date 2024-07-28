@@ -1,6 +1,6 @@
 {
   "name": "breadroll",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "breadroll 🥟 is an intuitive lightweight library for type-safe data processing, designed with type-safety, developer experience and reduced runtime errors in mind",
   "author": {
     "name": "devsgnr",
@@ -32,16 +32,16 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
-    "@types/lodash": "^4.17.0",
     "bun-types": "^0.6.0",
     "eslint": "^8.45.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
-    "rimraf": "^5.0.7",
     "prettier": "3.0.0",
+    "rimraf": "^5.0.7",
     "typescript": "5.1.6"
   },
   "peerDependencies": {
@@ -57,15 +57,16 @@
     "prepare": "husky install",
     "test:ci": "bun test ./test/bun.test.ts ./test/df.test.ts ./test/supabase.test.ts",
     "test:local": "bun test ./test/bun.test.ts ./test/df.test.ts",
-    "build:pre-build": "bun test:local && bun run build.ts",
-    "build:unix": "rm -rf dist && bun run build.ts && bun test ./test/build.test.js",
-    "build:windows": "bunx rimraf dist && bun run build.ts",
-    "build:stable": "bun run build.ts && bun test:ci"
+    "build:pre-build": "bun test:local && bun run build.ts && bunx tsc",
+    "build:unix": "rm -rf dist && bun run build.ts && bunx tsc && bun test ./test/build.test.js",
+    "build:windows": "bunx rimraf dist && bun run build.ts && bunx tsc",
+    "build:stable": "bunx rimraf dist && bun run build.ts && bunx tsc && bun test:ci"
   },
   "type": "module",
   "types": "./dist/index.d.ts",
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
+    "braces": "^3.0.3",
     "csv-parser": "^3.0.0",
     "lodash": "^4.17.21",
     "neat-csv": "^7.0.0"
